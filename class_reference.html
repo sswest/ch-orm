@@ -160,14 +160,14 @@
 </head>
 <body>
 <h1 id="class-reference">Class Reference</h1>
-<h2 id="infi.clickhouse_orm.database">infi.clickhouse_orm.database</h2>
+<h2 id="clickhouse_orm.database">clickhouse_orm.database</h2>
 <h3 id="database">Database</h3>
 <p>Database instances connect to a specific ClickHouse database for
 running queries, inserting data and other operations.</p>
 <h4
-id="databasedb_name-db_urlhttplocalhost8123-usernamenone-passwordnone-readonlyfalse-autocreatetrue-timeout60-verify_ssl_certtrue-log_statementsfalse">Database(db_name,
+id="databasedb_name-db_urlhttplocalhost8123-usernamenone-passwordnone-readonlyfalse-auto_createtrue-timeout60-verify_ssl_certtrue-log_statementsfalse">Database(db_name,
 db_url=“http://localhost:8123/”, username=None, password=None,
-readonly=False, autocreate=True, timeout=60, verify_ssl_cert=True,
+readonly=False, auto_create=True, timeout=60, verify_ssl_cert=True,
 log_statements=False)</h4>
 <p>Initializes a database instance. Unless it’s readonly, the database
 will be created on the ClickHouse server if it does not already
@@ -178,7 +178,7 @@ exist.</p>
 <li><code>username</code>: optional connection credentials.</li>
 <li><code>password</code>: optional connection credentials.</li>
 <li><code>readonly</code>: use a read-only connection.</li>
-<li><code>autocreate</code>: automatically create the database if it
+<li><code>auto_create</code>: automatically create the database if it
 does not exist (unless in readonly mode).</li>
 <li><code>timeout</code>: the connection timeout in seconds.</li>
 <li><code>verify_ssl_cert</code>: whether to verify the server’s
@@ -225,6 +225,7 @@ class, for example system tables.</p>
 <li><code>system_table</code>: whether the table is a system table, or
 belongs to the current database</li>
 </ul>
+<h4 id="init">init()</h4>
 <h4 id="insertmodel_instances-batch_size1000">insert(model_instances,
 batch_size=1000)</h4>
 <p>Insert records into the database.</p>
@@ -290,7 +291,142 @@ parameters</li>
 <h3 id="databaseexception">DatabaseException</h3>
 <p>Extends Exception</p>
 <p>Raised when a database operation fails.</p>
-<h2 id="infi.clickhouse_orm.models">infi.clickhouse_orm.models</h2>
+<h2 id="clickhouse_orm.aio.database">clickhouse_orm.aio.database</h2>
+<h3 id="aiodatabase">AioDatabase</h3>
+<p>Extends Database</p>
+<h4
+id="aiodatabasedb_name-db_urlhttplocalhost8123-usernamenone-passwordnone-readonlyfalse-auto_createtrue-timeout60-verify_ssl_certtrue-log_statementsfalse">AioDatabase(db_name,
+db_url=“http://localhost:8123/”, username=None, password=None,
+readonly=False, auto_create=True, timeout=60, verify_ssl_cert=True,
+log_statements=False)</h4>
+<p>Initializes a database instance. Unless it’s readonly, the database
+will be created on the ClickHouse server if it does not already
+exist.</p>
+<ul>
+<li><code>db_name</code>: name of the database to connect to.</li>
+<li><code>db_url</code>: URL of the ClickHouse server.</li>
+<li><code>username</code>: optional connection credentials.</li>
+<li><code>password</code>: optional connection credentials.</li>
+<li><code>readonly</code>: use a read-only connection.</li>
+<li><code>auto_create</code>: automatically create the database if it
+does not exist (unless in readonly mode).</li>
+<li><code>timeout</code>: the connection timeout in seconds.</li>
+<li><code>verify_ssl_cert</code>: whether to verify the server’s
+certificate when connecting via HTTPS.</li>
+<li><code>log_statements</code>: when True, all database statements are
+logged.</li>
+</ul>
+<h4 id="add_settingname-value-1">add_setting(name, value)</h4>
+<p>Adds a database setting that will be sent with every request. For
+example, <code>db.add_setting("max_execution_time", 10)</code> will
+limit query execution time to 10 seconds. The name must be string, and
+the value is converted to string in case it isn’t. To remove a setting,
+pass <code>None</code> as the value.</p>
+<h4 id="close">close()</h4>
+<h4 id="countmodel_class-conditionsnone-1">count(model_class,
+conditions=None)</h4>
+<p>Counts the number of records in the model’s table.</p>
+<ul>
+<li><code>model_class</code>: the model to count.</li>
+<li><code>conditions</code>: optional SQL conditions (contents of the
+WHERE clause).</li>
+</ul>
+<h4 id="create_database-1">create_database()</h4>
+<p>Creates the database on the ClickHouse server if it does not already
+exist.</p>
+<h4 id="create_tablemodel_class-1">create_table(model_class)</h4>
+<p>Creates a table for the given model class, if it does not exist
+already.</p>
+<h4
+id="create_temporary_tablemodel_class-table_namenone">create_temporary_table(model_class,
+table_name=None)</h4>
+<p>Creates a temporary table for the given model class, if it does not
+exist already. And you can specify the temporary table name
+explicitly.</p>
+<h4
+id="does_table_existmodel_class-1">does_table_exist(model_class)</h4>
+<p>Checks whether a table for the given model class already exists. Note
+that this only checks for existence of a table with the expected
+name.</p>
+<h4 id="drop_database-1">drop_database()</h4>
+<p>Deletes the database on the ClickHouse server.</p>
+<h4 id="drop_tablemodel_class-1">drop_table(model_class)</h4>
+<p>Drops the database table of the given model class, if it exists.</p>
+<h4
+id="get_model_for_tabletable_name-system_tablefalse-1">get_model_for_table(table_name,
+system_table=False)</h4>
+<p>Generates a model class from an existing table in the database. This
+can be used for querying tables which don’t have a corresponding model
+class, for example system tables.</p>
+<ul>
+<li><code>table_name</code>: the table to create a model for</li>
+<li><code>system_table</code>: whether the table is a system table, or
+belongs to the current database</li>
+</ul>
+<h4 id="init-1">init()</h4>
+<h4 id="insertmodel_instances-batch_size1000-1">insert(model_instances,
+batch_size=1000)</h4>
+<p>Insert records into the database.</p>
+<ul>
+<li><code>model_instances</code>: any iterable containing instances of a
+single model class.</li>
+<li><code>batch_size</code>: number of records to send per chunk (use a
+lower number if your records are very large).</li>
+</ul>
+<h4
+id="migratemigrations_package_name-up_to9999-1">migrate(migrations_package_name,
+up_to=9999)</h4>
+<p>Executes schema migrations.</p>
+<ul>
+<li><code>migrations_package_name</code> - fully qualified name of the
+Python package containing the migrations.</li>
+<li><code>up_to</code> - number of the last migration to apply.</li>
+</ul>
+<h4
+id="paginatemodel_class-order_by-page_num1-page_size100-conditionsnone-settingsnone-1">paginate(model_class,
+order_by, page_num=1, page_size=100, conditions=None,
+settings=None)</h4>
+<p>Selects records and returns a single page of model instances.</p>
+<ul>
+<li><code>model_class</code>: the model class matching the query’s
+table, or <code>None</code> for getting back instances of an ad-hoc
+model.</li>
+<li><code>order_by</code>: columns to use for sorting the query
+(contents of the ORDER BY clause).</li>
+<li><code>page_num</code>: the page number (1-based), or -1 to get the
+last page.</li>
+<li><code>page_size</code>: number of records to return per page.</li>
+<li><code>conditions</code>: optional SQL conditions (contents of the
+WHERE clause).</li>
+<li><code>settings</code>: query settings to send as HTTP GET
+parameters</li>
+</ul>
+<p>The result is a namedtuple containing <code>objects</code> (list),
+<code>number_of_objects</code>, <code>pages_total</code>,
+<code>number</code> (of the current page), and
+<code>page_size</code>.</p>
+<h4 id="rawquery-settingsnone-streamfalse-1">raw(query, settings=None,
+stream=False)</h4>
+<p>Performs a query and returns its output as text.</p>
+<ul>
+<li><code>query</code>: the SQL query to execute.</li>
+<li><code>settings</code>: query settings to send as HTTP GET
+parameters</li>
+<li><code>stream</code>: if true, the HTTP response from ClickHouse will
+be streamed.</li>
+</ul>
+<h4 id="selectquery-model_classnone-settingsnone-1">select(query,
+model_class=None, settings=None)</h4>
+<p>Performs a query and returns a generator of model instances.</p>
+<ul>
+<li><code>query</code>: the SQL query to execute.</li>
+<li><code>model_class</code>: the model class matching the query’s
+table, or <code>None</code> for getting back instances of an ad-hoc
+model.</li>
+<li><code>settings</code>: query settings to send as HTTP GET
+parameters</li>
+</ul>
+<h2 id="clickhouse_orm.models">clickhouse_orm.models</h2>
 <h3 id="model">Model</h3>
 <p>A base class for ORM models. Each model class represent a ClickHouse
 table. For example:</p>
@@ -344,6 +480,8 @@ instances.</p>
 <p>Returns true if the model is marked as read only.</p>
 <h4 id="model.is_system_model">Model.is_system_model()</h4>
 <p>Returns true if the model represents a system table.</p>
+<h4 id="model.is_temporary_model">Model.is_temporary_model()</h4>
+<p>Returns true if the model represents a temporary table.</p>
 <h4 id="model.objects_indatabase">Model.objects_in(database)</h4>
 <p>Returns a <code>QuerySet</code> for selecting instances of this model
 class.</p>
@@ -434,6 +572,9 @@ instances.</p>
 <p>Returns true if the model is marked as read only.</p>
 <h4 id="buffermodel.is_system_model">BufferModel.is_system_model()</h4>
 <p>Returns true if the model represents a system table.</p>
+<h4
+id="buffermodel.is_temporary_model">BufferModel.is_temporary_model()</h4>
+<p>Returns true if the model represents a temporary table.</p>
 <h4
 id="buffermodel.objects_indatabase">BufferModel.objects_in(database)</h4>
 <p>Returns a <code>QuerySet</code> for selecting instances of this model
@@ -528,6 +669,9 @@ instances.</p>
 <p>Returns true if the model is marked as read only.</p>
 <h4 id="mergemodel.is_system_model">MergeModel.is_system_model()</h4>
 <p>Returns true if the model represents a system table.</p>
+<h4
+id="mergemodel.is_temporary_model">MergeModel.is_temporary_model()</h4>
+<p>Returns true if the model represents a temporary table.</p>
 <h4
 id="mergemodel.objects_indatabase">MergeModel.objects_in(database)</h4>
 <p>Returns a <code>QuerySet</code> for selecting instances of this model
@@ -656,6 +800,9 @@ id="distributedmodel.is_read_only">DistributedModel.is_read_only()</h4>
 id="distributedmodel.is_system_model">DistributedModel.is_system_model()</h4>
 <p>Returns true if the model represents a system table.</p>
 <h4
+id="distributedmodel.is_temporary_model">DistributedModel.is_temporary_model()</h4>
+<p>Returns true if the model represents a temporary table.</p>
+<h4
 id="distributedmodel.objects_indatabase">DistributedModel.objects_in(database)</h4>
 <p>Returns a <code>QuerySet</code> for selecting instances of this model
 class.</p>
@@ -767,176 +914,205 @@ used in the Bloom filter.</li>
 <li><code>random_seed</code> — The seed for Bloom filter hash
 functions.</li>
 </ul>
-<h2 id="infi.clickhouse_orm.fields">infi.clickhouse_orm.fields</h2>
+<h2 id="clickhouse_orm.fields">clickhouse_orm.fields</h2>
 <h3 id="arrayfield">ArrayField</h3>
 <p>Extends Field</p>
 <h4
-id="arrayfieldinner_field-defaultnone-aliasnone-materializednone-readonlynone-codecnone">ArrayField(inner_field,
-default=None, alias=None, materialized=None, readonly=None,
-codec=None)</h4>
+id="arrayfieldinner_field-defaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">ArrayField(inner_field,
+default=None, alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="baseenumfield">BaseEnumField</h3>
 <p>Extends Field</p>
 <p>Abstract base class for all enum-type fields.</p>
 <h4
-id="baseenumfieldenum_cls-defaultnone-aliasnone-materializednone-readonlynone-codecnone">BaseEnumField(enum_cls,
-default=None, alias=None, materialized=None, readonly=None,
-codec=None)</h4>
+id="baseenumfieldenum_cls-defaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">BaseEnumField(enum_cls,
+default=None, alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="basefloatfield">BaseFloatField</h3>
 <p>Extends Field</p>
 <p>Abstract base class for all float-type fields.</p>
 <h4
-id="basefloatfielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">BaseFloatField(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="basefloatfielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">BaseFloatField(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="baseintfield">BaseIntField</h3>
 <p>Extends Field</p>
 <p>Abstract base class for all integer-type fields.</p>
 <h4
-id="baseintfielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">BaseIntField(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="baseintfielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">BaseIntField(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="datefield">DateField</h3>
 <p>Extends Field</p>
 <h4
-id="datefielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">DateField(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="datefielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">DateField(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="datetime64field">DateTime64Field</h3>
 <p>Extends DateTimeField</p>
 <h4
-id="datetime64fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-timezonenone-precision6">DateTime64Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None, timezone=None,
-precision=6)</h4>
+id="datetime64fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone-timezonenone-precision6">DateTime64Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None, timezone=None, precision=6)</h4>
 <h3 id="datetimefield">DateTimeField</h3>
 <p>Extends Field</p>
 <h4
-id="datetimefielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-timezonenone">DateTimeField(default=None,
+id="datetimefielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone-timezonenone">DateTimeField(default=None,
 alias=None, materialized=None, readonly=None, codec=None,
-timezone=None)</h4>
+db_column=None, timezone=None)</h4>
 <h3 id="decimal128field">Decimal128Field</h3>
 <p>Extends DecimalField</p>
 <h4
-id="decimal128fieldscale-defaultnone-aliasnone-materializednone-readonlynone">Decimal128Field(scale,
-default=None, alias=None, materialized=None, readonly=None)</h4>
+id="decimal128fieldscale-defaultnone-aliasnone-materializednone-readonlynone-db_columnnone">Decimal128Field(scale,
+default=None, alias=None, materialized=None, readonly=None,
+db_column=None)</h4>
 <h3 id="decimal32field">Decimal32Field</h3>
 <p>Extends DecimalField</p>
 <h4
-id="decimal32fieldscale-defaultnone-aliasnone-materializednone-readonlynone">Decimal32Field(scale,
-default=None, alias=None, materialized=None, readonly=None)</h4>
+id="decimal32fieldscale-defaultnone-aliasnone-materializednone-readonlynone-db_columnnone">Decimal32Field(scale,
+default=None, alias=None, materialized=None, readonly=None,
+db_column=None)</h4>
 <h3 id="decimal64field">Decimal64Field</h3>
 <p>Extends DecimalField</p>
 <h4
-id="decimal64fieldscale-defaultnone-aliasnone-materializednone-readonlynone">Decimal64Field(scale,
-default=None, alias=None, materialized=None, readonly=None)</h4>
+id="decimal64fieldscale-defaultnone-aliasnone-materializednone-readonlynone-db_columnnone">Decimal64Field(scale,
+default=None, alias=None, materialized=None, readonly=None,
+db_column=None)</h4>
 <h3 id="decimalfield">DecimalField</h3>
 <p>Extends Field</p>
 <p>Base class for all decimal fields. Can also be used directly.</p>
 <h4
-id="decimalfieldprecision-scale-defaultnone-aliasnone-materializednone-readonlynone">DecimalField(precision,
-scale, default=None, alias=None, materialized=None, readonly=None)</h4>
+id="decimalfieldprecision-scale-defaultnone-aliasnone-materializednone-readonlynone-db_columnnone">DecimalField(precision,
+scale, default=None, alias=None, materialized=None, readonly=None,
+db_column=None)</h4>
 <h3 id="enum16field">Enum16Field</h3>
 <p>Extends BaseEnumField</p>
 <h4
-id="enum16fieldenum_cls-defaultnone-aliasnone-materializednone-readonlynone-codecnone">Enum16Field(enum_cls,
-default=None, alias=None, materialized=None, readonly=None,
-codec=None)</h4>
+id="enum16fieldenum_cls-defaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">Enum16Field(enum_cls,
+default=None, alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="enum8field">Enum8Field</h3>
 <p>Extends BaseEnumField</p>
 <h4
-id="enum8fieldenum_cls-defaultnone-aliasnone-materializednone-readonlynone-codecnone">Enum8Field(enum_cls,
-default=None, alias=None, materialized=None, readonly=None,
-codec=None)</h4>
+id="enum8fieldenum_cls-defaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">Enum8Field(enum_cls,
+default=None, alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="field">Field</h3>
 <p>Extends FunctionOperatorsMixin</p>
 <p>Abstract base class for all field types.</p>
 <h4
-id="fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="fixedstringfield">FixedStringField</h3>
 <p>Extends StringField</p>
 <h4
-id="fixedstringfieldlength-defaultnone-aliasnone-materializednone-readonlynone">FixedStringField(length,
-default=None, alias=None, materialized=None, readonly=None)</h4>
+id="fixedstringfieldlength-defaultnone-aliasnone-materializednone-readonlynone-db_columnnone">FixedStringField(length,
+default=None, alias=None, materialized=None, readonly=None,
+db_column=None)</h4>
 <h3 id="float32field">Float32Field</h3>
 <p>Extends BaseFloatField</p>
 <h4
-id="float32fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Float32Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="float32fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">Float32Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="float64field">Float64Field</h3>
 <p>Extends BaseFloatField</p>
 <h4
-id="float64fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Float64Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="float64fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">Float64Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="ipv4field">IPv4Field</h3>
 <p>Extends Field</p>
 <h4
-id="ipv4fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">IPv4Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="ipv4fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">IPv4Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="ipv6field">IPv6Field</h3>
 <p>Extends Field</p>
 <h4
-id="ipv6fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">IPv6Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="ipv6fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">IPv6Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="int16field">Int16Field</h3>
 <p>Extends BaseIntField</p>
 <h4
-id="int16fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Int16Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="int16fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">Int16Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="int32field">Int32Field</h3>
 <p>Extends BaseIntField</p>
 <h4
-id="int32fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Int32Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="int32fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">Int32Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="int64field">Int64Field</h3>
 <p>Extends BaseIntField</p>
 <h4
-id="int64fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Int64Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="int64fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">Int64Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="int8field">Int8Field</h3>
 <p>Extends BaseIntField</p>
 <h4
-id="int8fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Int8Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="int8fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">Int8Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="lowcardinalityfield">LowCardinalityField</h3>
 <p>Extends Field</p>
 <h4
-id="lowcardinalityfieldinner_field-defaultnone-aliasnone-materializednone-readonlynone-codecnone">LowCardinalityField(inner_field,
-default=None, alias=None, materialized=None, readonly=None,
-codec=None)</h4>
+id="lowcardinalityfieldinner_field-defaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">LowCardinalityField(inner_field,
+default=None, alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="nullablefield">NullableField</h3>
 <p>Extends Field</p>
 <h4
-id="nullablefieldinner_field-defaultnone-aliasnone-materializednone-extra_null_valuesnone-codecnone">NullableField(inner_field,
+id="nullablefieldinner_field-defaultnone-aliasnone-materializednone-extra_null_valuesnone-codecnone-db_columnnone">NullableField(inner_field,
 default=None, alias=None, materialized=None, extra_null_values=None,
-codec=None)</h4>
+codec=None, db_column=None)</h4>
 <h3 id="stringfield">StringField</h3>
 <p>Extends Field</p>
 <h4
-id="stringfielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">StringField(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="stringfielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">StringField(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
+<h3 id="tuplefield">TupleField</h3>
+<p>Extends Field</p>
+<h4
+id="tuplefieldname_fields-defaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">TupleField(name_fields,
+default=None, alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="uint16field">UInt16Field</h3>
 <p>Extends BaseIntField</p>
 <h4
-id="uint16fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">UInt16Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="uint16fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">UInt16Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="uint32field">UInt32Field</h3>
 <p>Extends BaseIntField</p>
 <h4
-id="uint32fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">UInt32Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="uint32fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">UInt32Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="uint64field">UInt64Field</h3>
 <p>Extends BaseIntField</p>
 <h4
-id="uint64fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">UInt64Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="uint64fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">UInt64Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="uint8field">UInt8Field</h3>
 <p>Extends BaseIntField</p>
 <h4
-id="uint8fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">UInt8Field(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
+id="uint8fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">UInt8Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
 <h3 id="uuidfield">UUIDField</h3>
 <p>Extends Field</p>
 <h4
-id="uuidfielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">UUIDField(default=None,
-alias=None, materialized=None, readonly=None, codec=None)</h4>
-<h2 id="infi.clickhouse_orm.engines">infi.clickhouse_orm.engines</h2>
+id="uuidfielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-db_columnnone">UUIDField(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+db_column=None)</h4>
+<h2 id="clickhouse_orm.engines">clickhouse_orm.engines</h2>
 <h3 id="engine">Engine</h3>
 <h3 id="tinylog">TinyLog</h3>
 <p>Extends Engine</p>
@@ -1009,8 +1185,9 @@ id="replacingmergetreedate_colnone-order_by-ver_colnone-sampling_exprnone-index_
 order_by=(), ver_col=None, sampling_expr=None, index_granularity=8192,
 replica_table_path=None, replica_name=None, partition_key=None,
 primary_key=None)</h4>
-<h2 id="infi.clickhouse_orm.query">infi.clickhouse_orm.query</h2>
+<h2 id="clickhouse_orm.query">clickhouse_orm.query</h2>
 <h3 id="queryset">QuerySet</h3>
+<p>Extends Generic</p>
 <p>A queryset is an object that represents a database query using a
 specific <code>Model</code>. It is lazy, meaning that it does not hit
 the database until you iterate over its matching rows (model
@@ -1095,7 +1272,7 @@ immediate.</p>
 <p>Extends QuerySet</p>
 <p>A queryset used for aggregation.</p>
 <h4
-id="aggregatequerysetbase_qs-grouping_fields-calculated_fields">AggregateQuerySet(base_qs,
+id="aggregatequerysetbase_queryset-grouping_fields-calculated_fields">AggregateQuerySet(base_queryset,
 grouping_fields, calculated_fields)</h4>
 <p>Initializer. Normally you should not call this but rather use
 <code>QuerySet.aggregate()</code>.</p>
@@ -1103,7 +1280,8 @@ grouping_fields, calculated_fields)</h4>
 model. For example:</p>
 <pre><code>    (&#39;event_type&#39;, &#39;event_subtype&#39;)</code></pre>
 <p>The calculated fields should be a mapping from name to a ClickHouse
-aggregation function. For example:</p>
+aggregation function.</p>
+<p>For example:</p>
 <pre><code>    {&#39;weekday&#39;: &#39;toDayOfWeek(event_date)&#39;, &#39;number_of_events&#39;: &#39;count()&#39;}</code></pre>
 <p>At least one calculated field is required.</p>
 <h4 id="aggregateargs-kwargs-1">aggregate(*args, **kwargs)</h4>
@@ -1182,7 +1360,7 @@ https://clickhouse.tech/docs/en/query_language/select/#with-totals-modifier</p>
 <h4 id="qfilter_funcs-filter_fields">Q(*filter_funcs,
 **filter_fields)</h4>
 <h4 id="to_sqlmodel_cls">to_sql(model_cls)</h4>
-<h2 id="infi.clickhouse_orm.funcs">infi.clickhouse_orm.funcs</h2>
+<h2 id="clickhouse_orm.funcs">clickhouse_orm.funcs</h2>
 <h3 id="f">F</h3>
 <p>Extends Cond, FunctionOperatorsMixin</p>
 <p>Represents a database function call and its arguments. It doubles as
@@ -1384,10 +1562,11 @@ ancestor_id_expr)</h4>
 <h4 id="extractallpattern">extractAll(pattern)</h4>
 <h4 id="farmhash64">farmHash64()</h4>
 <h4 id="floornnone">floor(n=None)</h4>
-<h4 id="formatdatetimeformat-timezone">formatDateTime(format,
-timezone=““)</h4>
+<h4 id="formatdatetimeformat-timezoneno_value">formatDateTime(format,
+timezone=NO_VALUE)</h4>
 <h4 id="gcdb">gcd(b)</h4>
 <h4 id="generateuuidv4">generateUUIDv4()</h4>
+<h4 id="geohashencodey-precision12">geohashEncode(y, precision=12)</h4>
 <h4 id="greaterkwargs">greater(**kwargs)</h4>
 <h4 id="greaterorequalskwargs">greaterOrEquals(**kwargs)</h4>
 <h4 id="greatesty">greatest(y)</h4>
@@ -1671,6 +1850,18 @@ replacement)</h4>
 <h4 id="splitbystrings">splitByString(s)</h4>
 <h4 id="sqrt">sqrt()</h4>
 <h4 id="startswithprefix">startsWith(prefix)</h4>
+<h4 id="stddevpopkwargs">stddevPop(**kwargs)</h4>
+<h4 id="stddevpopifcond">stddevPopIf(cond)</h4>
+<h4 id="stddevpopordefault">stddevPopOrDefault()</h4>
+<h4 id="stddevpopordefaultifcond">stddevPopOrDefaultIf(cond)</h4>
+<h4 id="stddevpopornull">stddevPopOrNull()</h4>
+<h4 id="stddevpopornullifcond">stddevPopOrNullIf(cond)</h4>
+<h4 id="stddevsampkwargs">stddevSamp(**kwargs)</h4>
+<h4 id="stddevsampifcond">stddevSampIf(cond)</h4>
+<h4 id="stddevsampordefault">stddevSampOrDefault()</h4>
+<h4 id="stddevsampordefaultifcond">stddevSampOrDefaultIf(cond)</h4>
+<h4 id="stddevsampornull">stddevSampOrNull()</h4>
+<h4 id="stddevsampornullifcond">stddevSampOrNullIf(cond)</h4>
 <h4 id="substringkwargs">substring(**kwargs)</h4>
 <h4 id="substringutf8offset-length">substringUTF8(offset, length)</h4>
 <h4 id="subtractdaysn-timezoneno_value">subtractDays(n,
@@ -1734,8 +1925,8 @@ timezone=NO_VALUE)</h4>
 <h4 id="tohour">toHour()</h4>
 <h4 id="toipv4">toIPv4()</h4>
 <h4 id="toipv6">toIPv6()</h4>
-<h4 id="toisoweektimezone">toISOWeek(timezone=““)</h4>
-<h4 id="toisoyeartimezone">toISOYear(timezone=““)</h4>
+<h4 id="toisoweektimezoneno_value">toISOWeek(timezone=NO_VALUE)</h4>
+<h4 id="toisoyeartimezoneno_value">toISOYear(timezone=NO_VALUE)</h4>
 <h4 id="toint16kwargs">toInt16(**kwargs)</h4>
 <h4 id="toint16ornull">toInt16OrNull()</h4>
 <h4 id="toint16orzero">toInt16OrZero()</h4>
@@ -1759,16 +1950,21 @@ timezone=NO_VALUE)</h4>
 <h4 id="tominute">toMinute()</h4>
 <h4 id="tomonday">toMonday()</h4>
 <h4 id="tomonth">toMonth()</h4>
-<h4 id="toquartertimezone">toQuarter(timezone=““)</h4>
-<h4 id="torelativedaynumtimezone">toRelativeDayNum(timezone=““)</h4>
-<h4 id="torelativehournumtimezone">toRelativeHourNum(timezone=““)</h4>
+<h4 id="toquartertimezoneno_value">toQuarter(timezone=NO_VALUE)</h4>
 <h4
-id="torelativeminutenumtimezone">toRelativeMinuteNum(timezone=““)</h4>
-<h4 id="torelativemonthnumtimezone">toRelativeMonthNum(timezone=““)</h4>
+id="torelativedaynumtimezoneno_value">toRelativeDayNum(timezone=NO_VALUE)</h4>
 <h4
-id="torelativesecondnumtimezone">toRelativeSecondNum(timezone=““)</h4>
-<h4 id="torelativeweeknumtimezone">toRelativeWeekNum(timezone=““)</h4>
-<h4 id="torelativeyearnumtimezone">toRelativeYearNum(timezone=““)</h4>
+id="torelativehournumtimezoneno_value">toRelativeHourNum(timezone=NO_VALUE)</h4>
+<h4
+id="torelativeminutenumtimezoneno_value">toRelativeMinuteNum(timezone=NO_VALUE)</h4>
+<h4
+id="torelativemonthnumtimezoneno_value">toRelativeMonthNum(timezone=NO_VALUE)</h4>
+<h4
+id="torelativesecondnumtimezoneno_value">toRelativeSecondNum(timezone=NO_VALUE)</h4>
+<h4
+id="torelativeweeknumtimezoneno_value">toRelativeWeekNum(timezone=NO_VALUE)</h4>
+<h4
+id="torelativeyearnumtimezoneno_value">toRelativeYearNum(timezone=NO_VALUE)</h4>
 <h4 id="tosecond">toSecond()</h4>
 <h4 id="tostartofday">toStartOfDay()</h4>
 <h4 id="tostartoffifteenminutes">toStartOfFifteenMinutes()</h4>
@@ -1783,7 +1979,7 @@ id="torelativesecondnumtimezone">toRelativeSecondNum(timezone=““)</h4>
 <h4 id="tostartofyear">toStartOfYear()</h4>
 <h4 id="tostring">toString()</h4>
 <h4 id="tostringcuttozero">toStringCutToZero()</h4>
-<h4 id="totimetimezone">toTime(timezone=““)</h4>
+<h4 id="totimetimezoneno_value">toTime(timezone=NO_VALUE)</h4>
 <h4 id="totimezonetimezone">toTimeZone(timezone)</h4>
 <h4 id="touint16kwargs">toUInt16(**kwargs)</h4>
 <h4 id="touint16ornull">toUInt16OrNull()</h4>
@@ -1798,11 +1994,14 @@ id="torelativesecondnumtimezone">toRelativeSecondNum(timezone=““)</h4>
 <h4 id="touint8ornull">toUInt8OrNull()</h4>
 <h4 id="touint8orzero">toUInt8OrZero()</h4>
 <h4 id="touuid">toUUID()</h4>
-<h4 id="tounixtimestamptimezone">toUnixTimestamp(timezone=““)</h4>
-<h4 id="toweekmode0-timezone">toWeek(mode=0, timezone=““)</h4>
-<h4 id="toyyyymmtimezone">toYYYYMM(timezone=““)</h4>
-<h4 id="toyyyymmddtimezone">toYYYYMMDD(timezone=““)</h4>
-<h4 id="toyyyymmddhhmmsstimezone">toYYYYMMDDhhmmss(timezone=““)</h4>
+<h4
+id="tounixtimestamptimezoneno_value">toUnixTimestamp(timezone=NO_VALUE)</h4>
+<h4 id="toweekmode0-timezoneno_value">toWeek(mode=0,
+timezone=NO_VALUE)</h4>
+<h4 id="toyyyymmtimezoneno_value">toYYYYMM(timezone=NO_VALUE)</h4>
+<h4 id="toyyyymmddtimezoneno_value">toYYYYMMDD(timezone=NO_VALUE)</h4>
+<h4
+id="toyyyymmddhhmmsstimezoneno_value">toYYYYMMDDhhmmss(timezone=NO_VALUE)</h4>
 <h4 id="toyear">toYear()</h4>
 <h4 id="to_sqlargs">to_sql(*args)</h4>
 <p>Generates an SQL string for this function and its arguments. For
@@ -1825,8 +2024,195 @@ example if the function name is a symbol of a binary operator: (2.54 *
 <h4 id="trimleft">trimLeft()</h4>
 <h4 id="trimright">trimRight()</h4>
 <h4 id="trybase64decode">tryBase64Decode()</h4>
+<h4 id="tupleelementn">tupleElement(n)</h4>
 <h4 id="unhex">unhex()</h4>
 <h4 id="uniqkwargs">uniq(**kwargs)</h4>
 <h4 id="uniqexactkwargs">uniqExact(**kwargs)</h4>
+<h4 id="uniqexactif">uniqExactIf()</h4>
+<h4 id="uniqexactordefault">uniqExactOrDefault()</h4>
+<h4 id="uniqexactordefaultif">uniqExactOrDefaultIf()</h4>
+<h4 id="uniqexactornull">uniqExactOrNull()</h4>
+<h4 id="uniqexactornullif">uniqExactOrNullIf()</h4>
+<h4 id="uniqhll12kwargs">uniqHLL12(**kwargs)</h4>
+<h4 id="uniqhll12if">uniqHLL12If()</h4>
+<h4 id="uniqhll12ordefault">uniqHLL12OrDefault()</h4>
+<h4 id="uniqhll12ordefaultif">uniqHLL12OrDefaultIf()</h4>
+<h4 id="uniqhll12ornull">uniqHLL12OrNull()</h4>
+<h4 id="uniqhll12ornullif">uniqHLL12OrNullIf()</h4>
+<h4 id="uniqif">uniqIf()</h4>
+<h4 id="uniqordefault">uniqOrDefault()</h4>
+<h4 id="uniqordefaultif">uniqOrDefaultIf()</h4>
+<h4 id="uniqornull">uniqOrNull()</h4>
+<h4 id="uniqornullif">uniqOrNullIf()</h4>
+<h4 id="upperkwargs">upper(**kwargs)</h4>
+<h4 id="upperutf8">upperUTF8()</h4>
+<h4 id="varpopkwargs">varPop(**kwargs)</h4>
+<h4 id="varpopifcond">varPopIf(cond)</h4>
+<h4 id="varpopordefault">varPopOrDefault()</h4>
+<h4 id="varpopordefaultifcond">varPopOrDefaultIf(cond)</h4>
+<h4 id="varpopornull">varPopOrNull()</h4>
+<h4 id="varpopornullifcond">varPopOrNullIf(cond)</h4>
+<h4 id="varsampkwargs">varSamp(**kwargs)</h4>
+<h4 id="varsampifcond">varSampIf(cond)</h4>
+<h4 id="varsampordefault">varSampOrDefault()</h4>
+<h4 id="varsampordefaultifcond">varSampOrDefaultIf(cond)</h4>
+<h4 id="varsampornull">varSampOrNull()</h4>
+<h4 id="varsampornullifcond">varSampOrNullIf(cond)</h4>
+<h4 id="xxhash32">xxHash32()</h4>
+<h4 id="xxhash64">xxHash64()</h4>
+<h4 id="yesterday">yesterday()</h4>
+<h2 id="clickhouse_orm.system_models">clickhouse_orm.system_models</h2>
+<h3 id="systempart">SystemPart</h3>
+<p>Extends Model</p>
+<p>Contains information about parts of a table in the MergeTree family.
+This model operates only fields, described in the reference. Other
+fields are ignored.
+https://clickhouse.tech/docs/en/system_tables/system.parts/</p>
+<h4 id="systempartkwargs">SystemPart(**kwargs)</h4>
+<p>Creates a model instance, using keyword arguments as field values.
+Since values are immediately converted to their Pythonic type, invalid
+values will cause a <code>ValueError</code> to be raised. Unrecognized
+field names will cause an <code>AttributeError</code>.</p>
+<h4 id="attachsettingsnone">attach(settings=None)</h4>
+<p>Add a new part or partition from the ‘detached’ directory to the
+table.</p>
+<ul>
+<li><code>settings</code>: Settings for executing request to ClickHouse
+over db.raw() method</li>
+</ul>
+<p>Returns: SQL Query</p>
+<h4
+id="systempart.create_table_sqldb">SystemPart.create_table_sql(db)</h4>
+<p>Returns the SQL statement for creating a table for this model.</p>
+<h4 id="detachsettingsnone">detach(settings=None)</h4>
+<p>Move a partition to the ‘detached’ directory and forget it.</p>
+<ul>
+<li><code>settings</code>: Settings for executing request to ClickHouse
+over db.raw() method</li>
+</ul>
+<p>Returns: SQL Query</p>
+<h4 id="dropsettingsnone">drop(settings=None)</h4>
+<p>Delete a partition</p>
+<ul>
+<li><code>settings</code>: Settings for executing request to ClickHouse
+over db.raw() method</li>
+</ul>
+<p>Returns: SQL Query</p>
+<h4 id="systempart.drop_table_sqldb">SystemPart.drop_table_sql(db)</h4>
+<p>Returns the SQL command for deleting this model’s table.</p>
+<h4 id="fetchzookeeper_path-settingsnone">fetch(zookeeper_path,
+settings=None)</h4>
+<p>Download a partition from another server.</p>
+<ul>
+<li><code>zookeeper_path</code>: Path in zookeeper to fetch from</li>
+<li><code>settings</code>: Settings for executing request to ClickHouse
+over db.raw() method</li>
+</ul>
+<p>Returns: SQL Query</p>
+<h4
+id="systempart.fieldswritablefalse">SystemPart.fields(writable=False)</h4>
+<p>Returns an <code>OrderedDict</code> of the model’s fields (from name
+to <code>Field</code> instance). If <code>writable</code> is true, only
+writable fields are included. Callers should not modify the
+dictionary.</p>
+<h4 id="freezesettingsnone">freeze(settings=None)</h4>
+<p>Create a backup of a partition.</p>
+<ul>
+<li><code>settings</code>: Settings for executing request to ClickHouse
+over db.raw() method</li>
+</ul>
+<p>Returns: SQL Query</p>
+<h4
+id="systempart.from_tsvline-field_names-timezone_in_useutc-databasenone">SystemPart.from_tsv(line,
+field_names, timezone_in_use=UTC, database=None)</h4>
+<p>Create a model instance from a tab-separated line. The line may or
+may not include a newline. The <code>field_names</code> list must match
+the fields defined in the model, but does not have to include all of
+them.</p>
+<ul>
+<li><code>line</code>: the TSV-formatted data.</li>
+<li><code>field_names</code>: names of the model fields in the
+data.</li>
+<li><code>timezone_in_use</code>: the timezone to use when parsing dates
+and datetimes. Some fields use their own timezones.</li>
+<li><code>database</code>: if given, sets the database that this
+instance belongs to.</li>
+</ul>
+<h4 id="systempart.getdatabase-conditions">SystemPart.get(database,
+conditions=““)</h4>
+<p>Get all data from system.parts table</p>
+<ul>
+<li><code>database</code>: A database object to fetch data from.</li>
+<li><code>conditions</code>: WHERE clause conditions. Database condition
+is added automatically</li>
+</ul>
+<p>Returns: A list of SystemPart objects</p>
+<h4
+id="systempart.get_activedatabase-conditions">SystemPart.get_active(database,
+conditions=““)</h4>
+<p>Gets active data from system.parts table</p>
+<ul>
+<li><code>database</code>: A database object to fetch data from.</li>
+<li><code>conditions</code>: WHERE clause conditions. Database and
+active conditions are added automatically</li>
+</ul>
+<p>Returns: A list of SystemPart objects</p>
+<h4 id="get_database-4">get_database()</h4>
+<p>Gets the <code>Database</code> that this model instance belongs to.
+Returns <code>None</code> unless the instance was read from the database
+or written to it.</p>
+<h4 id="get_fieldname-4">get_field(name)</h4>
+<p>Gets a <code>Field</code> instance given its name, or
+<code>None</code> if not found.</p>
+<h4
+id="systempart.has_funcs_as_defaults">SystemPart.has_funcs_as_defaults()</h4>
+<p>Return True if some of the model’s fields use a function expression
+as a default value. This requires special handling when inserting
+instances.</p>
+<h4 id="systempart.is_read_only">SystemPart.is_read_only()</h4>
+<p>Returns true if the model is marked as read only.</p>
+<h4 id="systempart.is_system_model">SystemPart.is_system_model()</h4>
+<p>Returns true if the model represents a system table.</p>
+<h4
+id="systempart.is_temporary_model">SystemPart.is_temporary_model()</h4>
+<p>Returns true if the model represents a temporary table.</p>
+<h4
+id="systempart.objects_indatabase">SystemPart.objects_in(database)</h4>
+<p>Returns a <code>QuerySet</code> for selecting instances of this model
+class.</p>
+<h4 id="set_databasedb-4">set_database(db)</h4>
+<p>Sets the <code>Database</code> that this model instance belongs to.
+This is done automatically when the instance is read from the database
+or written to it.</p>
+<h4 id="systempart.table_name">SystemPart.table_name()</h4>
+<h4 id="to_db_string-4">to_db_string()</h4>
+<p>Returns the instance as a bytestring ready to be inserted into the
+database.</p>
+<h4
+id="to_dictinclude_readonlytrue-field_namesnone-4">to_dict(include_readonly=True,
+field_names=None)</h4>
+<p>Returns the instance’s column values as a dict.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+<li><code>field_names</code>: an iterable of field names to return
+(optional)</li>
+</ul>
+<h4
+id="to_tskvinclude_readonlytrue-4">to_tskv(include_readonly=True)</h4>
+<p>Returns the instance’s column keys and values as a tab-separated
+line. A newline is not included. Fields that were not assigned a value
+are omitted.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+</ul>
+<h4 id="to_tsvinclude_readonlytrue-4">to_tsv(include_readonly=True)</h4>
+<p>Returns the instance’s column values as a tab-separated line. A
+newline is not included.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+</ul>
 </body>
 </html>

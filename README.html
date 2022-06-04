@@ -152,69 +152,6 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      {   }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <!--[if lt IE 9]>
@@ -232,24 +169,30 @@ clickhouse server. Means you can use asyncio to perform asynchronous
 queries, although the asynchronous mode is not well tested.</p>
 <table>
 <colgroup>
-<col style="width: 10%" />
-<col style="width: 89%" />
+<col style="width: 15%" />
+<col style="width: 84%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th>Build</th>
 <th><a
-href="https://github.com/sswest/ch-orm/actions?query=workflow:ci"><img
-src="https://github.com/sswest/ch-orm/workflows/ci/badge.svg"
-alt="Coverage Status" /></a><a
-href="https://coveralls.io/github/sswest/ch-orm?branch=develop"><img
-src="https://coveralls.io/repos/github/sswest/ch-orm/badge.svg?branch=develop"
-alt="Coverage Status" /></a></th>
+href="https://github.com/sswest/ch-orm/actions?query=Python+3.7+Tests"><img
+src="https://github.com/sswest/ch-orm/workflows/Python%203.7%20Tests/badge.svg"
+alt="Python 3.7 Tests" /></a><a
+href="https://github.com/sswest/ch-orm/actions?query=Python+3.8+Tests"><img
+src="https://github.com/sswest/ch-orm/workflows/Python%203.8%20Tests/badge.svg"
+alt="Python 3.8 Tests" /></a><a
+href="https://github.com/sswest/ch-orm/actions?query=Python+3.9+Tests"><img
+src="https://github.com/sswest/ch-orm/workflows/Python%203.9%20Tests/badge.svg"
+alt="Python 3.9 Tests" /></a><a
+href="https://github.com/sswest/ch-orm/actions?query=Python+3.10+Tests"><img
+src="https://github.com/sswest/ch-orm/workflows/Python%203.10%20Tests/badge.svg"
+alt="Python 3.10 Tests" /></a></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Package</td>
+<td><strong>Package</strong></td>
 <td><a href="https://pypi.python.org/pypi/ch-orm"><img
 src="https://img.shields.io/pypi/v/ch-orm.svg" alt="PyPI" /></a><a
 href="https://pypi.python.org/pypi/ch-orm"><img
@@ -257,59 +200,24 @@ src="https://img.shields.io/pypi/pyversions/ch-orm.svg"
 alt="PyPI version" /></a><a
 href="https://pypi.python.org/pypi/ch-orm"><img
 src="https://img.shields.io/pypi/wheel/ch-orm.svg"
-alt="PyPI Wheel" /></a></td>
+alt="PyPI Wheel" /></a><a
+href="https://coveralls.io/github/sswest/ch-orm?branch=master"><img
+src="https://coveralls.io/repos/github/sswest/ch-orm/badge.svg?branch=master"
+alt="Coverage Status" /></a></td>
+</tr>
+<tr class="even">
+<td><strong>Docs</strong></td>
+<td><a href="http://sswest.github.io/ch-orm"><img
+src="https://camo.githubusercontent.com/bbb44987324f9324879ccae8ff5ad5c30b7e8b37ccee7235841a9628772595fe/68747470733a2f2f72656164746865646f63732e6f72672f70726f6a656374732f73616e69632f62616467652f3f76657273696f6e3d6c6174657374"
+alt="Documentation" /></a></td>
 </tr>
 </tbody>
 </table>
 <h1 id="introduction">Introduction</h1>
 <p>This project is simple ORM for working with the <a
-href="https://clickhouse.yandex/">ClickHouse database</a>. It allows you
-to define model classes whose instances can be written to the database
-and read from it.</p>
-<p>First you have to install like this:</p>
-<pre><code>pip install ch-orm</code></pre>
-<p>Let’s jump right in with a simple example of monitoring CPU usage.
-First we need to define the model class, connect to the database and
-create a table for the model:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm <span class="im">import</span> Database, Model, DateTimeField, UInt16Field, Float32Field, Memory, F</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CPUStats(Model):</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    timestamp <span class="op">=</span> DateTimeField()</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    cpu_id <span class="op">=</span> UInt16Field()</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    cpu_percent <span class="op">=</span> Float32Field()</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    engine <span class="op">=</span> Memory()</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> Database(<span class="st">&#39;demo&#39;</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>db.create_table(CPUStats)</span></code></pre></div>
-<p>Now we can collect usage statistics per CPU, and write them to the
-database:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> psutil, time, datetime</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>psutil.cpu_percent(percpu<span class="op">=</span><span class="va">True</span>) <span class="co"># first sample should be discarded</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">1</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    stats <span class="op">=</span> psutil.cpu_percent(percpu<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    timestamp <span class="op">=</span> datetime.datetime.now()</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    db.insert([</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        CPUStats(timestamp<span class="op">=</span>timestamp, cpu_id<span class="op">=</span>cpu_id, cpu_percent<span class="op">=</span>cpu_percent)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> cpu_id, cpu_percent <span class="kw">in</span> <span class="bu">enumerate</span>(stats)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    ])</span></code></pre></div>
-<p>Querying the table is easy, using either the query builder or raw
-SQL:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate what percentage of the time CPU 1 was over 95% busy</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>queryset <span class="op">=</span> CPUStats.objects_in(db)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> queryset.<span class="bu">filter</span>(CPUStats.cpu_id <span class="op">==</span> <span class="dv">1</span>).count()</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>busy <span class="op">=</span> queryset.<span class="bu">filter</span>(CPUStats.cpu_id <span class="op">==</span> <span class="dv">1</span>, CPUStats.cpu_percent <span class="op">&gt;</span> <span class="dv">95</span>).count()</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;CPU 1 was busy </span><span class="sc">{:.2f}% o</span><span class="st">f the time&#39;</span>.<span class="bu">format</span>(busy <span class="op">*</span> <span class="fl">100.0</span> <span class="op">/</span> total))</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average usage per CPU</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> queryset.aggregate(CPUStats.cpu_id, average<span class="op">=</span>F.avg(CPUStats.cpu_percent)):</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;CPU </span><span class="sc">{row.cpu_id}</span><span class="st">: </span><span class="sc">{row.average:.2f}</span><span class="st">%&#39;</span>.<span class="bu">format</span>(row<span class="op">=</span>row))</span></code></pre></div>
+href="https://clickhouse.yandex/">ClickHouse database</a>.</p>
+<p>It allows you to define model classes whose instances can be written
+to the database and read from it.</p>
 <p>This and other examples can be found in the <code>examples</code>
 folder.</p>
 <p>To learn more please visit the <a
