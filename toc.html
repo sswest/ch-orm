@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>toc</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+<li><a href="index.md#overview">Overview</a>
+<ul>
+<li><a href="index.md#installation">Installation</a></li>
+</ul></li>
+<li><a href="models_and_databases.md#models-and-databases">Models and
+Databases</a>
+<ul>
+<li><a href="models_and_databases.md#defining-models">Defining
+Models</a>
+<ul>
+<li><a href="models_and_databases.md#default-values">Default
+values</a></li>
+<li><a href="models_and_databases.md#null-values">Null values</a></li>
+<li><a href="models_and_databases.md#materialized-fields">Materialized
+fields</a></li>
+<li><a href="models_and_databases.md#alias-fields">Alias fields</a></li>
+<li><a href="models_and_databases.md#table-names">Table Names</a></li>
+<li><a href="models_and_databases.md#model-constraints">Model
+Constraints</a></li>
+<li><a href="models_and_databases.md#data-skipping-indexes">Data
+Skipping Indexes</a></li>
+</ul></li>
+<li><a href="models_and_databases.md#using-models">Using Models</a></li>
+<li><a
+href="models_and_databases.md#inserting-to-the-database">Inserting to
+the Database</a></li>
+<li><a href="models_and_databases.md#reading-from-the-database">Reading
+from the Database</a></li>
+<li><a href="models_and_databases.md#reading-without-a-model">Reading
+without a Model</a></li>
+<li><a href="models_and_databases.md#sql-placeholders">SQL
+Placeholders</a></li>
+<li><a href="models_and_databases.md#counting">Counting</a></li>
+<li><a href="models_and_databases.md#pagination">Pagination</a></li>
+</ul></li>
+<li><a href="async_databases.md#async-databases">Async Databases</a>
+<ul>
+<li><a href="async_databases.md#insert-from-the-aiodatabase">Insert from
+the AioDatabase</a></li>
+<li><a href="async_databases.md#reading-from-the-aiodatabase">Reading
+from the AioDatabase</a></li>
+</ul></li>
+<li><a href="querysets.md#querysets">Querysets</a>
+<ul>
+<li><a href="querysets.md#filtering">Filtering</a></li>
+<li><a href="querysets.md#using-in-and%20not-in">Using IN and NOT IN</a>
+<ul>
+<li><a href="querysets.md#specifying-prewhere%20conditions">Specifying
+PREWHERE conditions</a></li>
+<li><a href="querysets.md#old-style-filter-conditions">Old-style filter
+conditions</a></li>
+</ul></li>
+<li><a href="querysets.md#counting-and-checking%20existence">Counting
+and Checking Existence</a></li>
+<li><a href="querysets.md#ordering">Ordering</a></li>
+<li><a href="querysets.md#omitting-fields">Omitting Fields</a></li>
+<li><a href="querysets.md#distinct">Distinct</a></li>
+<li><a href="querysets.md#final">Final</a></li>
+<li><a href="querysets.md#slicing">Slicing</a></li>
+<li><a href="querysets.md#pagination">Pagination</a></li>
+<li><a href="querysets.md#mutations">Mutations</a></li>
+<li><a href="querysets.md#aggregation">Aggregation</a>
+<ul>
+<li><a href="querysets.md#adding-totals">Adding totals</a></li>
+</ul></li>
+</ul></li>
+<li><a href="field_options.md#field-options">Field Options</a>
+<ul>
+<li><a href="field_options.md#default">default</a></li>
+<li><a href="field_options.md#db_column">db_column</a></li>
+<li><a href="field_options.md#alias-/-materialized">alias /
+materialized</a></li>
+<li><a href="field_options.md#codec">codec</a></li>
+<li><a href="field_options.md#readonly">readonly</a></li>
+</ul></li>
+<li><a href="field_types.md#field-types">Field Types</a>
+<ul>
+<li><a href="field_types.md#datetimefield-and-time-zones">DateTimeField
+and Time Zones</a></li>
+<li><a href="field_types.md#working-with-enum-fields">Working with enum
+fields</a></li>
+<li><a href="field_types.md#working-with-array-fields">Working with
+array fields</a></li>
+<li><a href="field_types.md#working-with-tuple-fields">Working with
+tuple fields</a></li>
+<li><a href="field_types.md#working-with-nullable-fields">Working with
+nullable fields</a></li>
+<li><a
+href="field_types.md#working-with-lowcardinality%20fields">Working with
+LowCardinality fields</a></li>
+<li><a href="field_types.md#creating-custom-field-types">Creating custom
+field types</a></li>
+</ul></li>
+<li><a href="table_engines.md#table-engines">Table Engines</a>
+<ul>
+<li><a href="table_engines.md#simple-engines">Simple Engines</a></li>
+<li><a href="table_engines.md#engines-in-the-mergetree%20family">Engines
+in the MergeTree Family</a>
+<ul>
+<li><a href="table_engines.md#custom-partitioning">Custom
+partitioning</a></li>
+<li><a href="table_engines.md#primary-key">Primary key</a></li>
+<li><a href="table_engines.md#data-replication">Data
+Replication</a></li>
+</ul></li>
+<li><a href="table_engines.md#buffer-engine">Buffer Engine</a></li>
+<li><a href="table_engines.md#merge-engine">Merge Engine</a></li>
+</ul></li>
+<li><a href="schema_migrations.md#schema-migrations">Schema
+Migrations</a>
+<ul>
+<li><a href="schema_migrations.md#writing-migrations">Writing
+Migrations</a>
+<ul>
+<li><a href="schema_migrations.md#createtable">CreateTable</a></li>
+<li><a href="schema_migrations.md#droptable">DropTable</a></li>
+<li><a href="schema_migrations.md#altertable">AlterTable</a></li>
+<li><a
+href="schema_migrations.md#altertablewithbuffer">AlterTableWithBuffer</a></li>
+<li><a
+href="schema_migrations.md#alterconstraints">AlterConstraints</a></li>
+<li><a href="schema_migrations.md#runpython">RunPython</a></li>
+<li><a href="schema_migrations.md#runsql">RunSQL</a></li>
+</ul></li>
+<li><a href="schema_migrations.md#running-migrations">Running
+Migrations</a></li>
+</ul></li>
+<li><a href="system_models.md#system-models">System Models</a>
+<ul>
+<li><a href="system_models.md#partitions-and-parts">Partitions and
+Parts</a></li>
+</ul></li>
+<li><a href="contributing.md#contributing">Contributing</a>
+<ul>
+<li><a href="contributing.md#building">Building</a></li>
+<li><a href="contributing.md#tests">Tests</a></li>
+</ul></li>
+<li><a href="class_reference.md#class-reference">Class Reference</a>
+<ul>
+<li><a
+href="class_reference.md#inficlickhouse_ormdatabase">infi.clickhouse_orm.database</a>
+<ul>
+<li><a href="class_reference.md#database">Database</a></li>
+<li><a
+href="class_reference.md#databaseexception">DatabaseException</a></li>
+</ul></li>
+<li><a
+href="class_reference.md#inficlickhouse_ormmodels">infi.clickhouse_orm.models</a>
+<ul>
+<li><a href="class_reference.md#model">Model</a></li>
+<li><a href="class_reference.md#buffermodel">BufferModel</a></li>
+<li><a href="class_reference.md#mergemodel">MergeModel</a></li>
+<li><a
+href="class_reference.md#distributedmodel">DistributedModel</a></li>
+<li><a href="class_reference.md#constraint">Constraint</a></li>
+<li><a href="class_reference.md#index">Index</a></li>
+</ul></li>
+<li><a
+href="class_reference.md#inficlickhouse_ormfields">infi.clickhouse_orm.fields</a>
+<ul>
+<li><a href="class_reference.md#arrayfield">ArrayField</a></li>
+<li><a href="class_reference.md#baseenumfield">BaseEnumField</a></li>
+<li><a href="class_reference.md#basefloatfield">BaseFloatField</a></li>
+<li><a href="class_reference.md#baseintfield">BaseIntField</a></li>
+<li><a href="class_reference.md#datefield">DateField</a></li>
+<li><a
+href="class_reference.md#datetime64field">DateTime64Field</a></li>
+<li><a href="class_reference.md#datetimefield">DateTimeField</a></li>
+<li><a
+href="class_reference.md#decimal128field">Decimal128Field</a></li>
+<li><a href="class_reference.md#decimal32field">Decimal32Field</a></li>
+<li><a href="class_reference.md#decimal64field">Decimal64Field</a></li>
+<li><a href="class_reference.md#decimalfield">DecimalField</a></li>
+<li><a href="class_reference.md#enum16field">Enum16Field</a></li>
+<li><a href="class_reference.md#enum8field">Enum8Field</a></li>
+<li><a href="class_reference.md#field">Field</a></li>
+<li><a
+href="class_reference.md#fixedstringfield">FixedStringField</a></li>
+<li><a href="class_reference.md#float32field">Float32Field</a></li>
+<li><a href="class_reference.md#float64field">Float64Field</a></li>
+<li><a href="class_reference.md#ipv4field">IPv4Field</a></li>
+<li><a href="class_reference.md#ipv6field">IPv6Field</a></li>
+<li><a href="class_reference.md#int16field">Int16Field</a></li>
+<li><a href="class_reference.md#int32field">Int32Field</a></li>
+<li><a href="class_reference.md#int64field">Int64Field</a></li>
+<li><a href="class_reference.md#int8field">Int8Field</a></li>
+<li><a
+href="class_reference.md#lowcardinalityfield">LowCardinalityField</a></li>
+<li><a href="class_reference.md#nullablefield">NullableField</a></li>
+<li><a href="class_reference.md#stringfield">StringField</a></li>
+<li><a href="class_reference.md#uint16field">UInt16Field</a></li>
+<li><a href="class_reference.md#uint32field">UInt32Field</a></li>
+<li><a href="class_reference.md#uint64field">UInt64Field</a></li>
+<li><a href="class_reference.md#uint8field">UInt8Field</a></li>
+<li><a href="class_reference.md#uuidfield">UUIDField</a></li>
+</ul></li>
+<li><a
+href="class_reference.md#inficlickhouse_ormengines">infi.clickhouse_orm.engines</a>
+<ul>
+<li><a href="class_reference.md#engine">Engine</a></li>
+<li><a href="class_reference.md#tinylog">TinyLog</a></li>
+<li><a href="class_reference.md#log">Log</a></li>
+<li><a href="class_reference.md#memory">Memory</a></li>
+<li><a href="class_reference.md#mergetree">MergeTree</a></li>
+<li><a href="class_reference.md#buffer">Buffer</a></li>
+<li><a href="class_reference.md#merge">Merge</a></li>
+<li><a href="class_reference.md#distributed">Distributed</a></li>
+<li><a
+href="class_reference.md#collapsingmergetree">CollapsingMergeTree</a></li>
+<li><a
+href="class_reference.md#summingmergetree">SummingMergeTree</a></li>
+<li><a
+href="class_reference.md#replacingmergetree">ReplacingMergeTree</a></li>
+</ul></li>
+<li><a
+href="class_reference.md#inficlickhouse_ormquery">infi.clickhouse_orm.query</a>
+<ul>
+<li><a href="class_reference.md#queryset">QuerySet</a></li>
+<li><a
+href="class_reference.md#aggregatequeryset">AggregateQuerySet</a></li>
+<li><a href="class_reference.md#q">Q</a></li>
+</ul></li>
+<li><a
+href="class_reference.md#inficlickhouse_ormfuncs">infi.clickhouse_orm.funcs</a>
+<ul>
+<li><a href="class_reference.md#f">F</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</body>
+</html>

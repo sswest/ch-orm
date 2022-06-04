@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CHANGELOG</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="change-log">Change Log</h1>
+<h2 id="v2.1.1">v2.1.1</h2>
+<ul>
+<li>Improve support of ClickHouse v21.9 (mangototango)</li>
+<li>Ignore non-numeric parts in ClickHouse version (mangototango)</li>
+<li>Fix precedence of ~ operator in Q objects (mangototango)</li>
+<li>Support for adding a column to the beginning of a table
+(meanmail)</li>
+<li>Add stddevPop and stddevSamp functions (k.peskov)</li>
+</ul>
+<h2 id="v2.1.0">v2.1.0</h2>
+<ul>
+<li>Support for model constraints</li>
+<li>Support for data skipping indexes</li>
+<li>Support for mutations: <code>QuerySet.update</code> and
+<code>QuerySet.delete</code></li>
+<li>Added functions for working with external dictionaries</li>
+<li>Support FINAL for <code>ReplacingMergeTree</code> (chripede)</li>
+<li>Added <code>DateTime64Field</code> (NiyazNz)</li>
+<li>Make <code>DateTimeField</code> and <code>DateTime64Field</code>
+timezone-aware (NiyazNz)</li>
+</ul>
+<p><strong>Backwards incompatible changes</strong></p>
+<p>Previously, <code>DateTimeField</code> always converted its value
+from the database timezone to UTC. This is no longer the case: the
+field’s value now preserves the timezone it was defined with, or if not
+specified - the database’s global timezone. This change has no effect if
+your database timezone is set to UTC.</p>
+<h2 id="v2.0.1">v2.0.1</h2>
+<ul>
+<li>Remove unnecessary import of <code>six</code></li>
+</ul>
+<h2 id="v2.0.0">v2.0.0</h2>
+<ul>
+<li>Dropped support for Python 2.x</li>
+<li>New flexible syntax for database expressions and functions</li>
+<li>Expressions as default values for model fields</li>
+<li>Support for IPv4 and IPv6 fields</li>
+<li>Automatic generation of models by inspecting existing tables</li>
+<li>Convenient ways to import ORM classes</li>
+</ul>
+<p>See <a href="docs/whats_new_in_version_2.md">What’s new in version
+2</a> for details.</p>
+<h2 id="v1.4.0">v1.4.0</h2>
+<ul>
+<li>Added primary_key parameter to MergeTree engines (M1hacka)</li>
+<li>Support negative enum values (Romamo)</li>
+</ul>
+<h2 id="v1.3.0">v1.3.0</h2>
+<ul>
+<li>Support LowCardinality columns in ad-hoc queries</li>
+<li>Support for LIMIT BY in querysets (utapyngo)</li>
+</ul>
+<h2 id="v1.2.0">v1.2.0</h2>
+<ul>
+<li>Add support for per-field compression codecs (rbelio,
+Chocorean)</li>
+<li>Add support for low cardinality fields (rbelio)</li>
+</ul>
+<h2 id="v1.1.0">v1.1.0</h2>
+<ul>
+<li>Add PREWHERE support to querysets (M1hacka)</li>
+<li>Add WITH TOTALS support to querysets (M1hacka)</li>
+<li>Extend date field range (trthhrtz)</li>
+<li>Fix parsing of server errors in ClickHouse v19.3.3+</li>
+<li>Fix pagination when asking for the last page on a query that matches
+no records</li>
+<li>Use HTTP Basic Authentication instead of passing the credentials in
+the URL</li>
+<li>Support default/alias/materialized for nullable fields</li>
+<li>Add UUIDField (kpotehin)</li>
+<li>Add <code>log_statements</code> parameter to database
+initializer</li>
+<li>Fix test_merge which fails on ClickHouse v19.8.3</li>
+<li>Fix querysets using the SystemPart model</li>
+</ul>
+<h2 id="v1.0.4">v1.0.4</h2>
+<ul>
+<li>Added <code>timeout</code> parameter to database initializer
+(SUHAR1K)</li>
+<li>Added <code>verify_ssl_cert</code> parameter to database
+initializer</li>
+<li>Added <code>final()</code> method to querysets (M1hacka)</li>
+<li>Fixed a migrations problem - cannot add a new materialized field
+after a regular field</li>
+</ul>
+<h2 id="v1.0.3">v1.0.3</h2>
+<ul>
+<li>Bug fix: <code>QuerySet.count()</code> ignores slicing</li>
+<li>Bug fix: wrong parentheses when building queries using Q
+objects</li>
+<li>Support Decimal fields</li>
+<li>Added <code>Database.add_setting</code> method</li>
+</ul>
+<h2 id="v1.0.2">v1.0.2</h2>
+<ul>
+<li>Include alias and materialized fields in queryset results</li>
+<li>Check for database existence, to allow delayed creation</li>
+<li>Added <code>Database.does_table_exist</code> method</li>
+<li>Support for <code>IS NULL</code> and <code>IS NOT NULL</code> in
+querysets (kalombos)</li>
+</ul>
+<h2 id="v1.0.1">v1.0.1</h2>
+<ul>
+<li>NullableField: take extra_null_values into account in
+<code>validate</code> and <code>to_python</code></li>
+<li>Added <code>Field.isinstance</code> method</li>
+<li>Validate the inner field passed to <code>ArrayField</code></li>
+</ul>
+<h2 id="v1.0.0">v1.0.0</h2>
+<ul>
+<li>Add support for compound filters with Q objects (desile)</li>
+<li>Add support for BETWEEN operator (desile)</li>
+<li>Distributed engine support (tsionyx)</li>
+<li><code>_fields</code> and <code>_writable_fields</code> are
+OrderedDicts - note that this might break backwards compatibility
+(tsionyx)</li>
+<li>Improve error messages returned from the database with the
+<code>ServerError</code> class (tsionyx)</li>
+<li>Added support for custom partitioning (M1hacka)</li>
+<li>Added attribute <code>server_version</code> to Database class
+(M1hacka)</li>
+<li>Changed <code>Engine.create_table_sql()</code>,
+<code>Engine.drop_table_sql()</code>,
+<code>Model.create_table_sql()</code>,
+<code>Model.drop_table_sql()</code> parameter to db from db_name
+(M1hacka)</li>
+<li>Fix parsing of datetime column type when it includes a timezone
+(M1hacka)</li>
+<li>Rename <code>Model.system</code> to <code>Model._system</code> to
+prevent collision with a column that has the same name</li>
+<li>Rename <code>Model.readonly</code> to <code>Model._readonly</code>
+to prevent collision with a column that has the same name</li>
+<li>The <code>field_names</code> argument to <code>Model.to_tsv</code>
+is now mandatory</li>
+<li>Improve creation time of model instances by keeping a dictionary of
+default values</li>
+<li>Fix queryset bug when field name contains double underscores
+(YouCanKeepSilence)</li>
+<li>Prevent exception when determining timezone of old ClickHouse
+versions (vv-p)</li>
+</ul>
+<h2 id="v0.9.8">v0.9.8</h2>
+<ul>
+<li>Bug fix: add field names list explicitly to Database.insert method
+(anci)</li>
+<li>Added RunPython and RunSQL migrations (M1hacka)</li>
+<li>Allow ISO-formatted datetime values (tsionyx)</li>
+<li>Show field name in error message when invalid value assigned
+(tsionyx)</li>
+<li>Bug fix: select query fails when query contains ‘$’ symbol
+(M1hacka)</li>
+<li>Prevent problems with AlterTable migrations related to field order
+(M1hacka)</li>
+<li>Added documentation about custom fields.</li>
+</ul>
+<h2 id="v0.9.7">v0.9.7</h2>
+<ul>
+<li>Add <code>distinct</code> method to querysets</li>
+<li>Add <code>AlterTableWithBuffer</code> migration operation</li>
+<li>Support Merge engine (M1hacka)</li>
+</ul>
+<h2 id="v0.9.6">v0.9.6</h2>
+<ul>
+<li>Fix python3 compatibility (TvoroG)</li>
+<li>Nullable arrays not supported in latest ClickHouse version</li>
+<li>system.parts table no longer includes “replicated” column in latest
+ClickHouse version</li>
+</ul>
+<h2 id="v0.9.5">v0.9.5</h2>
+<ul>
+<li>Added <code>QuerySet.paginate()</code></li>
+<li>Support for basic aggregation in querysets</li>
+</ul>
+<h2 id="v0.9.4">v0.9.4</h2>
+<ul>
+<li>Migrations: when creating a table for a <code>BufferModel</code>,
+create the underlying table too if necessary</li>
+</ul>
+<h2 id="v0.9.3">v0.9.3</h2>
+<ul>
+<li>Changed license from PSF to BSD</li>
+<li>Nullable fields support (yamiou)</li>
+<li>Support for queryset slicing</li>
+</ul>
+<h2 id="v0.9.2">v0.9.2</h2>
+<ul>
+<li>Added <code>ne</code> and <code>not_in</code> queryset
+operators</li>
+<li>Querysets no longer have a default order unless
+<code>order_by</code> is called</li>
+<li>Added <code>autocreate</code> flag to database initializer</li>
+<li>Fix some Python 2/3 incompatibilities (TvoroG, tsionyx)</li>
+<li>To work around a JOIN bug in ClickHouse, <code>$table</code> now
+inserts only the table name, and the database name is sent in the query
+params instead</li>
+</ul>
+<h2 id="v0.9.0">v0.9.0</h2>
+<ul>
+<li>Major new feature: building model queries using QuerySets</li>
+<li>Refactor and expand the documentation</li>
+<li>Add support for FixedString fields</li>
+<li>Add support for more engine types: TinyLog, Log, Memory</li>
+<li>Bug fix: Do not send readonly=1 when connection is already in
+readonly mode</li>
+</ul>
+<h2 id="v0.8.2">v0.8.2</h2>
+<ul>
+<li>Fix broken Python 3 support (M1hacka)</li>
+</ul>
+<h2 id="v0.8.1">v0.8.1</h2>
+<ul>
+<li>Add support for ReplacingMergeTree (leenr)</li>
+<li>Fix problem with SELECT WITH TOTALS (pilosus)</li>
+<li>Update serialization format of DateTimeField to 10 digits, zero
+padded (nikepan)</li>
+<li>Greatly improve performance when inserting large strings (credit to
+M1hacka for identifying the problem)</li>
+<li>Reduce memory footprint of Database.insert()</li>
+</ul>
+<h2 id="v0.8.0">v0.8.0</h2>
+<ul>
+<li>Always keep datetime fields in UTC internally, and convert server
+timezone to UTC when parsing query results</li>
+<li>Support for ALIAS and MATERIALIZED fields (M1ha)</li>
+<li>Pagination: passing -1 as the page number now returns the last
+page</li>
+<li>Accept datetime values for date fields (Zloool)</li>
+<li>Support readonly mode in Database class (tswr)</li>
+<li>Added support for the Buffer table engine (emakarov)</li>
+<li>Added the SystemPart readonly model, which provides operations on
+partitions (M1ha)</li>
+<li>Added Model.to_dict() that converts a model instance to a dictionary
+(M1ha)</li>
+<li>Added Database.raw() to perform arbitrary queries (M1ha)</li>
+</ul>
+<h2 id="v0.7.1">v0.7.1</h2>
+<ul>
+<li>Accept ‘0000-00-00 00:00:00’ as a datetime value (tsionyx)</li>
+<li>Bug fix: parse_array fails on int arrays</li>
+<li>Improve performance when inserting many rows</li>
+</ul>
+<h2 id="v0.7.0">v0.7.0</h2>
+<ul>
+<li>Support array fields</li>
+<li>Support enum fields</li>
+</ul>
+<h2 id="v0.6.3">v0.6.3</h2>
+<ul>
+<li>Python 3 support</li>
+</ul>
+</body>
+</html>

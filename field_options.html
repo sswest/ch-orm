@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>field_options</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="field-options">Field Options</h1>
+<p>All field types accept the following arguments:</p>
+<ul>
+<li>default</li>
+<li>alias</li>
+<li>materialized</li>
+<li>readonly</li>
+<li>codec</li>
+<li>db_column</li>
+</ul>
+<p>Note that <code>default</code>, <code>alias</code> and
+<code>materialized</code> are mutually exclusive - you cannot use more
+than one of them in a single field.</p>
+<h2 id="default">default</h2>
+<p>Specifies a default value to use for the field. If not given, the
+field will have a default value based on its type: empty string for
+string fields, zero for numeric fields, etc. The default value can be a
+Python value suitable for the field type, or an expression. For
+example:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Event(Model):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> StringField(default<span class="op">=</span><span class="st">&quot;EVENT&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    repeated <span class="op">=</span> UInt32Field(default<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    created <span class="op">=</span> DateTimeField(default<span class="op">=</span>F.now())</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    engine <span class="op">=</span> Memory()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    ...</span></code></pre></div>
+<p>When creating a model instance, any fields you do not specify get
+their default value. Fields that use a default expression are assigned a
+sentinel value of <code>clickhouse_orm.utils.NO_VALUE</code> instead.
+For example:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> event <span class="op">=</span> Event()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(event.to_dict())</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>{<span class="st">&#39;name&#39;</span>: <span class="st">&#39;EVENT&#39;</span>, <span class="st">&#39;repeated&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;created&#39;</span>: <span class="op">&lt;</span>NO_VALUE<span class="op">&gt;</span>}</span></code></pre></div>
+<p>:warning: Due to a bug in ClickHouse versions prior to 20.1.2.4,
+insertion of records with expressions for default values may fail.</p>
+<h2 id="db_column">db_column</h2>
+<p>db_column allows you to use the field names defined by the clickhouse
+backend, rather than Field instance names.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Style(Model):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    create_time <span class="op">=</span> DateTimeField(default<span class="op">=</span>F.now(), db_column<span class="op">=</span><span class="st">&quot;createTime&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    engine <span class="op">=</span> Memory()</span></code></pre></div>
+<p>You can use the <code>create_time</code> field for all ORM
+operations, but the clickhouse will store the column named
+<code>createTime</code>.</p>
+<h2 id="alias-materialized">alias / materialized</h2>
+<p>The <code>alias</code> and <code>materialized</code> attributes
+expect an expression that gets calculated by the database. The
+difference is that <code>alias</code> fields are calculated on the fly,
+while <code>materialized</code> fields are calculated when the record is
+inserted, and are stored on disk. You can use any expression, and can
+refer to other model fields. For example:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Event(Model):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    created <span class="op">=</span> DateTimeField()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    created_date <span class="op">=</span> DateTimeField(materialized<span class="op">=</span>F.toDate(created))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> StringField()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    normalized_name <span class="op">=</span> StringField(alias<span class="op">=</span>F.upper(F.trim(name)))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    engine <span class="op">=</span> Memory()</span></code></pre></div>
+<p>For backwards compatibility with older versions of the ORM, you can
+pass the expression as an SQL string:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    created_date <span class="op">=</span> DateTimeField(materialized<span class="op">=</span><span class="st">&quot;toDate(created)&quot;</span>)</span></code></pre></div>
+<p>Both field types can’t be inserted into the database directly, so
+they are ignored when using the <code>Database.insert()</code> method.
+ClickHouse does not return the field values if you use
+<code>"SELECT * FROM ..."</code> - you have to list these field names
+explicitly in the query.</p>
+<p>Usage:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>obj <span class="op">=</span> Event(created<span class="op">=</span>datetime.now(), name<span class="op">=</span><span class="st">&#39;MyEvent&#39;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> Database(<span class="st">&#39;my_test_db&#39;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>db.insert([obj])</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># All values will be retrieved from database</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>db.select(<span class="st">&#39;SELECT created, created_date, username, name FROM $db.event&#39;</span>, model_class<span class="op">=</span>Event)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># created_date and username will contain a default value</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>db.select(<span class="st">&#39;SELECT * FROM $db.event&#39;</span>, model_class<span class="op">=</span>Event)</span></code></pre></div>
+<p>When creating a model instance, any alias or materialized fields are
+assigned a sentinel value of <code>clickhouse_orm.utils.NO_VALUE</code>
+since their real values can only be known after insertion to the
+database.</p>
+<h2 id="codec">codec</h2>
+<p>This attribute specifies the compression algorithm to use for the
+field (instead of the default data compression algorithm defined in
+server settings).</p>
+<p>Supported compression algorithms:</p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 37%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Codec</th>
+<th>Argument</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NONE</td>
+<td>None</td>
+<td>No compression.</td>
+</tr>
+<tr class="even">
+<td>LZ4</td>
+<td>None</td>
+<td>LZ4 compression.</td>
+</tr>
+<tr class="odd">
+<td>LZ4HC(<code>level</code>)</td>
+<td>Possible <code>level</code> range: [3, 12].</td>
+<td>Default value: 9. Greater values stands for better compression and
+higher CPU usage. Recommended value range: [4,9].</td>
+</tr>
+<tr class="even">
+<td>ZSTD(<code>level</code>)</td>
+<td>Possible <code>level</code>range: [1, 22].</td>
+<td>Default value: 1. Greater values stands for better compression and
+higher CPU usage. Levels &gt;= 20, should be used with caution, as they
+require more memory.</td>
+</tr>
+<tr class="odd">
+<td>Delta(<code>delta_bytes</code>)</td>
+<td>Possible <code>delta_bytes</code> range: 1, 2, 4 , 8.</td>
+<td>Default value for <code>delta_bytes</code> is
+<code>sizeof(type)</code> if it is equal to 1, 2,4 or 8 and equals to 1
+otherwise.</td>
+</tr>
+</tbody>
+</table>
+<p>Codecs can be combined by separating their names with commas. The
+default database codec is not included into pipeline (if it should be
+applied to a field, you have to specify it explicitly in pipeline).</p>
+<p>Recommended usage for codecs: - When values for particular metric do
+not differ significantly from point to point, delta-encoding allows to
+reduce disk space usage significantly. - DateTime works great with
+pipeline of Delta, ZSTD and the column size can be compressed to 2-3% of
+its original size (given a smooth datetime data) - Numeric types usually
+enjoy best compression rates with ZSTD - String types enjoy good
+compression rates with LZ4HC</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Stats(Model):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">id</span>                  <span class="op">=</span> UInt64Field(codec<span class="op">=</span><span class="st">&#39;ZSTD(10)&#39;</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    timestamp           <span class="op">=</span> DateTimeField(codec<span class="op">=</span><span class="st">&#39;Delta,ZSTD&#39;</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    timestamp_date      <span class="op">=</span> DateField(codec<span class="op">=</span><span class="st">&#39;Delta(4),ZSTD(22)&#39;</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    metadata_id         <span class="op">=</span> Int64Field(codec<span class="op">=</span><span class="st">&#39;LZ4&#39;</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    status              <span class="op">=</span> StringField(codec<span class="op">=</span><span class="st">&#39;LZ4HC(10)&#39;</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    calculation         <span class="op">=</span> NullableField(Float32Field(), codec<span class="op">=</span><span class="st">&#39;ZSTD&#39;</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    alerts              <span class="op">=</span> ArrayField(FixedStringField(length<span class="op">=</span><span class="dv">15</span>), codec<span class="op">=</span><span class="st">&#39;Delta(2),LZ4HC&#39;</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    engine <span class="op">=</span> MergeTree(<span class="st">&#39;timestamp_date&#39;</span>, (<span class="st">&#39;id&#39;</span>, <span class="st">&#39;timestamp&#39;</span>))</span></code></pre></div>
+<p>Note: This feature is supported on ClickHouse version 19.1.16 and
+above. Codec arguments will be ignored by the ORM for older versions of
+ClickHouse.</p>
+<h2 id="readonly">readonly</h2>
+<p>This attribute is set automatically for fields with
+<code>alias</code> or <code>materialized</code> attributes, you do not
+need to pass it yourself.</p>
+<hr />
+<p><a href="querysets.md">&lt;&lt; Querysets</a> | <a
+href="toc.md">Table of Contents</a> | <a href="field_types.md">Field
+Types &gt;&gt;</a></p>
+</body>
+</html>

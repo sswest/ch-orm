@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>table_engines</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="table-engines">Table Engines</h1>
+<p>See: <a
+href="https://clickhouse.tech/docs/en/engines/table-engines/">ClickHouse
+Documentation</a></p>
+<p>Each model must have an engine instance, used when creating the table
+in ClickHouse.</p>
+<p>The following engines are supported by the ORM:</p>
+<ul>
+<li>TinyLog</li>
+<li>Log</li>
+<li>Memory</li>
+<li>MergeTree / ReplicatedMergeTree</li>
+<li>CollapsingMergeTree / ReplicatedCollapsingMergeTree</li>
+<li>SummingMergeTree / ReplicatedSummingMergeTree</li>
+<li>ReplacingMergeTree / ReplicatedReplacingMergeTree</li>
+<li>Buffer</li>
+<li>Merge</li>
+<li>Distributed</li>
+</ul>
+<h2 id="simple-engines">Simple Engines</h2>
+<p><code>TinyLog</code>, <code>Log</code> and <code>Memory</code>
+engines do not require any parameters:</p>
+<pre><code>engine = TinyLog()
+
+engine = Log()
+
+engine = Memory()</code></pre>
+<h2 id="engines-in-the-mergetree-family">Engines in the MergeTree
+Family</h2>
+<p>To define a <code>MergeTree</code> engine, supply the date column
+name and the names (or expressions) for the key columns:</p>
+<pre><code>engine = MergeTree(&#39;EventDate&#39;, (&#39;CounterID&#39;, &#39;EventDate&#39;))</code></pre>
+<p>You may also provide a sampling expression:</p>
+<pre><code>engine = MergeTree(&#39;EventDate&#39;, (&#39;CounterID&#39;, &#39;EventDate&#39;), sampling_expr=F.intHash32(UserID))</code></pre>
+<p>A <code>CollapsingMergeTree</code> engine is defined in a similar
+manner, but requires also a sign column:</p>
+<pre><code>engine = CollapsingMergeTree(&#39;EventDate&#39;, (&#39;CounterID&#39;, &#39;EventDate&#39;), &#39;Sign&#39;)</code></pre>
+<p>For a <code>SummingMergeTree</code> you can optionally specify the
+summing columns:</p>
+<pre><code>engine = SummingMergeTree(&#39;EventDate&#39;, (&#39;OrderID&#39;, &#39;EventDate&#39;, &#39;BannerID&#39;),
+                          summing_cols=(&#39;Shows&#39;, &#39;Clicks&#39;, &#39;Cost&#39;))</code></pre>
+<p>For a <code>ReplacingMergeTree</code> you can optionally specify the
+version column:</p>
+<pre><code>engine = ReplacingMergeTree(&#39;EventDate&#39;, (&#39;OrderID&#39;, &#39;EventDate&#39;, &#39;BannerID&#39;), ver_col=&#39;Version&#39;)</code></pre>
+<h3 id="custom-partitioning">Custom partitioning</h3>
+<p>ClickHouse supports <a
+href="https://clickhouse.tech/docs/en/engines/table-engines/mergetree-family/custom-partitioning-key/">custom
+partitioning</a> expressions since version 1.1.54310</p>
+<p>You can use custom partitioning with any <code>MergeTree</code>
+family engine. To set custom partitioning:</p>
+<ul>
+<li>Instead of specifying the <code>date_col</code> (first) constructor
+parameter, pass a tuple of field names or expressions in the
+<code>order_by</code> (second) constructor parameter.</li>
+<li>Add <code>partition_key</code> parameter. It should be a tuple of
+expressions, by which partitions are built.</li>
+</ul>
+<p>Standard monthly partitioning by date column can be specified using
+the <code>toYYYYMM(date)</code> function.</p>
+<p>Example:</p>
+<pre><code>engine = ReplacingMergeTree(order_by=(&#39;OrderID&#39;, &#39;EventDate&#39;, &#39;BannerID&#39;), ver_col=&#39;Version&#39;,
+                            partition_key=(F.toYYYYMM(EventDate), &#39;BannerID&#39;))</code></pre>
+<h3 id="primary-key">Primary key</h3>
+<p>ClickHouse supports <a
+href="https://clickhouse.tech/docs/en/engines/table-engines/mergetree-family/mergetree/#primary-keys-and-indexes-in-queries">custom
+primary key</a> expressions since version 1.1.54310</p>
+<p>You can use custom primary key with any <code>MergeTree</code> family
+engine. To set custom partitioning add <code>primary_key</code>
+parameter. It should be a tuple of expressions, by which partitions are
+built.</p>
+<p>By default primary key is equal to order_by expression</p>
+<p>Example:</p>
+<pre><code>engine = ReplacingMergeTree(order_by=(&#39;OrderID&#39;, &#39;EventDate&#39;, &#39;BannerID&#39;), ver_col=&#39;Version&#39;,
+                            partition_key=(F.toYYYYMM(EventDate), &#39;BannerID&#39;), primary_key=(&#39;OrderID&#39;,))</code></pre>
+<h3 id="data-replication">Data Replication</h3>
+<p>Any of the above engines can be converted to a replicated engine
+(e.g. <code>ReplicatedMergeTree</code>) by adding two parameters,
+<code>replica_table_path</code> and <code>replica_name</code>:</p>
+<pre><code>engine = MergeTree(&#39;EventDate&#39;, (&#39;CounterID&#39;, &#39;EventDate&#39;),
+                   replica_table_path=&#39;/clickhouse/tables/{layer}-{shard}/hits&#39;,
+                   replica_name=&#39;{replica}&#39;)</code></pre>
+<h2 id="buffer-engine">Buffer Engine</h2>
+<p>A <code>Buffer</code> engine is only used in conjunction with a
+<code>BufferModel</code>. The model should be a subclass of both
+<code>BufferModel</code> and the main model. The main model is also
+passed to the engine:</p>
+<pre><code>class PersonBuffer(BufferModel, Person):
+
+    engine = Buffer(Person)</code></pre>
+<p>Additional buffer parameters can optionally be specified:</p>
+<pre><code>    engine = Buffer(Person, num_layers=16, min_time=10,
+                    max_time=100, min_rows=10000, max_rows=1000000,
+                    min_bytes=10000000, max_bytes=100000000)</code></pre>
+<p>Then you can insert objects into Buffer model and they will be
+handled by ClickHouse properly:</p>
+<pre><code>db.create_table(PersonBuffer)
+suzy = PersonBuffer(first_name=&#39;Suzy&#39;, last_name=&#39;Jones&#39;)
+dan = PersonBuffer(first_name=&#39;Dan&#39;, last_name=&#39;Schwartz&#39;)
+db.insert([dan, suzy])</code></pre>
+<h2 id="merge-engine">Merge Engine</h2>
+<p><a
+href="https://clickhouse.tech/docs/en/operations/table_engines/merge/">ClickHouse
+docs</a></p>
+<p>A <code>Merge</code> engine is only used in conjunction with a
+<code>MergeModel</code>. This table does not store data itself, but
+allows reading from any number of other tables simultaneously. So you
+can’t insert in it. Engine parameter specifies re2 (similar to PCRE)
+regular expression, from which data is selected.</p>
+<pre><code>class MergeTable(MergeModel):
+    engine = Merge(&#39;^table_prefix&#39;)</code></pre>
+<hr />
+<p><a href="field_types.md">&lt;&lt; Field Types</a> | <a
+href="toc.md">Table of Contents</a> | <a
+href="schema_migrations.md">Schema Migrations &gt;&gt;</a></p>
+</body>
+</html>

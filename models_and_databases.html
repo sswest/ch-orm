@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>models_and_databases</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="models-and-databases">Models and Databases</h1>
+<p>Models represent ClickHouse tables, allowing you to work with them
+using familiar pythonic syntax.</p>
+<p>Database instances connect to a specific ClickHouse database for
+running queries, inserting data and other operations.</p>
+<h2 id="defining-models">Defining Models</h2>
+<p>Models are defined in a way reminiscent of Django’s ORM, by
+subclassing <code>Model</code>:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm <span class="im">import</span> Model, StringField, DateField, Float32Field, MergeTree</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person(Model):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    first_name <span class="op">=</span> StringField()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    last_name <span class="op">=</span> StringField()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    birthday <span class="op">=</span> DateField()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> Float32Field()</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    engine <span class="op">=</span> MergeTree(<span class="st">&#39;birthday&#39;</span>, (<span class="st">&#39;first_name&#39;</span>, <span class="st">&#39;last_name&#39;</span>, <span class="st">&#39;birthday&#39;</span>))</span></code></pre></div>
+<p>The columns in the database table are represented by model fields.
+Each field has a type, which matches the type of the corresponding
+database column. All the supported fields types are listed <a
+href="field_types.md">here</a>.</p>
+<p>A model must have an <code>engine</code>, which determines how its
+table is stored on disk (if at all), and what capabilities it has. For
+more details about table engines see <a
+href="table_engines.md">here</a>.</p>
+<h3 id="default-values">Default values</h3>
+<p>Each field has a “natural” default value - empty string for string
+fields, zero for numeric fields etc. To specify a different value use
+the <code>default</code> parameter:</p>
+<pre><code>    first_name = StringField(default=&quot;anonymous&quot;)</code></pre>
+<p>For additional details see <a href="field_options.md">here</a>.</p>
+<h3 id="null-values">Null values</h3>
+<p>To allow null values in a field, wrap it inside a
+<code>NullableField</code>:</p>
+<pre><code>    birthday = NullableField(DateField())</code></pre>
+<p>In this case, the default value for that field becomes
+<code>null</code> unless otherwise specified.</p>
+<p>For more information about <code>NullableField</code> see <a
+href="field_types.md">Field Types</a>.</p>
+<h3 id="materialized-fields">Materialized fields</h3>
+<p>The value of a materialized field is calculated from other fields in
+the model. For example:</p>
+<pre><code>    year_born = Int16Field(materialized=F.toYear(birthday))</code></pre>
+<p>Materialized fields are read-only, meaning that their values are not
+sent to the database when inserting records.</p>
+<p>For additional details see <a href="field_options.md">here</a>.</p>
+<h3 id="alias-fields">Alias fields</h3>
+<p>An alias field is a field whose value is calculated by ClickHouse on
+the fly, as a function of other fields. It is not physically stored by
+the database. For example:</p>
+<pre><code>    weekday_born = field.UInt8Field(alias=F.toDayOfWeek(birthday))</code></pre>
+<p>Alias fields are read-only, meaning that their values are not sent to
+the database when inserting records.</p>
+<p>For additional details see <a href="field_options.md">here</a>.</p>
+<h3 id="table-names">Table Names</h3>
+<p>The table name used for the model is its class name, converted to
+lowercase. To override the default name, implement the
+<code>table_name</code> method:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm.models <span class="im">import</span> Model</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person(Model):</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> table_name(cls):</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">&#39;people&#39;</span></span></code></pre></div>
+<h3 id="model-constraints">Model Constraints</h3>
+<p>It is possible to define constraints which ClickHouse verifies when
+data is inserted. Trying to insert invalid records will raise a
+<code>ServerError</code>. Each constraint has a name and an expression
+to validate. For example:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm.models <span class="im">import</span> Model, Constraint</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm.funcs <span class="im">import</span> F</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm.fields <span class="im">import</span> DateTimeField</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person(Model):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    birthday <span class="op">=</span> DateTimeField()</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ensure that the birthday is not a future date</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    birthday_is_in_the_past <span class="op">=</span> Constraint(birthday <span class="op">&lt;=</span> F.today())</span></code></pre></div>
+<h3 id="data-skipping-indexes">Data Skipping Indexes</h3>
+<p>Models that use an engine from the <code>MergeTree</code> family can
+define additional indexes over one or more columns or expressions. These
+indexes are used in SELECT queries for reducing the amount of data to
+read from the disk by skipping big blocks of data that do not satisfy
+the query’s conditions.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm.models <span class="im">import</span> Model, Index</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm.funcs <span class="im">import</span> F</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm.fields <span class="im">import</span> StringField, Float32Field</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person(Model):</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    first_name <span class="op">=</span> StringField()</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    last_name <span class="op">=</span> StringField()</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> Float32Field()</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A minmax index that can help find people taller or shorter than some height</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    height_index <span class="op">=</span> Index(height, <span class="bu">type</span><span class="op">=</span>Index.minmax(), granularity<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A trigram index that can help find substrings inside people names</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    names_index <span class="op">=</span> Index((F.lower(first_name), F.lower(last_name)),</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                        <span class="bu">type</span><span class="op">=</span>Index.ngrambf_v1(<span class="dv">3</span>, <span class="dv">256</span>, <span class="dv">2</span>, <span class="dv">0</span>), granularity<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div>
+<h2 id="using-models">Using Models</h2>
+<p>Once you have a model, you can create model instances:</p>
+<pre><code>&gt;&gt;&gt; dan = Person(first_name=&#39;Dan&#39;, last_name=&#39;Schwartz&#39;)
+&gt;&gt;&gt; suzy = Person(first_name=&#39;Suzy&#39;, last_name=&#39;Jones&#39;)
+&gt;&gt;&gt; dan.first_name
+&#39;Dan&#39;</code></pre>
+<p>When values are assigned to model fields, they are immediately
+converted to their Pythonic data type. In case the value is invalid, a
+<code>ValueError</code> is raised:</p>
+<pre><code>&gt;&gt;&gt; suzy.birthday = &#39;1980-01-17&#39;
+&gt;&gt;&gt; suzy.birthday
+datetime.date(1980, 1, 17)
+&gt;&gt;&gt; suzy.birthday = 0.5
+ValueError: Invalid value for DateField - 0.5
+&gt;&gt;&gt; suzy.birthday = &#39;1922-05-31&#39;
+ValueError: DateField out of range - 1922-05-31 is not between 1970-01-01 and 2105-12-31</code></pre>
+<h2 id="inserting-to-the-database">Inserting to the Database</h2>
+<p>To write your instances to ClickHouse, you need a
+<code>Database</code> instance:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm <span class="im">import</span> Database</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> Database(<span class="st">&#39;my_test_db&#39;</span>)</span></code></pre></div>
+<p>This automatically connects to <a href="http://localhost:8123"
+class="uri">http://localhost:8123</a> and creates a database called
+my_test_db, unless it already exists. If necessary, you can specify a
+different database URL and optional credentials:</p>
+<pre><code>db = Database(&#39;my_test_db&#39;, db_url=&#39;http://192.168.1.1:8050&#39;, username=&#39;scott&#39;, password=&#39;tiger&#39;)</code></pre>
+<p>Using the <code>Database</code> instance you can create a table for
+your model, and insert instances to it:</p>
+<pre><code>db.create_table(Person)
+db.insert([dan, suzy])</code></pre>
+<p>The <code>insert</code> method can take any iterable of model
+instances, but they all must belong to the same model class.</p>
+<p>Creating a read-only database is also supported. Such a
+<code>Database</code> instance can only read data, and cannot modify
+data or schemas:</p>
+<pre><code>db = Database(&#39;my_test_db&#39;, readonly=True)</code></pre>
+<h2 id="reading-from-the-database">Reading from the Database</h2>
+<p>Loading model instances from the database is simple:</p>
+<pre><code>for person in db.select(&quot;SELECT * FROM my_test_db.person&quot;, model_class=Person):
+    print(person.first_name, person.last_name)</code></pre>
+<p>Do not include a <code>FORMAT</code> clause in the query, since the
+ORM automatically sets the format to
+<code>TabSeparatedWithNamesAndTypes</code>.</p>
+<p>It is possible to select only a subset of the columns, and the rest
+will receive their default values:</p>
+<pre><code>for person in db.select(&quot;SELECT first_name FROM my_test_db.person WHERE last_name=&#39;Smith&#39;&quot;, model_class=Person):
+    print(person.first_name)</code></pre>
+<p>The ORM provides a way to build simple queries without writing SQL by
+hand. The previous snippet can be written like this:</p>
+<pre><code>for person in Person.objects_in(db).filter(Person.last_name == &#39;Smith&#39;).only(&#39;first_name&#39;):
+    print(person.first_name)</code></pre>
+<p>See <a href="querysets.md">Querysets</a> for more information.</p>
+<h2 id="reading-without-a-model">Reading without a Model</h2>
+<p>When running a query, specifying a model class is not required. In
+case you do not provide a model class, an ad-hoc class will be defined
+based on the column names and types returned by the query:</p>
+<pre><code>for row in db.select(&quot;SELECT max(height) as max_height FROM my_test_db.person&quot;):
+    print(row.max_height)</code></pre>
+<p>This is a very convenient feature that saves you the need to define a
+model for each query, while still letting you work with Pythonic column
+values and an elegant syntax.</p>
+<p>It is also possible to generate a model class on the fly for an
+existing table in the database using <code>get_model_for_table</code>.
+This is particularly useful for querying system tables, for example:</p>
+<pre><code>QueryLog = db.get_model_for_table(&#39;query_log&#39;, system_table=True)
+for row in QueryLog.objects_in(db).filter(QueryLog.query_duration_ms &gt; 10000):
+    print(row.query)</code></pre>
+<h2 id="sql-placeholders">SQL Placeholders</h2>
+<p>There are a couple of special placeholders that you can use inside
+the SQL to make it easier to write: <code>$db</code> and
+<code>$table</code>. The first one is replaced by the database name, and
+the second is replaced by the table name (but is available only when the
+model is specified).</p>
+<p>So instead of this:</p>
+<pre><code>db.select(&quot;SELECT * FROM my_test_db.person&quot;, model_class=Person)</code></pre>
+<p>you can use:</p>
+<pre><code>db.select(&quot;SELECT * FROM $db.$table&quot;, model_class=Person)</code></pre>
+<p>Note: normally it is not necessary to specify the database name,
+since it’s already sent in the query parameters to ClickHouse. It is
+enough to specify the table name.</p>
+<h2 id="counting">Counting</h2>
+<p>The <code>Database</code> class also supports counting records
+easily:</p>
+<pre><code>&gt;&gt;&gt; db.count(Person)
+117
+&gt;&gt;&gt; db.count(Person, conditions=&quot;height &gt; 1.90&quot;)
+6</code></pre>
+<h2 id="pagination">Pagination</h2>
+<p>It is possible to paginate through model instances:</p>
+<pre><code>&gt;&gt;&gt; order_by = &#39;first_name, last_name&#39;
+&gt;&gt;&gt; page = db.paginate(Person, order_by, page_num=1, page_size=10)
+&gt;&gt;&gt; print(page.number_of_objects)
+2507
+&gt;&gt;&gt; print(page.pages_total)
+251
+&gt;&gt;&gt; for person in page.objects:
+&gt;&gt;&gt;     # do something</code></pre>
+<p>The <code>paginate</code> method returns a <code>namedtuple</code>
+containing the following fields:</p>
+<ul>
+<li><code>objects</code> - the list of objects in this page</li>
+<li><code>number_of_objects</code> - total number of objects in all
+pages</li>
+<li><code>pages_total</code> - total number of pages</li>
+<li><code>number</code> - the page number, starting from 1; the special
+value -1 may be used to retrieve the last page</li>
+<li><code>page_size</code> - the number of objects per page</li>
+</ul>
+<p>You can optionally pass conditions to the query:</p>
+<pre><code>&gt;&gt;&gt; page = db.paginate(Person, order_by, page_num=1, page_size=100, conditions=&#39;height &gt; 1.90&#39;)</code></pre>
+<p>Note that <code>order_by</code> must be chosen so that the ordering
+is unique, otherwise there might be inconsistencies in the pagination
+(such as an instance that appears on two different pages).</p>
+<hr />
+<p><a href="index.md">&lt;&lt; Overview</a> | <a href="toc.md">Table of
+Contents</a> | <a href="async_databases.md">Async DataBase
+&gt;&gt;</a></p>
+</body>
+</html>

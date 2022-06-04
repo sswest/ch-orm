@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>system_models</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="system-models">System Models</h1>
+<p><a
+href="https://clickhouse.tech/docs/en/operations/system-tables/">Clickhouse
+docs</a>.</p>
+<p>System models are read only models for implementing part of the
+system’s functionality, and for providing access to information about
+how the system is working.</p>
+<p>Currently the following system models are supported:</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 18%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>DB Table</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SystemPart</td>
+<td>system.parts</td>
+<td>Gives methods to work with partitions. See below.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="partitions-and-parts">Partitions and Parts</h2>
+<p><a
+href="https://clickhouse.tech/docs/en/sql-reference/statements/alter/#alter_manipulations-with-partitions">ClickHouse
+docs</a>.</p>
+<p>A partition in a table is data for a single calendar month. Table
+“system.parts” contains information about each part.</p>
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 17%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Parameters</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>get(static)</td>
+<td>database, conditions=“”</td>
+<td>Gets database partitions, filtered by conditions</td>
+</tr>
+<tr class="even">
+<td>get_active(static)</td>
+<td>database, conditions=“”</td>
+<td>Gets only active (not detached or dropped) partitions, filtered by
+conditions</td>
+</tr>
+<tr class="odd">
+<td>detach</td>
+<td>settings=None</td>
+<td>Detaches the partition. Settings is a dict of params to pass to http
+request</td>
+</tr>
+<tr class="even">
+<td>drop</td>
+<td>settings=None</td>
+<td>Drops the partition. Settings is a dict of params to pass to http
+request</td>
+</tr>
+<tr class="odd">
+<td>attach</td>
+<td>settings=None</td>
+<td>Attaches already detached partition. Settings is a dict of params to
+pass to http request</td>
+</tr>
+<tr class="even">
+<td>freeze</td>
+<td>settings=None</td>
+<td>Freezes (makes backup) of the partition. Settings is a dict of
+params to pass to http request</td>
+</tr>
+<tr class="odd">
+<td>fetch</td>
+<td>settings=None</td>
+<td>Fetches partition. Settings is a dict of params to pass to http
+request</td>
+</tr>
+</tbody>
+</table>
+<p>Usage example:</p>
+<pre><code>from infi.clickhouse_orm import Database, SystemPart
+db = Database(&#39;my_test_db&#39;, db_url=&#39;http://192.168.1.1:8050&#39;, username=&#39;scott&#39;, password=&#39;tiger&#39;)
+partitions = SystemPart.get_active(db, conditions=&#39;&#39;)  # Getting all active partitions of the database
+if len(partitions) &gt; 0:
+    partitions = sorted(partitions, key=lambda obj: obj.name)  # Partition name is YYYYMM, so we can sort so
+    partitions[0].freeze()  # Make a backup in /opt/clickhouse/shadow directory
+    partitions[0].drop()  # Dropped partition</code></pre>
+<p><code>Note</code>: system.parts stores information for all databases.
+To be correct, SystemPart model was designed to receive only parts
+belonging to the given database instance.</p>
+<hr />
+<p><a href="schema_migrations.md">&lt;&lt; Schema Migrations</a> | <a
+href="toc.md">Table of Contents</a> | <a
+href="contributing.md">Contributing &gt;&gt;</a></p>
+</body>
+</html>

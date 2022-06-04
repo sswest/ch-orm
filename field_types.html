@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>field_types</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="field-types">Field Types</h1>
+<p>See: <a
+href="https://clickhouse.tech/docs/en/sql-reference/data-types/">ClickHouse
+Documentation</a></p>
+<p>The following field types are supported:</p>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 12%" />
+<col style="width: 22%" />
+<col style="width: 49%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>DB Type</th>
+<th>Pythonic Type</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>StringField</td>
+<td>String</td>
+<td>str</td>
+<td>Encoded as UTF-8 when written to ClickHouse</td>
+</tr>
+<tr class="even">
+<td>FixedStringField</td>
+<td>FixedString</td>
+<td>str</td>
+<td>Encoded as UTF-8 when written to ClickHouse</td>
+</tr>
+<tr class="odd">
+<td>DateField</td>
+<td>Date</td>
+<td>datetime.date</td>
+<td>Range 1970-01-01 to 2105-12-31</td>
+</tr>
+<tr class="even">
+<td>DateTimeField</td>
+<td>DateTime</td>
+<td>datetime.datetime</td>
+<td>Minimal value is 1970-01-01 00:00:00; Timezone aware</td>
+</tr>
+<tr class="odd">
+<td>DateTime64Field</td>
+<td>DateTime64</td>
+<td>datetime.datetime</td>
+<td>Minimal value is 1970-01-01 00:00:00; Timezone aware</td>
+</tr>
+<tr class="even">
+<td>Int8Field</td>
+<td>Int8</td>
+<td>int</td>
+<td>Range -128 to 127</td>
+</tr>
+<tr class="odd">
+<td>Int16Field</td>
+<td>Int16</td>
+<td>int</td>
+<td>Range -32768 to 32767</td>
+</tr>
+<tr class="even">
+<td>Int32Field</td>
+<td>Int32</td>
+<td>int</td>
+<td>Range -2147483648 to 2147483647</td>
+</tr>
+<tr class="odd">
+<td>Int64Field</td>
+<td>Int64</td>
+<td>int</td>
+<td>Range -9223372036854775808 to 9223372036854775807</td>
+</tr>
+<tr class="even">
+<td>UInt8Field</td>
+<td>UInt8</td>
+<td>int</td>
+<td>Range 0 to 255</td>
+</tr>
+<tr class="odd">
+<td>UInt16Field</td>
+<td>UInt16</td>
+<td>int</td>
+<td>Range 0 to 65535</td>
+</tr>
+<tr class="even">
+<td>UInt32Field</td>
+<td>UInt32</td>
+<td>int</td>
+<td>Range 0 to 4294967295</td>
+</tr>
+<tr class="odd">
+<td>UInt64Field</td>
+<td>UInt64</td>
+<td>int</td>
+<td>Range 0 to 18446744073709551615</td>
+</tr>
+<tr class="even">
+<td>Float32Field</td>
+<td>Float32</td>
+<td>float</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Float64Field</td>
+<td>Float64</td>
+<td>float</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>DecimalField</td>
+<td>Decimal</td>
+<td>Decimal</td>
+<td>Pythonic values are rounded to fit the scale of the database
+field</td>
+</tr>
+<tr class="odd">
+<td>Decimal32Field</td>
+<td>Decimal32</td>
+<td>Decimal</td>
+<td>Ditto</td>
+</tr>
+<tr class="even">
+<td>Decimal64Field</td>
+<td>Decimal64</td>
+<td>Decimal</td>
+<td>Ditto</td>
+</tr>
+<tr class="odd">
+<td>Decimal128Field</td>
+<td>Decimal128</td>
+<td>Decimal</td>
+<td>Ditto</td>
+</tr>
+<tr class="even">
+<td>UUIDField</td>
+<td>UUID</td>
+<td>uuid.UUID</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>IPv4Field</td>
+<td>IPv4</td>
+<td>ipaddress.IPv4Address</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>IPv6Field</td>
+<td>IPv6</td>
+<td>ipaddress.IPv6Address</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Enum8Field</td>
+<td>Enum8</td>
+<td>Enum</td>
+<td>See below</td>
+</tr>
+<tr class="even">
+<td>Enum16Field</td>
+<td>Enum16</td>
+<td>Enum</td>
+<td>See below</td>
+</tr>
+<tr class="odd">
+<td>ArrayField</td>
+<td>Array</td>
+<td>list</td>
+<td>See below</td>
+</tr>
+<tr class="even">
+<td>TupleField</td>
+<td>Tuple</td>
+<td>tuple</td>
+<td>See below</td>
+</tr>
+<tr class="odd">
+<td>PointField</td>
+<td>Point</td>
+<td>contrib.geo.fields.Point</td>
+<td>Experimental feature</td>
+</tr>
+<tr class="even">
+<td>RingField</td>
+<td>Ring</td>
+<td>contrib.geo.fields.Ring</td>
+<td>Experimental feature</td>
+</tr>
+<tr class="odd">
+<td>NullableField</td>
+<td>Nullable</td>
+<td>See below</td>
+<td>See below</td>
+</tr>
+</tbody>
+</table>
+<h2 id="datetimefield-and-time-zones">DateTimeField and Time Zones</h2>
+<p><code>DateTimeField</code> and <code>DateTime64Field</code> can
+accept a <code>timezone</code> parameter (either the timezone name or a
+<code>pytz</code> timezone instance). This timezone will be used as the
+column timezone in ClickHouse. If not provided, the fields will use the
+timezone defined in the database configuration.</p>
+<p>A <code>DateTimeField</code> and <code>DateTime64Field</code> can be
+assigned values from one of the following types:</p>
+<ul>
+<li>datetime</li>
+<li>date</li>
+<li>integer - number of seconds since the Unix epoch</li>
+<li>float (DateTime64Field only) - number of seconds and microseconds
+since the Unix epoch</li>
+<li>string in <code>YYYY-MM-DD HH:MM:SS</code> format or <a
+href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>-compatible
+format</li>
+</ul>
+<p>The assigned value always gets converted to a timezone-aware
+<code>datetime</code> in UTC. The only exception is when the assigned
+value is a timezone-aware <code>datetime</code>, in which case it will
+not be changed.</p>
+<p>DateTime values that are read from the database are kept in the
+database-defined timezone - either the one defined for the field, or the
+global timezone defined in the database configuration.</p>
+<p>It is strongly recommended to set the server timezone to UTC and to
+store all datetime values in that timezone, in order to prevent
+confusion and subtle bugs. Conversion to a different timezone should
+only be performed when the value needs to be displayed.</p>
+<h2 id="working-with-enum-fields">Working with enum fields</h2>
+<p><code>Enum8Field</code> and <code>Enum16Field</code> provide support
+for working with ClickHouse enum columns. They accept strings or
+integers as values, and convert them to the matching Pythonic Enum
+member.</p>
+<p>Example of a model with an enum field:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Gender <span class="op">=</span> Enum(<span class="st">&#39;Gender&#39;</span>, <span class="st">&#39;male female unspecified&#39;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person(Model):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    first_name <span class="op">=</span> StringField()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    last_name <span class="op">=</span> StringField()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    birthday <span class="op">=</span> DateField()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    gender <span class="op">=</span> Enum32Field(Gender)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    engine <span class="op">=</span> MergeTree(<span class="st">&#39;birthday&#39;</span>, (<span class="st">&#39;first_name&#39;</span>, <span class="st">&#39;last_name&#39;</span>, <span class="st">&#39;birthday&#39;</span>))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>suzy <span class="op">=</span> Person(first_name<span class="op">=</span><span class="st">&#39;Suzy&#39;</span>, last_name<span class="op">=</span><span class="st">&#39;Jones&#39;</span>, gender<span class="op">=</span>Gender.female)</span></code></pre></div>
+<h2 id="working-with-array-fields">Working with array fields</h2>
+<p>You can create array fields containing any data type, for
+example:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SensorData(Model):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    date <span class="op">=</span> DateField()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    temperatures <span class="op">=</span> ArrayField(Float32Field())</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    humidity_levels <span class="op">=</span> ArrayField(UInt8Field())</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    engine <span class="op">=</span> MergeTree(<span class="st">&#39;date&#39;</span>, (<span class="st">&#39;date&#39;</span>,))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> SensorData(date<span class="op">=</span>date.today(), temperatures<span class="op">=</span>[<span class="fl">25.5</span>, <span class="fl">31.2</span>, <span class="fl">28.7</span>], humidity_levels<span class="op">=</span>[<span class="dv">41</span>, <span class="dv">39</span>, <span class="dv">66</span>])</span></code></pre></div>
+<p>Note that multidimensional arrays are not supported yet by the
+ORM.</p>
+<h2 id="working-with-tuple-fields">Working with tuple fields</h2>
+<p>You can create tuple fields containing multiple data type, for
+example:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm.models <span class="im">import</span> Model</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm.engines <span class="im">import</span> MergeTree</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm.fields <span class="im">import</span> DateField, Float32Field, UInt8Field, TupleField</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SensorData(Model):</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    date <span class="op">=</span> DateField()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    info <span class="op">=</span> TupleField([(<span class="st">&#39;t&#39;</span>, Float32Field()), (<span class="st">&#39;h&#39;</span>, UInt8Field())])</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    engine <span class="op">=</span> MergeTree(<span class="st">&#39;date&#39;</span>, (<span class="st">&#39;date&#39;</span>,))</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> SensorData(date<span class="op">=</span>date.today(), info<span class="op">=</span>(<span class="fl">25.5</span>, <span class="dv">41</span>))</span></code></pre></div>
+<h2 id="working-with-nullable-fields">Working with nullable fields</h2>
+<p><a
+href="https://clickhouse.tech/docs/en/sql-reference/data-types/nullable/">ClickHouse
+provides a NULL value support</a>.</p>
+<p>Wrapping another field in a <code>NullableField</code> makes it
+possible to assign <code>None</code> to that field. For example:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> EventData(Model):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    date <span class="op">=</span> DateField()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    comment <span class="op">=</span> NullableField(StringField(), extra_null_values<span class="op">=</span>{<span class="st">&#39;&#39;</span>})</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> NullableField(UInt8Field())</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    serie <span class="op">=</span> NullableField(ArrayField(UInt8Field()))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    engine <span class="op">=</span> MergeTree(<span class="st">&#39;date&#39;</span>, (<span class="st">&#39;date&#39;</span>,))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>score_event <span class="op">=</span> EventData(date<span class="op">=</span>date.today(), comment<span class="op">=</span><span class="va">None</span>, score<span class="op">=</span><span class="dv">5</span>, serie<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>comment_event <span class="op">=</span> EventData(date<span class="op">=</span>date.today(), comment<span class="op">=</span><span class="st">&#39;Excellent!&#39;</span>, score<span class="op">=</span><span class="va">None</span>, serie<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>another_event <span class="op">=</span> EventData(date<span class="op">=</span>date.today(), comment<span class="op">=</span><span class="st">&#39;&#39;</span>, score<span class="op">=</span><span class="va">None</span>, serie<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>action_event <span class="op">=</span> EventData(date<span class="op">=</span>date.today(), comment<span class="op">=</span><span class="st">&#39;&#39;</span>, score<span class="op">=</span><span class="va">None</span>, serie<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span></code></pre></div>
+<p>The <code>extra_null_values</code> parameter is an iterable of
+additional values that should be converted to <code>None</code>.</p>
+<p>NOTE: <code>ArrayField</code> of <code>NullableField</code> is not
+supported. Also <code>EnumField</code> cannot be nullable.</p>
+<p>NOTE: Using <code>Nullable</code> almost always negatively affects
+performance, keep this in mind when designing your databases.</p>
+<h2 id="working-with-lowcardinality-fields">Working with LowCardinality
+fields</h2>
+<p>Starting with version 19.0 ClickHouse offers a new type of field to
+improve the performance of queries and compaction of columns for low
+entropy data.</p>
+<p><a href="https://github.com/tech/ClickHouse/issues/4074">More
+specifically</a> LowCardinality data type builds dictionaries
+automatically. It can use multiple different dictionaries if
+necessarily. If the number of distinct values is pretty large, the
+dictionaries become local, several different dictionaries will be used
+for different ranges of data. For example, if you have too many distinct
+values in total, but only less than about a million values each day -
+then the queries by day will be processed efficiently, and queries for
+larger ranges will be processed rather efficiently.</p>
+<p>LowCardinality works independently of (generic) fields compression.
+LowCardinality fields are subsequently compressed as usual. The
+compression ratios of LowCardinality fields for text data may be
+significantly better than without LowCardinality.</p>
+<p>LowCardinality will give performance boost, in the form of processing
+speed, if the number of distinct values is less than a few millions.
+This is because data is processed in dictionary encoded form.</p>
+<p>You can find further information <a
+href="https://clickhouse.tech/docs/en/sql-reference/data-types/lowcardinality/">here</a>.</p>
+<p>Usage example:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LowCardinalityModel(Model):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    date       <span class="op">=</span> DateField()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    string     <span class="op">=</span> LowCardinalityField(StringField())</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    nullable   <span class="op">=</span> LowCardinalityField(NullableField(StringField()))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    array      <span class="op">=</span> ArrayField(LowCardinalityField(DateField()))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    ...</span></code></pre></div>
+<p>Note: <code>LowCardinality</code> field with an inner array field is
+not supported. Use an <code>ArrayField</code> with a
+<code>LowCardinality</code> inner field as seen in the example.</p>
+<h2 id="creating-custom-field-types">Creating custom field types</h2>
+<p>Sometimes it is convenient to use data types that are supported in
+Python, but have no corresponding column type in ClickHouse. In these
+cases it is possible to define a custom field class that knows how to
+convert the Pythonic object to a suitable representation in the
+database, and vice versa.</p>
+<p>For example, we can create a BooleanField which will hold
+<code>True</code> and <code>False</code> values, but write them to the
+database as 0 and 1 (in a <code>UInt8</code> column). For this purpose
+we’ll subclass the <code>Field</code> class, and implement two
+methods:</p>
+<ul>
+<li><code>to_python</code> which converts any supported value to a
+<code>bool</code>. The method should know how to handle strings (which
+typically come from the database), booleans, and possibly other valid
+options. In case the value is not supported, it should raise a
+<code>ValueError</code>.</li>
+<li><code>to_db_string</code> which converts a <code>bool</code> into a
+string for writing to the database.</li>
+</ul>
+<p>Here’s the full implementation:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> infi.clickhouse_orm <span class="im">import</span> Field</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BooleanField(Field):</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The ClickHouse column type to use</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    db_type <span class="op">=</span> <span class="st">&#39;UInt8&#39;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The default value</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    class_default <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> to_python(<span class="va">self</span>, value, timezone_in_use):</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert valid values to bool</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> value <span class="kw">in</span> (<span class="dv">1</span>, <span class="st">&#39;1&#39;</span>, <span class="va">True</span>):</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> value <span class="kw">in</span> (<span class="dv">0</span>, <span class="st">&#39;0&#39;</span>, <span class="va">False</span>):</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;Invalid value for BooleanField: </span><span class="sc">%r</span><span class="st">&#39;</span> <span class="op">%</span> value)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> to_db_string(<span class="va">self</span>, value, quote<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># The value was already converted by to_python, so it&#39;s a bool</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">&#39;1&#39;</span> <span class="cf">if</span> value <span class="cf">else</span> <span class="st">&#39;0&#39;</span></span></code></pre></div>
+<hr />
+<p><a href="field_options.md">&lt;&lt; Field Options</a> | <a
+href="toc.md">Table of Contents</a> | <a href="table_engines.md">Table
+Engines &gt;&gt;</a></p>
+</body>
+</html>

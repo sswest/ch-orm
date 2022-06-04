@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>class_reference</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="class-reference">Class Reference</h1>
+<h2 id="infi.clickhouse_orm.database">infi.clickhouse_orm.database</h2>
+<h3 id="database">Database</h3>
+<p>Database instances connect to a specific ClickHouse database for
+running queries, inserting data and other operations.</p>
+<h4
+id="databasedb_name-db_urlhttplocalhost8123-usernamenone-passwordnone-readonlyfalse-autocreatetrue-timeout60-verify_ssl_certtrue-log_statementsfalse">Database(db_name,
+db_url=“http://localhost:8123/”, username=None, password=None,
+readonly=False, autocreate=True, timeout=60, verify_ssl_cert=True,
+log_statements=False)</h4>
+<p>Initializes a database instance. Unless it’s readonly, the database
+will be created on the ClickHouse server if it does not already
+exist.</p>
+<ul>
+<li><code>db_name</code>: name of the database to connect to.</li>
+<li><code>db_url</code>: URL of the ClickHouse server.</li>
+<li><code>username</code>: optional connection credentials.</li>
+<li><code>password</code>: optional connection credentials.</li>
+<li><code>readonly</code>: use a read-only connection.</li>
+<li><code>autocreate</code>: automatically create the database if it
+does not exist (unless in readonly mode).</li>
+<li><code>timeout</code>: the connection timeout in seconds.</li>
+<li><code>verify_ssl_cert</code>: whether to verify the server’s
+certificate when connecting via HTTPS.</li>
+<li><code>log_statements</code>: when True, all database statements are
+logged.</li>
+</ul>
+<h4 id="add_settingname-value">add_setting(name, value)</h4>
+<p>Adds a database setting that will be sent with every request. For
+example, <code>db.add_setting("max_execution_time", 10)</code> will
+limit query execution time to 10 seconds. The name must be string, and
+the value is converted to string in case it isn’t. To remove a setting,
+pass <code>None</code> as the value.</p>
+<h4 id="countmodel_class-conditionsnone">count(model_class,
+conditions=None)</h4>
+<p>Counts the number of records in the model’s table.</p>
+<ul>
+<li><code>model_class</code>: the model to count.</li>
+<li><code>conditions</code>: optional SQL conditions (contents of the
+WHERE clause).</li>
+</ul>
+<h4 id="create_database">create_database()</h4>
+<p>Creates the database on the ClickHouse server if it does not already
+exist.</p>
+<h4 id="create_tablemodel_class">create_table(model_class)</h4>
+<p>Creates a table for the given model class, if it does not exist
+already.</p>
+<h4 id="does_table_existmodel_class">does_table_exist(model_class)</h4>
+<p>Checks whether a table for the given model class already exists. Note
+that this only checks for existence of a table with the expected
+name.</p>
+<h4 id="drop_database">drop_database()</h4>
+<p>Deletes the database on the ClickHouse server.</p>
+<h4 id="drop_tablemodel_class">drop_table(model_class)</h4>
+<p>Drops the database table of the given model class, if it exists.</p>
+<h4
+id="get_model_for_tabletable_name-system_tablefalse">get_model_for_table(table_name,
+system_table=False)</h4>
+<p>Generates a model class from an existing table in the database. This
+can be used for querying tables which don’t have a corresponding model
+class, for example system tables.</p>
+<ul>
+<li><code>table_name</code>: the table to create a model for</li>
+<li><code>system_table</code>: whether the table is a system table, or
+belongs to the current database</li>
+</ul>
+<h4 id="insertmodel_instances-batch_size1000">insert(model_instances,
+batch_size=1000)</h4>
+<p>Insert records into the database.</p>
+<ul>
+<li><code>model_instances</code>: any iterable containing instances of a
+single model class.</li>
+<li><code>batch_size</code>: number of records to send per chunk (use a
+lower number if your records are very large).</li>
+</ul>
+<h4
+id="migratemigrations_package_name-up_to9999">migrate(migrations_package_name,
+up_to=9999)</h4>
+<p>Executes schema migrations.</p>
+<ul>
+<li><code>migrations_package_name</code> - fully qualified name of the
+Python package containing the migrations.</li>
+<li><code>up_to</code> - number of the last migration to apply.</li>
+</ul>
+<h4
+id="paginatemodel_class-order_by-page_num1-page_size100-conditionsnone-settingsnone">paginate(model_class,
+order_by, page_num=1, page_size=100, conditions=None,
+settings=None)</h4>
+<p>Selects records and returns a single page of model instances.</p>
+<ul>
+<li><code>model_class</code>: the model class matching the query’s
+table, or <code>None</code> for getting back instances of an ad-hoc
+model.</li>
+<li><code>order_by</code>: columns to use for sorting the query
+(contents of the ORDER BY clause).</li>
+<li><code>page_num</code>: the page number (1-based), or -1 to get the
+last page.</li>
+<li><code>page_size</code>: number of records to return per page.</li>
+<li><code>conditions</code>: optional SQL conditions (contents of the
+WHERE clause).</li>
+<li><code>settings</code>: query settings to send as HTTP GET
+parameters</li>
+</ul>
+<p>The result is a namedtuple containing <code>objects</code> (list),
+<code>number_of_objects</code>, <code>pages_total</code>,
+<code>number</code> (of the current page), and
+<code>page_size</code>.</p>
+<h4 id="rawquery-settingsnone-streamfalse">raw(query, settings=None,
+stream=False)</h4>
+<p>Performs a query and returns its output as text.</p>
+<ul>
+<li><code>query</code>: the SQL query to execute.</li>
+<li><code>settings</code>: query settings to send as HTTP GET
+parameters</li>
+<li><code>stream</code>: if true, the HTTP response from ClickHouse will
+be streamed.</li>
+</ul>
+<h4 id="selectquery-model_classnone-settingsnone">select(query,
+model_class=None, settings=None)</h4>
+<p>Performs a query and returns a generator of model instances.</p>
+<ul>
+<li><code>query</code>: the SQL query to execute.</li>
+<li><code>model_class</code>: the model class matching the query’s
+table, or <code>None</code> for getting back instances of an ad-hoc
+model.</li>
+<li><code>settings</code>: query settings to send as HTTP GET
+parameters</li>
+</ul>
+<h3 id="databaseexception">DatabaseException</h3>
+<p>Extends Exception</p>
+<p>Raised when a database operation fails.</p>
+<h2 id="infi.clickhouse_orm.models">infi.clickhouse_orm.models</h2>
+<h3 id="model">Model</h3>
+<p>A base class for ORM models. Each model class represent a ClickHouse
+table. For example:</p>
+<pre><code>class CPUStats(Model):
+    timestamp = DateTimeField()
+    cpu_id = UInt16Field()
+    cpu_percent = Float32Field()
+    engine = Memory()</code></pre>
+<h4 id="modelkwargs">Model(**kwargs)</h4>
+<p>Creates a model instance, using keyword arguments as field values.
+Since values are immediately converted to their Pythonic type, invalid
+values will cause a <code>ValueError</code> to be raised. Unrecognized
+field names will cause an <code>AttributeError</code>.</p>
+<h4 id="model.create_table_sqldb">Model.create_table_sql(db)</h4>
+<p>Returns the SQL statement for creating a table for this model.</p>
+<h4 id="model.drop_table_sqldb">Model.drop_table_sql(db)</h4>
+<p>Returns the SQL command for deleting this model’s table.</p>
+<h4 id="model.fieldswritablefalse">Model.fields(writable=False)</h4>
+<p>Returns an <code>OrderedDict</code> of the model’s fields (from name
+to <code>Field</code> instance). If <code>writable</code> is true, only
+writable fields are included. Callers should not modify the
+dictionary.</p>
+<h4
+id="model.from_tsvline-field_names-timezone_in_useutc-databasenone">Model.from_tsv(line,
+field_names, timezone_in_use=UTC, database=None)</h4>
+<p>Create a model instance from a tab-separated line. The line may or
+may not include a newline. The <code>field_names</code> list must match
+the fields defined in the model, but does not have to include all of
+them.</p>
+<ul>
+<li><code>line</code>: the TSV-formatted data.</li>
+<li><code>field_names</code>: names of the model fields in the
+data.</li>
+<li><code>timezone_in_use</code>: the timezone to use when parsing dates
+and datetimes. Some fields use their own timezones.</li>
+<li><code>database</code>: if given, sets the database that this
+instance belongs to.</li>
+</ul>
+<h4 id="get_database">get_database()</h4>
+<p>Gets the <code>Database</code> that this model instance belongs to.
+Returns <code>None</code> unless the instance was read from the database
+or written to it.</p>
+<h4 id="get_fieldname">get_field(name)</h4>
+<p>Gets a <code>Field</code> instance given its name, or
+<code>None</code> if not found.</p>
+<h4 id="model.has_funcs_as_defaults">Model.has_funcs_as_defaults()</h4>
+<p>Return True if some of the model’s fields use a function expression
+as a default value. This requires special handling when inserting
+instances.</p>
+<h4 id="model.is_read_only">Model.is_read_only()</h4>
+<p>Returns true if the model is marked as read only.</p>
+<h4 id="model.is_system_model">Model.is_system_model()</h4>
+<p>Returns true if the model represents a system table.</p>
+<h4 id="model.objects_indatabase">Model.objects_in(database)</h4>
+<p>Returns a <code>QuerySet</code> for selecting instances of this model
+class.</p>
+<h4 id="set_databasedb">set_database(db)</h4>
+<p>Sets the <code>Database</code> that this model instance belongs to.
+This is done automatically when the instance is read from the database
+or written to it.</p>
+<h4 id="model.table_name">Model.table_name()</h4>
+<p>Returns the model’s database table name. By default this is the class
+name converted to lowercase. Override this if you want to use a
+different table name.</p>
+<h4 id="to_db_string">to_db_string()</h4>
+<p>Returns the instance as a bytestring ready to be inserted into the
+database.</p>
+<h4
+id="to_dictinclude_readonlytrue-field_namesnone">to_dict(include_readonly=True,
+field_names=None)</h4>
+<p>Returns the instance’s column values as a dict.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+<li><code>field_names</code>: an iterable of field names to return
+(optional)</li>
+</ul>
+<h4 id="to_tskvinclude_readonlytrue">to_tskv(include_readonly=True)</h4>
+<p>Returns the instance’s column keys and values as a tab-separated
+line. A newline is not included. Fields that were not assigned a value
+are omitted.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+</ul>
+<h4 id="to_tsvinclude_readonlytrue">to_tsv(include_readonly=True)</h4>
+<p>Returns the instance’s column values as a tab-separated line. A
+newline is not included.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+</ul>
+<h3 id="buffermodel">BufferModel</h3>
+<p>Extends Model</p>
+<h4 id="buffermodelkwargs">BufferModel(**kwargs)</h4>
+<p>Creates a model instance, using keyword arguments as field values.
+Since values are immediately converted to their Pythonic type, invalid
+values will cause a <code>ValueError</code> to be raised. Unrecognized
+field names will cause an <code>AttributeError</code>.</p>
+<h4
+id="buffermodel.create_table_sqldb">BufferModel.create_table_sql(db)</h4>
+<p>Returns the SQL statement for creating a table for this model.</p>
+<h4
+id="buffermodel.drop_table_sqldb">BufferModel.drop_table_sql(db)</h4>
+<p>Returns the SQL command for deleting this model’s table.</p>
+<h4
+id="buffermodel.fieldswritablefalse">BufferModel.fields(writable=False)</h4>
+<p>Returns an <code>OrderedDict</code> of the model’s fields (from name
+to <code>Field</code> instance). If <code>writable</code> is true, only
+writable fields are included. Callers should not modify the
+dictionary.</p>
+<h4
+id="buffermodel.from_tsvline-field_names-timezone_in_useutc-databasenone">BufferModel.from_tsv(line,
+field_names, timezone_in_use=UTC, database=None)</h4>
+<p>Create a model instance from a tab-separated line. The line may or
+may not include a newline. The <code>field_names</code> list must match
+the fields defined in the model, but does not have to include all of
+them.</p>
+<ul>
+<li><code>line</code>: the TSV-formatted data.</li>
+<li><code>field_names</code>: names of the model fields in the
+data.</li>
+<li><code>timezone_in_use</code>: the timezone to use when parsing dates
+and datetimes. Some fields use their own timezones.</li>
+<li><code>database</code>: if given, sets the database that this
+instance belongs to.</li>
+</ul>
+<h4 id="get_database-1">get_database()</h4>
+<p>Gets the <code>Database</code> that this model instance belongs to.
+Returns <code>None</code> unless the instance was read from the database
+or written to it.</p>
+<h4 id="get_fieldname-1">get_field(name)</h4>
+<p>Gets a <code>Field</code> instance given its name, or
+<code>None</code> if not found.</p>
+<h4
+id="buffermodel.has_funcs_as_defaults">BufferModel.has_funcs_as_defaults()</h4>
+<p>Return True if some of the model’s fields use a function expression
+as a default value. This requires special handling when inserting
+instances.</p>
+<h4 id="buffermodel.is_read_only">BufferModel.is_read_only()</h4>
+<p>Returns true if the model is marked as read only.</p>
+<h4 id="buffermodel.is_system_model">BufferModel.is_system_model()</h4>
+<p>Returns true if the model represents a system table.</p>
+<h4
+id="buffermodel.objects_indatabase">BufferModel.objects_in(database)</h4>
+<p>Returns a <code>QuerySet</code> for selecting instances of this model
+class.</p>
+<h4 id="set_databasedb-1">set_database(db)</h4>
+<p>Sets the <code>Database</code> that this model instance belongs to.
+This is done automatically when the instance is read from the database
+or written to it.</p>
+<h4 id="buffermodel.table_name">BufferModel.table_name()</h4>
+<p>Returns the model’s database table name. By default this is the class
+name converted to lowercase. Override this if you want to use a
+different table name.</p>
+<h4 id="to_db_string-1">to_db_string()</h4>
+<p>Returns the instance as a bytestring ready to be inserted into the
+database.</p>
+<h4
+id="to_dictinclude_readonlytrue-field_namesnone-1">to_dict(include_readonly=True,
+field_names=None)</h4>
+<p>Returns the instance’s column values as a dict.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+<li><code>field_names</code>: an iterable of field names to return
+(optional)</li>
+</ul>
+<h4
+id="to_tskvinclude_readonlytrue-1">to_tskv(include_readonly=True)</h4>
+<p>Returns the instance’s column keys and values as a tab-separated
+line. A newline is not included. Fields that were not assigned a value
+are omitted.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+</ul>
+<h4 id="to_tsvinclude_readonlytrue-1">to_tsv(include_readonly=True)</h4>
+<p>Returns the instance’s column values as a tab-separated line. A
+newline is not included.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+</ul>
+<h3 id="mergemodel">MergeModel</h3>
+<p>Extends Model</p>
+<p>Model for Merge engine Predefines virtual _table column an controls
+that rows can’t be inserted to this table type
+https://clickhouse.tech/docs/en/single/index.html#document-table_engines/merge</p>
+<h4 id="mergemodelkwargs">MergeModel(**kwargs)</h4>
+<p>Creates a model instance, using keyword arguments as field values.
+Since values are immediately converted to their Pythonic type, invalid
+values will cause a <code>ValueError</code> to be raised. Unrecognized
+field names will cause an <code>AttributeError</code>.</p>
+<h4
+id="mergemodel.create_table_sqldb">MergeModel.create_table_sql(db)</h4>
+<p>Returns the SQL statement for creating a table for this model.</p>
+<h4 id="mergemodel.drop_table_sqldb">MergeModel.drop_table_sql(db)</h4>
+<p>Returns the SQL command for deleting this model’s table.</p>
+<h4
+id="mergemodel.fieldswritablefalse">MergeModel.fields(writable=False)</h4>
+<p>Returns an <code>OrderedDict</code> of the model’s fields (from name
+to <code>Field</code> instance). If <code>writable</code> is true, only
+writable fields are included. Callers should not modify the
+dictionary.</p>
+<h4
+id="mergemodel.from_tsvline-field_names-timezone_in_useutc-databasenone">MergeModel.from_tsv(line,
+field_names, timezone_in_use=UTC, database=None)</h4>
+<p>Create a model instance from a tab-separated line. The line may or
+may not include a newline. The <code>field_names</code> list must match
+the fields defined in the model, but does not have to include all of
+them.</p>
+<ul>
+<li><code>line</code>: the TSV-formatted data.</li>
+<li><code>field_names</code>: names of the model fields in the
+data.</li>
+<li><code>timezone_in_use</code>: the timezone to use when parsing dates
+and datetimes. Some fields use their own timezones.</li>
+<li><code>database</code>: if given, sets the database that this
+instance belongs to.</li>
+</ul>
+<h4 id="get_database-2">get_database()</h4>
+<p>Gets the <code>Database</code> that this model instance belongs to.
+Returns <code>None</code> unless the instance was read from the database
+or written to it.</p>
+<h4 id="get_fieldname-2">get_field(name)</h4>
+<p>Gets a <code>Field</code> instance given its name, or
+<code>None</code> if not found.</p>
+<h4
+id="mergemodel.has_funcs_as_defaults">MergeModel.has_funcs_as_defaults()</h4>
+<p>Return True if some of the model’s fields use a function expression
+as a default value. This requires special handling when inserting
+instances.</p>
+<h4 id="mergemodel.is_read_only">MergeModel.is_read_only()</h4>
+<p>Returns true if the model is marked as read only.</p>
+<h4 id="mergemodel.is_system_model">MergeModel.is_system_model()</h4>
+<p>Returns true if the model represents a system table.</p>
+<h4
+id="mergemodel.objects_indatabase">MergeModel.objects_in(database)</h4>
+<p>Returns a <code>QuerySet</code> for selecting instances of this model
+class.</p>
+<h4 id="set_databasedb-2">set_database(db)</h4>
+<p>Sets the <code>Database</code> that this model instance belongs to.
+This is done automatically when the instance is read from the database
+or written to it.</p>
+<h4 id="mergemodel.table_name">MergeModel.table_name()</h4>
+<p>Returns the model’s database table name. By default this is the class
+name converted to lowercase. Override this if you want to use a
+different table name.</p>
+<h4 id="to_db_string-2">to_db_string()</h4>
+<p>Returns the instance as a bytestring ready to be inserted into the
+database.</p>
+<h4
+id="to_dictinclude_readonlytrue-field_namesnone-2">to_dict(include_readonly=True,
+field_names=None)</h4>
+<p>Returns the instance’s column values as a dict.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+<li><code>field_names</code>: an iterable of field names to return
+(optional)</li>
+</ul>
+<h4
+id="to_tskvinclude_readonlytrue-2">to_tskv(include_readonly=True)</h4>
+<p>Returns the instance’s column keys and values as a tab-separated
+line. A newline is not included. Fields that were not assigned a value
+are omitted.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+</ul>
+<h4 id="to_tsvinclude_readonlytrue-2">to_tsv(include_readonly=True)</h4>
+<p>Returns the instance’s column values as a tab-separated line. A
+newline is not included.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+</ul>
+<h3 id="distributedmodel">DistributedModel</h3>
+<p>Extends Model</p>
+<p>Model class for use with a <code>Distributed</code> engine.</p>
+<h4 id="distributedmodelkwargs">DistributedModel(**kwargs)</h4>
+<p>Creates a model instance, using keyword arguments as field values.
+Since values are immediately converted to their Pythonic type, invalid
+values will cause a <code>ValueError</code> to be raised. Unrecognized
+field names will cause an <code>AttributeError</code>.</p>
+<h4
+id="distributedmodel.create_table_sqldb">DistributedModel.create_table_sql(db)</h4>
+<p>Returns the SQL statement for creating a table for this model.</p>
+<h4
+id="distributedmodel.drop_table_sqldb">DistributedModel.drop_table_sql(db)</h4>
+<p>Returns the SQL command for deleting this model’s table.</p>
+<h4
+id="distributedmodel.fieldswritablefalse">DistributedModel.fields(writable=False)</h4>
+<p>Returns an <code>OrderedDict</code> of the model’s fields (from name
+to <code>Field</code> instance). If <code>writable</code> is true, only
+writable fields are included. Callers should not modify the
+dictionary.</p>
+<h4
+id="distributedmodel.fix_engine_table">DistributedModel.fix_engine_table()</h4>
+<p>Remember: Distributed table does not store any data, just provides
+distributed access to it.</p>
+<p>So if we define a model with engine that has no defined table for
+data storage (see FooDistributed below), that table cannot be
+successfully created. This routine can automatically fix engine’s
+storage table by finding the first non-distributed model among your
+model’s superclasses.</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>class Foo(Model): … id = UInt8Field(1) … class FooDistributed(Foo,
+DistributedModel): … engine = Distributed(‘my_cluster’) …
+FooDistributed.engine.table None FooDistributed.fix_engine()
+FooDistributed.engine.table &lt;class
+‘<strong>main</strong>.Foo’&gt;</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>However if you prefer more explicit way of doing things, you can
+always mention the Foo model twice without bothering with any fixes:</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>class FooDistributedVerbose(Foo, DistributedModel): … engine =
+Distributed(‘my_cluster’, Foo) FooDistributedVerbose.engine.table
+&lt;class ‘<strong>main</strong>.Foo’&gt;</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>See tests.test_engines:DistributedTestCase for more examples</p>
+<h4
+id="distributedmodel.from_tsvline-field_names-timezone_in_useutc-databasenone">DistributedModel.from_tsv(line,
+field_names, timezone_in_use=UTC, database=None)</h4>
+<p>Create a model instance from a tab-separated line. The line may or
+may not include a newline. The <code>field_names</code> list must match
+the fields defined in the model, but does not have to include all of
+them.</p>
+<ul>
+<li><code>line</code>: the TSV-formatted data.</li>
+<li><code>field_names</code>: names of the model fields in the
+data.</li>
+<li><code>timezone_in_use</code>: the timezone to use when parsing dates
+and datetimes. Some fields use their own timezones.</li>
+<li><code>database</code>: if given, sets the database that this
+instance belongs to.</li>
+</ul>
+<h4 id="get_database-3">get_database()</h4>
+<p>Gets the <code>Database</code> that this model instance belongs to.
+Returns <code>None</code> unless the instance was read from the database
+or written to it.</p>
+<h4 id="get_fieldname-3">get_field(name)</h4>
+<p>Gets a <code>Field</code> instance given its name, or
+<code>None</code> if not found.</p>
+<h4
+id="distributedmodel.has_funcs_as_defaults">DistributedModel.has_funcs_as_defaults()</h4>
+<p>Return True if some of the model’s fields use a function expression
+as a default value. This requires special handling when inserting
+instances.</p>
+<h4
+id="distributedmodel.is_read_only">DistributedModel.is_read_only()</h4>
+<p>Returns true if the model is marked as read only.</p>
+<h4
+id="distributedmodel.is_system_model">DistributedModel.is_system_model()</h4>
+<p>Returns true if the model represents a system table.</p>
+<h4
+id="distributedmodel.objects_indatabase">DistributedModel.objects_in(database)</h4>
+<p>Returns a <code>QuerySet</code> for selecting instances of this model
+class.</p>
+<h4 id="set_databasedb-3">set_database(db)</h4>
+<p>Sets the <code>Database</code> that this model instance belongs to.
+This is done automatically when the instance is read from the database
+or written to it.</p>
+<h4 id="distributedmodel.table_name">DistributedModel.table_name()</h4>
+<p>Returns the model’s database table name. By default this is the class
+name converted to lowercase. Override this if you want to use a
+different table name.</p>
+<h4 id="to_db_string-3">to_db_string()</h4>
+<p>Returns the instance as a bytestring ready to be inserted into the
+database.</p>
+<h4
+id="to_dictinclude_readonlytrue-field_namesnone-3">to_dict(include_readonly=True,
+field_names=None)</h4>
+<p>Returns the instance’s column values as a dict.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+<li><code>field_names</code>: an iterable of field names to return
+(optional)</li>
+</ul>
+<h4
+id="to_tskvinclude_readonlytrue-3">to_tskv(include_readonly=True)</h4>
+<p>Returns the instance’s column keys and values as a tab-separated
+line. A newline is not included. Fields that were not assigned a value
+are omitted.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+</ul>
+<h4 id="to_tsvinclude_readonlytrue-3">to_tsv(include_readonly=True)</h4>
+<p>Returns the instance’s column values as a tab-separated line. A
+newline is not included.</p>
+<ul>
+<li><code>include_readonly</code>: if false, returns only fields that
+can be inserted into database.</li>
+</ul>
+<h3 id="constraint">Constraint</h3>
+<p>Defines a model constraint.</p>
+<h4 id="constraintexpr">Constraint(expr)</h4>
+<p>Initializer. Expects an expression that ClickHouse will verify when
+inserting data.</p>
+<h4 id="create_table_sql">create_table_sql()</h4>
+<p>Returns the SQL statement for defining this constraint during table
+creation.</p>
+<h3 id="index">Index</h3>
+<p>Defines a data-skipping index.</p>
+<h4 id="indexexpr-type-granularity">Index(expr, type, granularity)</h4>
+<p>Initializer.</p>
+<ul>
+<li><code>expr</code> - a column, expression, or tuple of columns and
+expressions to index.</li>
+<li><code>type</code> - the index type. Use one of the following methods
+to specify the type: <code>Index.minmax</code>, <code>Index.set</code>,
+<code>Index.ngrambf_v1</code>, <code>Index.tokenbf_v1</code> or
+<code>Index.bloom_filter</code>.</li>
+<li><code>granularity</code> - index block size (number of multiples of
+the <code>index_granularity</code> defined by the engine).</li>
+</ul>
+<h4 id="bloom_filter">bloom_filter()</h4>
+<p>An index that stores a Bloom filter containing values of the index
+expression.</p>
+<ul>
+<li><code>false_positive</code> - the probability (between 0 and 1) of
+receiving a false positive response from the filter</li>
+</ul>
+<h4 id="create_table_sql-1">create_table_sql()</h4>
+<p>Returns the SQL statement for defining this index during table
+creation.</p>
+<h4 id="minmax">minmax()</h4>
+<p>An index that stores extremes of the specified expression (if the
+expression is tuple, then it stores extremes for each element of tuple).
+The stored info is used for skipping blocks of data like the primary
+key.</p>
+<h4
+id="ngrambf_v1size_of_bloom_filter_in_bytes-number_of_hash_functions-random_seed">ngrambf_v1(size_of_bloom_filter_in_bytes,
+number_of_hash_functions, random_seed)</h4>
+<p>An index that stores a Bloom filter containing all ngrams from a
+block of data. Works only with strings. Can be used for optimization of
+equals, like and in expressions.</p>
+<ul>
+<li><code>n</code> — ngram size</li>
+<li><code>size_of_bloom_filter_in_bytes</code> — Bloom filter size in
+bytes (you can use large values here, for example 256 or 512, because it
+can be compressed well).</li>
+<li><code>number_of_hash_functions</code> — The number of hash functions
+used in the Bloom filter.</li>
+<li><code>random_seed</code> — The seed for Bloom filter hash
+functions.</li>
+</ul>
+<h4 id="set">set()</h4>
+<p>An index that stores unique values of the specified expression (no
+more than max_rows rows, or unlimited if max_rows=0). Uses the values to
+check if the WHERE expression is not satisfiable on a block of data.</p>
+<h4
+id="tokenbf_v1number_of_hash_functions-random_seed">tokenbf_v1(number_of_hash_functions,
+random_seed)</h4>
+<p>An index that stores a Bloom filter containing string tokens. Tokens
+are sequences separated by non-alphanumeric characters.</p>
+<ul>
+<li><code>size_of_bloom_filter_in_bytes</code> — Bloom filter size in
+bytes (you can use large values here, for example 256 or 512, because it
+can be compressed well).</li>
+<li><code>number_of_hash_functions</code> — The number of hash functions
+used in the Bloom filter.</li>
+<li><code>random_seed</code> — The seed for Bloom filter hash
+functions.</li>
+</ul>
+<h2 id="infi.clickhouse_orm.fields">infi.clickhouse_orm.fields</h2>
+<h3 id="arrayfield">ArrayField</h3>
+<p>Extends Field</p>
+<h4
+id="arrayfieldinner_field-defaultnone-aliasnone-materializednone-readonlynone-codecnone">ArrayField(inner_field,
+default=None, alias=None, materialized=None, readonly=None,
+codec=None)</h4>
+<h3 id="baseenumfield">BaseEnumField</h3>
+<p>Extends Field</p>
+<p>Abstract base class for all enum-type fields.</p>
+<h4
+id="baseenumfieldenum_cls-defaultnone-aliasnone-materializednone-readonlynone-codecnone">BaseEnumField(enum_cls,
+default=None, alias=None, materialized=None, readonly=None,
+codec=None)</h4>
+<h3 id="basefloatfield">BaseFloatField</h3>
+<p>Extends Field</p>
+<p>Abstract base class for all float-type fields.</p>
+<h4
+id="basefloatfielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">BaseFloatField(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="baseintfield">BaseIntField</h3>
+<p>Extends Field</p>
+<p>Abstract base class for all integer-type fields.</p>
+<h4
+id="baseintfielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">BaseIntField(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="datefield">DateField</h3>
+<p>Extends Field</p>
+<h4
+id="datefielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">DateField(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="datetime64field">DateTime64Field</h3>
+<p>Extends DateTimeField</p>
+<h4
+id="datetime64fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-timezonenone-precision6">DateTime64Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None, timezone=None,
+precision=6)</h4>
+<h3 id="datetimefield">DateTimeField</h3>
+<p>Extends Field</p>
+<h4
+id="datetimefielddefaultnone-aliasnone-materializednone-readonlynone-codecnone-timezonenone">DateTimeField(default=None,
+alias=None, materialized=None, readonly=None, codec=None,
+timezone=None)</h4>
+<h3 id="decimal128field">Decimal128Field</h3>
+<p>Extends DecimalField</p>
+<h4
+id="decimal128fieldscale-defaultnone-aliasnone-materializednone-readonlynone">Decimal128Field(scale,
+default=None, alias=None, materialized=None, readonly=None)</h4>
+<h3 id="decimal32field">Decimal32Field</h3>
+<p>Extends DecimalField</p>
+<h4
+id="decimal32fieldscale-defaultnone-aliasnone-materializednone-readonlynone">Decimal32Field(scale,
+default=None, alias=None, materialized=None, readonly=None)</h4>
+<h3 id="decimal64field">Decimal64Field</h3>
+<p>Extends DecimalField</p>
+<h4
+id="decimal64fieldscale-defaultnone-aliasnone-materializednone-readonlynone">Decimal64Field(scale,
+default=None, alias=None, materialized=None, readonly=None)</h4>
+<h3 id="decimalfield">DecimalField</h3>
+<p>Extends Field</p>
+<p>Base class for all decimal fields. Can also be used directly.</p>
+<h4
+id="decimalfieldprecision-scale-defaultnone-aliasnone-materializednone-readonlynone">DecimalField(precision,
+scale, default=None, alias=None, materialized=None, readonly=None)</h4>
+<h3 id="enum16field">Enum16Field</h3>
+<p>Extends BaseEnumField</p>
+<h4
+id="enum16fieldenum_cls-defaultnone-aliasnone-materializednone-readonlynone-codecnone">Enum16Field(enum_cls,
+default=None, alias=None, materialized=None, readonly=None,
+codec=None)</h4>
+<h3 id="enum8field">Enum8Field</h3>
+<p>Extends BaseEnumField</p>
+<h4
+id="enum8fieldenum_cls-defaultnone-aliasnone-materializednone-readonlynone-codecnone">Enum8Field(enum_cls,
+default=None, alias=None, materialized=None, readonly=None,
+codec=None)</h4>
+<h3 id="field">Field</h3>
+<p>Extends FunctionOperatorsMixin</p>
+<p>Abstract base class for all field types.</p>
+<h4
+id="fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="fixedstringfield">FixedStringField</h3>
+<p>Extends StringField</p>
+<h4
+id="fixedstringfieldlength-defaultnone-aliasnone-materializednone-readonlynone">FixedStringField(length,
+default=None, alias=None, materialized=None, readonly=None)</h4>
+<h3 id="float32field">Float32Field</h3>
+<p>Extends BaseFloatField</p>
+<h4
+id="float32fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Float32Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="float64field">Float64Field</h3>
+<p>Extends BaseFloatField</p>
+<h4
+id="float64fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Float64Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="ipv4field">IPv4Field</h3>
+<p>Extends Field</p>
+<h4
+id="ipv4fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">IPv4Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="ipv6field">IPv6Field</h3>
+<p>Extends Field</p>
+<h4
+id="ipv6fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">IPv6Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="int16field">Int16Field</h3>
+<p>Extends BaseIntField</p>
+<h4
+id="int16fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Int16Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="int32field">Int32Field</h3>
+<p>Extends BaseIntField</p>
+<h4
+id="int32fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Int32Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="int64field">Int64Field</h3>
+<p>Extends BaseIntField</p>
+<h4
+id="int64fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Int64Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="int8field">Int8Field</h3>
+<p>Extends BaseIntField</p>
+<h4
+id="int8fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">Int8Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="lowcardinalityfield">LowCardinalityField</h3>
+<p>Extends Field</p>
+<h4
+id="lowcardinalityfieldinner_field-defaultnone-aliasnone-materializednone-readonlynone-codecnone">LowCardinalityField(inner_field,
+default=None, alias=None, materialized=None, readonly=None,
+codec=None)</h4>
+<h3 id="nullablefield">NullableField</h3>
+<p>Extends Field</p>
+<h4
+id="nullablefieldinner_field-defaultnone-aliasnone-materializednone-extra_null_valuesnone-codecnone">NullableField(inner_field,
+default=None, alias=None, materialized=None, extra_null_values=None,
+codec=None)</h4>
+<h3 id="stringfield">StringField</h3>
+<p>Extends Field</p>
+<h4
+id="stringfielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">StringField(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="uint16field">UInt16Field</h3>
+<p>Extends BaseIntField</p>
+<h4
+id="uint16fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">UInt16Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="uint32field">UInt32Field</h3>
+<p>Extends BaseIntField</p>
+<h4
+id="uint32fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">UInt32Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="uint64field">UInt64Field</h3>
+<p>Extends BaseIntField</p>
+<h4
+id="uint64fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">UInt64Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="uint8field">UInt8Field</h3>
+<p>Extends BaseIntField</p>
+<h4
+id="uint8fielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">UInt8Field(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h3 id="uuidfield">UUIDField</h3>
+<p>Extends Field</p>
+<h4
+id="uuidfielddefaultnone-aliasnone-materializednone-readonlynone-codecnone">UUIDField(default=None,
+alias=None, materialized=None, readonly=None, codec=None)</h4>
+<h2 id="infi.clickhouse_orm.engines">infi.clickhouse_orm.engines</h2>
+<h3 id="engine">Engine</h3>
+<h3 id="tinylog">TinyLog</h3>
+<p>Extends Engine</p>
+<h3 id="log">Log</h3>
+<p>Extends Engine</p>
+<h3 id="memory">Memory</h3>
+<p>Extends Engine</p>
+<h3 id="mergetree">MergeTree</h3>
+<p>Extends Engine</p>
+<h4
+id="mergetreedate_colnone-order_by-sampling_exprnone-index_granularity8192-replica_table_pathnone-replica_namenone-partition_keynone-primary_keynone">MergeTree(date_col=None,
+order_by=(), sampling_expr=None, index_granularity=8192,
+replica_table_path=None, replica_name=None, partition_key=None,
+primary_key=None)</h4>
+<h3 id="buffer">Buffer</h3>
+<p>Extends Engine</p>
+<p>Buffers the data to write in RAM, periodically flushing it to another
+table. Must be used in conjuction with a <code>BufferModel</code>. Read
+more <a
+href="https://clickhouse.tech/docs/en/engines/table-engines/special/buffer/">here</a>.</p>
+<h4
+id="buffermain_model-num_layers16-min_time10-max_time100-min_rows10000-max_rows1000000-min_bytes10000000-max_bytes100000000">Buffer(main_model,
+num_layers=16, min_time=10, max_time=100, min_rows=10000,
+max_rows=1000000, min_bytes=10000000, max_bytes=100000000)</h4>
+<h3 id="merge">Merge</h3>
+<p>Extends Engine</p>
+<p>The Merge engine (not to be confused with MergeTree) does not store
+data itself, but allows reading from any number of other tables
+simultaneously. Writing to a table is not supported
+https://clickhouse.tech/docs/en/engines/table-engines/special/merge/</p>
+<h4 id="mergetable_regex">Merge(table_regex)</h4>
+<h3 id="distributed">Distributed</h3>
+<p>Extends Engine</p>
+<p>The Distributed engine by itself does not store data, but allows
+distributed query processing on multiple servers. Reading is
+automatically parallelized. During a read, the table indexes on remote
+servers are used, if there are any.</p>
+<p>See full documentation here
+https://clickhouse.tech/docs/en/engines/table-engines/special/distributed/</p>
+<h4
+id="distributedcluster-tablenone-sharding_keynone">Distributed(cluster,
+table=None, sharding_key=None)</h4>
+<ul>
+<li><code>cluster</code>: what cluster to access data from</li>
+<li><code>table</code>: underlying table that actually stores data. If
+you are not specifying any table here, ensure that it can be inferred
+from your model’s superclass (see
+models.DistributedModel.fix_engine_table)</li>
+<li><code>sharding_key</code>: how to distribute data among shards when
+inserting straightly into Distributed table, optional</li>
+</ul>
+<h3 id="collapsingmergetree">CollapsingMergeTree</h3>
+<p>Extends MergeTree</p>
+<h4
+id="collapsingmergetreedate_colnone-order_by-sign_colsign-sampling_exprnone-index_granularity8192-replica_table_pathnone-replica_namenone-partition_keynone-primary_keynone">CollapsingMergeTree(date_col=None,
+order_by=(), sign_col=“sign”, sampling_expr=None,
+index_granularity=8192, replica_table_path=None, replica_name=None,
+partition_key=None, primary_key=None)</h4>
+<h3 id="summingmergetree">SummingMergeTree</h3>
+<p>Extends MergeTree</p>
+<h4
+id="summingmergetreedate_colnone-order_by-summing_colsnone-sampling_exprnone-index_granularity8192-replica_table_pathnone-replica_namenone-partition_keynone-primary_keynone">SummingMergeTree(date_col=None,
+order_by=(), summing_cols=None, sampling_expr=None,
+index_granularity=8192, replica_table_path=None, replica_name=None,
+partition_key=None, primary_key=None)</h4>
+<h3 id="replacingmergetree">ReplacingMergeTree</h3>
+<p>Extends MergeTree</p>
+<h4
+id="replacingmergetreedate_colnone-order_by-ver_colnone-sampling_exprnone-index_granularity8192-replica_table_pathnone-replica_namenone-partition_keynone-primary_keynone">ReplacingMergeTree(date_col=None,
+order_by=(), ver_col=None, sampling_expr=None, index_granularity=8192,
+replica_table_path=None, replica_name=None, partition_key=None,
+primary_key=None)</h4>
+<h2 id="infi.clickhouse_orm.query">infi.clickhouse_orm.query</h2>
+<h3 id="queryset">QuerySet</h3>
+<p>A queryset is an object that represents a database query using a
+specific <code>Model</code>. It is lazy, meaning that it does not hit
+the database until you iterate over its matching rows (model
+instances).</p>
+<h4 id="querysetmodel_cls-database">QuerySet(model_cls, database)</h4>
+<p>Initializer. It is possible to create a queryset like this, but the
+standard way is to use <code>MyModel.objects_in(database)</code>.</p>
+<h4 id="aggregateargs-kwargs">aggregate(*args, **kwargs)</h4>
+<p>Returns an <code>AggregateQuerySet</code> over this query, with
+<code>args</code> serving as grouping fields and <code>kwargs</code>
+serving as calculated fields. At least one calculated field is required.
+For example:</p>
+<pre><code>    Event.objects_in(database).filter(date__gt=&#39;2017-08-01&#39;).aggregate(&#39;event_type&#39;, count=&#39;count()&#39;)</code></pre>
+<p>is equivalent to:</p>
+<pre><code>    SELECT event_type, count() AS count FROM event
+    WHERE data &gt; &#39;2017-08-01&#39;
+    GROUP BY event_type</code></pre>
+<h4 id="as_sql">as_sql()</h4>
+<p>Returns the whole query as a SQL string.</p>
+<h4
+id="conditions_as_sqlprewherefalse">conditions_as_sql(prewhere=False)</h4>
+<p>Returns the contents of the query’s <code>WHERE</code> or
+<code>PREWHERE</code> clause as a string.</p>
+<h4 id="count">count()</h4>
+<p>Returns the number of matching model instances.</p>
+<h4 id="delete">delete()</h4>
+<p>Deletes all records matched by this queryset’s conditions. Note that
+ClickHouse performs deletions in the background, so they are not
+immediate.</p>
+<h4 id="distinct">distinct()</h4>
+<p>Adds a DISTINCT clause to the query, meaning that any duplicate rows
+in the results will be omitted.</p>
+<h4 id="excludeq-kwargs">exclude(*q, **kwargs)</h4>
+<p>Returns a copy of this queryset that excludes all rows matching the
+conditions. Pass <code>prewhere=True</code> to apply the conditions as
+PREWHERE instead of WHERE.</p>
+<h4 id="filterq-kwargs">filter(*q, **kwargs)</h4>
+<p>Returns a copy of this queryset that includes only rows matching the
+conditions. Pass <code>prewhere=True</code> to apply the conditions as
+PREWHERE instead of WHERE.</p>
+<h4 id="final">final()</h4>
+<p>Adds a FINAL modifier to table, meaning data will be collapsed to
+final version. Can be used with the <code>CollapsingMergeTree</code> and
+<code>ReplacingMergeTree</code> engines only.</p>
+<h4 id="limit_byoffset_limit-fields_or_expr">limit_by(offset_limit,
+*fields_or_expr)</h4>
+<p>Adds a LIMIT BY clause to the query. - <code>offset_limit</code>:
+either an integer specifying the limit, or a tuple of integers (offset,
+limit). - <code>fields_or_expr</code>: the field names or expressions to
+use in the clause.</p>
+<h4 id="onlyfield_names">only(*field_names)</h4>
+<p>Returns a copy of this queryset limited to the specified field names.
+Useful when there are large fields that are not needed, or for creating
+a subquery to use with an IN operator.</p>
+<h4 id="order_byfield_names">order_by(*field_names)</h4>
+<p>Returns a copy of this queryset with the ordering changed.</p>
+<h4 id="order_by_as_sql">order_by_as_sql()</h4>
+<p>Returns the contents of the query’s <code>ORDER BY</code> clause as a
+string.</p>
+<h4 id="paginatepage_num1-page_size100">paginate(page_num=1,
+page_size=100)</h4>
+<p>Returns a single page of model instances that match the queryset.
+Note that <code>order_by</code> should be used first, to ensure a
+correct partitioning of records into pages.</p>
+<ul>
+<li><code>page_num</code>: the page number (1-based), or -1 to get the
+last page.</li>
+<li><code>page_size</code>: number of records to return per page.</li>
+</ul>
+<p>The result is a namedtuple containing <code>objects</code> (list),
+<code>number_of_objects</code>, <code>pages_total</code>,
+<code>number</code> (of the current page), and
+<code>page_size</code>.</p>
+<h4 id="select_fields_as_sql">select_fields_as_sql()</h4>
+<p>Returns the selected fields or expressions as a SQL string.</p>
+<h4 id="updatekwargs">update(**kwargs)</h4>
+<p>Updates all records matched by this queryset’s conditions. Keyword
+arguments specify the field names and expressions to use for the update.
+Note that ClickHouse performs updates in the background, so they are not
+immediate.</p>
+<h3 id="aggregatequeryset">AggregateQuerySet</h3>
+<p>Extends QuerySet</p>
+<p>A queryset used for aggregation.</p>
+<h4
+id="aggregatequerysetbase_qs-grouping_fields-calculated_fields">AggregateQuerySet(base_qs,
+grouping_fields, calculated_fields)</h4>
+<p>Initializer. Normally you should not call this but rather use
+<code>QuerySet.aggregate()</code>.</p>
+<p>The grouping fields should be a list/tuple of field names from the
+model. For example:</p>
+<pre><code>    (&#39;event_type&#39;, &#39;event_subtype&#39;)</code></pre>
+<p>The calculated fields should be a mapping from name to a ClickHouse
+aggregation function. For example:</p>
+<pre><code>    {&#39;weekday&#39;: &#39;toDayOfWeek(event_date)&#39;, &#39;number_of_events&#39;: &#39;count()&#39;}</code></pre>
+<p>At least one calculated field is required.</p>
+<h4 id="aggregateargs-kwargs-1">aggregate(*args, **kwargs)</h4>
+<p>This method is not supported on <code>AggregateQuerySet</code>.</p>
+<h4 id="as_sql-1">as_sql()</h4>
+<p>Returns the whole query as a SQL string.</p>
+<h4
+id="conditions_as_sqlprewherefalse-1">conditions_as_sql(prewhere=False)</h4>
+<p>Returns the contents of the query’s <code>WHERE</code> or
+<code>PREWHERE</code> clause as a string.</p>
+<h4 id="count-1">count()</h4>
+<p>Returns the number of rows after aggregation.</p>
+<h4 id="delete-1">delete()</h4>
+<p>Deletes all records matched by this queryset’s conditions. Note that
+ClickHouse performs deletions in the background, so they are not
+immediate.</p>
+<h4 id="distinct-1">distinct()</h4>
+<p>Adds a DISTINCT clause to the query, meaning that any duplicate rows
+in the results will be omitted.</p>
+<h4 id="excludeq-kwargs-1">exclude(*q, **kwargs)</h4>
+<p>Returns a copy of this queryset that excludes all rows matching the
+conditions. Pass <code>prewhere=True</code> to apply the conditions as
+PREWHERE instead of WHERE.</p>
+<h4 id="filterq-kwargs-1">filter(*q, **kwargs)</h4>
+<p>Returns a copy of this queryset that includes only rows matching the
+conditions. Pass <code>prewhere=True</code> to apply the conditions as
+PREWHERE instead of WHERE.</p>
+<h4 id="final-1">final()</h4>
+<p>Adds a FINAL modifier to table, meaning data will be collapsed to
+final version. Can be used with the <code>CollapsingMergeTree</code> and
+<code>ReplacingMergeTree</code> engines only.</p>
+<h4 id="group_byargs">group_by(*args)</h4>
+<p>This method lets you specify the grouping fields explicitly. The
+<code>args</code> must be names of grouping fields or calculated fields
+that this queryset was created with.</p>
+<h4 id="limit_byoffset_limit-fields_or_expr-1">limit_by(offset_limit,
+*fields_or_expr)</h4>
+<p>Adds a LIMIT BY clause to the query. - <code>offset_limit</code>:
+either an integer specifying the limit, or a tuple of integers (offset,
+limit). - <code>fields_or_expr</code>: the field names or expressions to
+use in the clause.</p>
+<h4 id="onlyfield_names-1">only(*field_names)</h4>
+<p>This method is not supported on <code>AggregateQuerySet</code>.</p>
+<h4 id="order_byfield_names-1">order_by(*field_names)</h4>
+<p>Returns a copy of this queryset with the ordering changed.</p>
+<h4 id="order_by_as_sql-1">order_by_as_sql()</h4>
+<p>Returns the contents of the query’s <code>ORDER BY</code> clause as a
+string.</p>
+<h4 id="paginatepage_num1-page_size100-1">paginate(page_num=1,
+page_size=100)</h4>
+<p>Returns a single page of model instances that match the queryset.
+Note that <code>order_by</code> should be used first, to ensure a
+correct partitioning of records into pages.</p>
+<ul>
+<li><code>page_num</code>: the page number (1-based), or -1 to get the
+last page.</li>
+<li><code>page_size</code>: number of records to return per page.</li>
+</ul>
+<p>The result is a namedtuple containing <code>objects</code> (list),
+<code>number_of_objects</code>, <code>pages_total</code>,
+<code>number</code> (of the current page), and
+<code>page_size</code>.</p>
+<h4 id="select_fields_as_sql-1">select_fields_as_sql()</h4>
+<p>Returns the selected fields or expressions as a SQL string.</p>
+<h4 id="updatekwargs-1">update(**kwargs)</h4>
+<p>Updates all records matched by this queryset’s conditions. Keyword
+arguments specify the field names and expressions to use for the update.
+Note that ClickHouse performs updates in the background, so they are not
+immediate.</p>
+<h4 id="with_totals">with_totals()</h4>
+<p>Adds WITH TOTALS modifier ot GROUP BY, making query return extra row
+with aggregate function calculated across all the rows. More
+information:
+https://clickhouse.tech/docs/en/query_language/select/#with-totals-modifier</p>
+<h3 id="q">Q</h3>
+<h4 id="qfilter_funcs-filter_fields">Q(*filter_funcs,
+**filter_fields)</h4>
+<h4 id="to_sqlmodel_cls">to_sql(model_cls)</h4>
+<h2 id="infi.clickhouse_orm.funcs">infi.clickhouse_orm.funcs</h2>
+<h3 id="f">F</h3>
+<p>Extends Cond, FunctionOperatorsMixin</p>
+<p>Represents a database function call and its arguments. It doubles as
+a query condition when the function returns a boolean result.</p>
+<h4 id="casttype">CAST(type)</h4>
+<h4 id="crc32">CRC32()</h4>
+<h4 id="ipv4cidrtorangecidr">IPv4CIDRToRange(cidr)</h4>
+<h4 id="ipv4numtostring">IPv4NumToString()</h4>
+<h4 id="ipv4numtostringclassc">IPv4NumToStringClassC()</h4>
+<h4 id="ipv4stringtonum">IPv4StringToNum()</h4>
+<h4 id="ipv4toipv6">IPv4ToIPv6()</h4>
+<h4 id="ipv6cidrtorangecidr">IPv6CIDRToRange(cidr)</h4>
+<h4 id="ipv6numtostring">IPv6NumToString()</h4>
+<h4 id="ipv6stringtonum">IPv6StringToNum()</h4>
+<h4 id="md5">MD5()</h4>
+<h4 id="sha1">SHA1()</h4>
+<h4 id="sha224">SHA224()</h4>
+<h4 id="sha256">SHA256()</h4>
+<h4 id="urlhashnnone">URLHash(n=None)</h4>
+<h4 id="uuidnumtostring">UUIDNumToString()</h4>
+<h4 id="uuidstringtonum">UUIDStringToNum()</h4>
+<h4 id="fname-args">F(name, *args)</h4>
+<p>Initializer.</p>
+<h4 id="abs">abs()</h4>
+<h4 id="acos">acos()</h4>
+<h4 id="adddaysn-timezoneno_value">addDays(n, timezone=NO_VALUE)</h4>
+<h4 id="addhoursn-timezoneno_value">addHours(n, timezone=NO_VALUE)</h4>
+<h4 id="addminutesn-timezoneno_value">addMinutes(n,
+timezone=NO_VALUE)</h4>
+<h4 id="addmonthsn-timezoneno_value">addMonths(n,
+timezone=NO_VALUE)</h4>
+<h4 id="addquartersn-timezoneno_value">addQuarters(n,
+timezone=NO_VALUE)</h4>
+<h4 id="addsecondsn-timezoneno_value">addSeconds(n,
+timezone=NO_VALUE)</h4>
+<h4 id="addweeksn-timezoneno_value">addWeeks(n, timezone=NO_VALUE)</h4>
+<h4 id="addyearsn-timezoneno_value">addYears(n, timezone=NO_VALUE)</h4>
+<h4 id="alphatokens">alphaTokens()</h4>
+<h4 id="anykwargs">any(**kwargs)</h4>
+<h4 id="anyheavykwargs">anyHeavy(**kwargs)</h4>
+<h4 id="anyheavyifcond">anyHeavyIf(cond)</h4>
+<h4 id="anyheavyordefault">anyHeavyOrDefault()</h4>
+<h4 id="anyheavyordefaultifcond">anyHeavyOrDefaultIf(cond)</h4>
+<h4 id="anyheavyornull">anyHeavyOrNull()</h4>
+<h4 id="anyheavyornullifcond">anyHeavyOrNullIf(cond)</h4>
+<h4 id="anyifcond">anyIf(cond)</h4>
+<h4 id="anylastkwargs">anyLast(**kwargs)</h4>
+<h4 id="anylastifcond">anyLastIf(cond)</h4>
+<h4 id="anylastordefault">anyLastOrDefault()</h4>
+<h4 id="anylastordefaultifcond">anyLastOrDefaultIf(cond)</h4>
+<h4 id="anylastornull">anyLastOrNull()</h4>
+<h4 id="anylastornullifcond">anyLastOrNullIf(cond)</h4>
+<h4 id="anyordefault">anyOrDefault()</h4>
+<h4 id="anyordefaultifcond">anyOrDefaultIf(cond)</h4>
+<h4 id="anyornull">anyOrNull()</h4>
+<h4 id="anyornullifcond">anyOrNullIf(cond)</h4>
+<h4 id="appendtrailingcharifabsentc">appendTrailingCharIfAbsent(c)</h4>
+<h4 id="argmaxkwargs">argMax(**kwargs)</h4>
+<h4 id="argmaxify-cond">argMaxIf(y, cond)</h4>
+<h4 id="argmaxordefaulty">argMaxOrDefault(y)</h4>
+<h4 id="argmaxordefaultify-cond">argMaxOrDefaultIf(y, cond)</h4>
+<h4 id="argmaxornully">argMaxOrNull(y)</h4>
+<h4 id="argmaxornullify-cond">argMaxOrNullIf(y, cond)</h4>
+<h4 id="argminkwargs">argMin(**kwargs)</h4>
+<h4 id="argminify-cond">argMinIf(y, cond)</h4>
+<h4 id="argminordefaulty">argMinOrDefault(y)</h4>
+<h4 id="argminordefaultify-cond">argMinOrDefaultIf(y, cond)</h4>
+<h4 id="argminornully">argMinOrNull(y)</h4>
+<h4 id="argminornullify-cond">argMinOrNullIf(y, cond)</h4>
+<h4 id="array">array()</h4>
+<h4 id="arrayconcat">arrayConcat()</h4>
+<h4 id="arraydifference">arrayDifference()</h4>
+<h4 id="arraydistinct">arrayDistinct()</h4>
+<h4 id="arrayelementn">arrayElement(n)</h4>
+<h4 id="arrayenumerate">arrayEnumerate()</h4>
+<h4 id="arrayenumeratedense">arrayEnumerateDense()</h4>
+<h4 id="arrayenumeratedenseranked">arrayEnumerateDenseRanked()</h4>
+<h4 id="arrayenumerateuniq">arrayEnumerateUniq()</h4>
+<h4 id="arrayenumerateuniqranked">arrayEnumerateUniqRanked()</h4>
+<h4 id="arrayintersect">arrayIntersect()</h4>
+<h4 id="arrayjoin">arrayJoin()</h4>
+<h4 id="arraypopback">arrayPopBack()</h4>
+<h4 id="arraypopfront">arrayPopFront()</h4>
+<h4 id="arraypushbackx">arrayPushBack(x)</h4>
+<h4 id="arraypushfrontx">arrayPushFront(x)</h4>
+<h4 id="arrayreduceargs">arrayReduce(*args)</h4>
+<h4 id="arrayresizesize-extendernone">arrayResize(size,
+extender=None)</h4>
+<h4 id="arrayreverse">arrayReverse()</h4>
+<h4 id="arraysliceoffset-lengthnone">arraySlice(offset,
+length=None)</h4>
+<h4 id="arraystringconcatsepnone">arrayStringConcat(sep=None)</h4>
+<h4 id="arrayuniq">arrayUniq()</h4>
+<h4 id="asin">asin()</h4>
+<h4 id="atan">atan()</h4>
+<h4 id="avgkwargs">avg(**kwargs)</h4>
+<h4 id="avgifcond">avgIf(cond)</h4>
+<h4 id="avgordefault">avgOrDefault()</h4>
+<h4 id="avgordefaultifcond">avgOrDefaultIf(cond)</h4>
+<h4 id="avgornull">avgOrNull()</h4>
+<h4 id="avgornullifcond">avgOrNullIf(cond)</h4>
+<h4 id="base64decode">base64Decode()</h4>
+<h4 id="base64encode">base64Encode()</h4>
+<h4 id="bitandy">bitAnd(y)</h4>
+<h4 id="bitnot">bitNot()</h4>
+<h4 id="bitory">bitOr(y)</h4>
+<h4 id="bitrotatelefty">bitRotateLeft(y)</h4>
+<h4 id="bitrotaterighty">bitRotateRight(y)</h4>
+<h4 id="bitshiftlefty">bitShiftLeft(y)</h4>
+<h4 id="bitshiftrighty">bitShiftRight(y)</h4>
+<h4 id="bittesty">bitTest(y)</h4>
+<h4 id="bittestallargs">bitTestAll(*args)</h4>
+<h4 id="bittestanyargs">bitTestAny(*args)</h4>
+<h4 id="bitxory">bitXor(y)</h4>
+<h4 id="bitmapandy">bitmapAnd(y)</h4>
+<h4 id="bitmapandcardinalityy">bitmapAndCardinality(y)</h4>
+<h4 id="bitmapandnoty">bitmapAndnot(y)</h4>
+<h4 id="bitmapandnotcardinalityy">bitmapAndnotCardinality(y)</h4>
+<h4 id="bitmapbuild">bitmapBuild()</h4>
+<h4 id="bitmapcardinality">bitmapCardinality()</h4>
+<h4 id="bitmapcontainsneedle">bitmapContains(needle)</h4>
+<h4 id="bitmaphasally">bitmapHasAll(y)</h4>
+<h4 id="bitmaphasanyy">bitmapHasAny(y)</h4>
+<h4 id="bitmapory">bitmapOr(y)</h4>
+<h4 id="bitmaporcardinalityy">bitmapOrCardinality(y)</h4>
+<h4 id="bitmaptoarray">bitmapToArray()</h4>
+<h4 id="bitmapxory">bitmapXor(y)</h4>
+<h4 id="bitmapxorcardinalityy">bitmapXorCardinality(y)</h4>
+<h4 id="bitmasktoarray">bitmaskToArray()</h4>
+<h4 id="bitmasktolist">bitmaskToList()</h4>
+<h4 id="cbrt">cbrt()</h4>
+<h4 id="ceilingnnone">ceiling(n=None)</h4>
+<h4 id="ceilingnnone-1">ceiling(n=None)</h4>
+<h4 id="cityhash64">cityHash64()</h4>
+<h4 id="coalesce">coalesce()</h4>
+<h4 id="concat">concat()</h4>
+<h4
+id="convertcharsetfrom_charset-to_charset">convertCharset(from_charset,
+to_charset)</h4>
+<h4 id="corrkwargs">corr(**kwargs)</h4>
+<h4 id="corrify-cond">corrIf(y, cond)</h4>
+<h4 id="corrordefaulty">corrOrDefault(y)</h4>
+<h4 id="corrordefaultify-cond">corrOrDefaultIf(y, cond)</h4>
+<h4 id="corrornully">corrOrNull(y)</h4>
+<h4 id="corrornullify-cond">corrOrNullIf(y, cond)</h4>
+<h4 id="cos">cos()</h4>
+<h4 id="countkwargs">count(**kwargs)</h4>
+<h4 id="countequalx">countEqual(x)</h4>
+<h4 id="countif">countIf()</h4>
+<h4 id="countordefault">countOrDefault()</h4>
+<h4 id="countordefaultif">countOrDefaultIf()</h4>
+<h4 id="countornull">countOrNull()</h4>
+<h4 id="countornullif">countOrNullIf()</h4>
+<h4 id="covarpopkwargs">covarPop(**kwargs)</h4>
+<h4 id="covarpopify-cond">covarPopIf(y, cond)</h4>
+<h4 id="covarpopordefaulty">covarPopOrDefault(y)</h4>
+<h4 id="covarpopordefaultify-cond">covarPopOrDefaultIf(y, cond)</h4>
+<h4 id="covarpopornully">covarPopOrNull(y)</h4>
+<h4 id="covarpopornullify-cond">covarPopOrNullIf(y, cond)</h4>
+<h4 id="covarsampkwargs">covarSamp(**kwargs)</h4>
+<h4 id="covarsampify-cond">covarSampIf(y, cond)</h4>
+<h4 id="covarsampordefaulty">covarSampOrDefault(y)</h4>
+<h4 id="covarsampordefaultify-cond">covarSampOrDefaultIf(y, cond)</h4>
+<h4 id="covarsampornully">covarSampOrNull(y)</h4>
+<h4 id="covarsampornullify-cond">covarSampOrNullIf(y, cond)</h4>
+<h4 id="dictgetattr_name-id_expr">dictGet(attr_name, id_expr)</h4>
+<h4 id="dictgethierarchyid_expr">dictGetHierarchy(id_expr)</h4>
+<h4
+id="dictgetordefaultattr_name-id_expr-default">dictGetOrDefault(attr_name,
+id_expr, default)</h4>
+<h4 id="dicthasid_expr">dictHas(id_expr)</h4>
+<h4 id="dictisinchild_id_expr-ancestor_id_expr">dictIsIn(child_id_expr,
+ancestor_id_expr)</h4>
+<h4 id="dividekwargs">divide(**kwargs)</h4>
+<h4 id="e">e()</h4>
+<h4 id="empty">empty()</h4>
+<h4 id="emptyarraydate">emptyArrayDate()</h4>
+<h4 id="emptyarraydatetime">emptyArrayDateTime()</h4>
+<h4 id="emptyarrayfloat32">emptyArrayFloat32()</h4>
+<h4 id="emptyarrayfloat64">emptyArrayFloat64()</h4>
+<h4 id="emptyarrayint16">emptyArrayInt16()</h4>
+<h4 id="emptyarrayint32">emptyArrayInt32()</h4>
+<h4 id="emptyarrayint64">emptyArrayInt64()</h4>
+<h4 id="emptyarrayint8">emptyArrayInt8()</h4>
+<h4 id="emptyarraystring">emptyArrayString()</h4>
+<h4 id="emptyarraytosingle">emptyArrayToSingle()</h4>
+<h4 id="emptyarrayuint16">emptyArrayUInt16()</h4>
+<h4 id="emptyarrayuint32">emptyArrayUInt32()</h4>
+<h4 id="emptyarrayuint64">emptyArrayUInt64()</h4>
+<h4 id="emptyarrayuint8">emptyArrayUInt8()</h4>
+<h4 id="endswithsuffix">endsWith(suffix)</h4>
+<h4 id="equalskwargs">equals(**kwargs)</h4>
+<h4 id="erf">erf()</h4>
+<h4 id="erfc">erfc()</h4>
+<h4 id="exp">exp()</h4>
+<h4 id="exp10">exp10()</h4>
+<h4 id="exp2">exp2()</h4>
+<h4 id="extractpattern">extract(pattern)</h4>
+<h4 id="extractallpattern">extractAll(pattern)</h4>
+<h4 id="farmhash64">farmHash64()</h4>
+<h4 id="floornnone">floor(n=None)</h4>
+<h4 id="formatdatetimeformat-timezone">formatDateTime(format,
+timezone=““)</h4>
+<h4 id="gcdb">gcd(b)</h4>
+<h4 id="generateuuidv4">generateUUIDv4()</h4>
+<h4 id="greaterkwargs">greater(**kwargs)</h4>
+<h4 id="greaterorequalskwargs">greaterOrEquals(**kwargs)</h4>
+<h4 id="greatesty">greatest(y)</h4>
+<h4 id="halfmd5">halfMD5()</h4>
+<h4 id="hasx">has(x)</h4>
+<h4 id="hasallx">hasAll(x)</h4>
+<h4 id="hasanyx">hasAny(x)</h4>
+<h4 id="hex">hex()</h4>
+<h4 id="hivehash">hiveHash()</h4>
+<h4 id="ifnotfinitey">ifNotFinite(y)</h4>
+<h4 id="ifnully">ifNull(y)</h4>
+<h4 id="indexofx">indexOf(x)</h4>
+<h4 id="intdivb">intDiv(b)</h4>
+<h4 id="intdivorzerob">intDivOrZero(b)</h4>
+<h4 id="intexp10">intExp10()</h4>
+<h4 id="intexp2">intExp2()</h4>
+<h4 id="inthash32">intHash32()</h4>
+<h4 id="inthash64">intHash64()</h4>
+<h4 id="isfinite">isFinite()</h4>
+<h4 id="isinothers">isIn(others)</h4>
+<h4 id="isinfinite">isInfinite()</h4>
+<h4 id="isnan">isNaN()</h4>
+<h4 id="isnotinothers">isNotIn(others)</h4>
+<h4 id="isnotnull">isNotNull()</h4>
+<h4 id="isnull">isNull()</h4>
+<h4 id="javahash">javaHash()</h4>
+<h4 id="jumpconsistenthashbuckets">jumpConsistentHash(buckets)</h4>
+<h4 id="kurtpopkwargs">kurtPop(**kwargs)</h4>
+<h4 id="kurtpopifcond">kurtPopIf(cond)</h4>
+<h4 id="kurtpopordefault">kurtPopOrDefault()</h4>
+<h4 id="kurtpopordefaultifcond">kurtPopOrDefaultIf(cond)</h4>
+<h4 id="kurtpopornull">kurtPopOrNull()</h4>
+<h4 id="kurtpopornullifcond">kurtPopOrNullIf(cond)</h4>
+<h4 id="kurtsampkwargs">kurtSamp(**kwargs)</h4>
+<h4 id="kurtsampifcond">kurtSampIf(cond)</h4>
+<h4 id="kurtsampordefault">kurtSampOrDefault()</h4>
+<h4 id="kurtsampordefaultifcond">kurtSampOrDefaultIf(cond)</h4>
+<h4 id="kurtsampornull">kurtSampOrNull()</h4>
+<h4 id="kurtsampornullifcond">kurtSampOrNullIf(cond)</h4>
+<h4 id="lcmb">lcm(b)</h4>
+<h4 id="leasty">least(y)</h4>
+<h4 id="lengthkwargs">length(**kwargs)</h4>
+<h4 id="lengthutf8">lengthUTF8()</h4>
+<h4 id="lesskwargs">less(**kwargs)</h4>
+<h4 id="lessorequalskwargs">lessOrEquals(**kwargs)</h4>
+<h4 id="lgamma">lgamma()</h4>
+<h4 id="likepattern">like(pattern)</h4>
+<h4 id="log-1">log()</h4>
+<h4 id="log-2">log()</h4>
+<h4 id="log10">log10()</h4>
+<h4 id="log2">log2()</h4>
+<h4 id="lowerkwargs">lower(**kwargs)</h4>
+<h4 id="lowerutf8">lowerUTF8()</h4>
+<h4 id="matchpattern">match(pattern)</h4>
+<h4 id="maxkwargs">max(**kwargs)</h4>
+<h4 id="maxifcond">maxIf(cond)</h4>
+<h4 id="maxordefault">maxOrDefault()</h4>
+<h4 id="maxordefaultifcond">maxOrDefaultIf(cond)</h4>
+<h4 id="maxornull">maxOrNull()</h4>
+<h4 id="maxornullifcond">maxOrNullIf(cond)</h4>
+<h4 id="metrohash64">metroHash64()</h4>
+<h4 id="minkwargs">min(**kwargs)</h4>
+<h4 id="minifcond">minIf(cond)</h4>
+<h4 id="minordefault">minOrDefault()</h4>
+<h4 id="minordefaultifcond">minOrDefaultIf(cond)</h4>
+<h4 id="minornull">minOrNull()</h4>
+<h4 id="minornullifcond">minOrNullIf(cond)</h4>
+<h4 id="minuskwargs">minus(**kwargs)</h4>
+<h4 id="modulokwargs">modulo(**kwargs)</h4>
+<h4 id="multiplykwargs">multiply(**kwargs)</h4>
+<h4 id="murmurhash2_32">murmurHash2_32()</h4>
+<h4 id="murmurhash2_64">murmurHash2_64()</h4>
+<h4 id="murmurhash3_128">murmurHash3_128()</h4>
+<h4 id="murmurhash3_32">murmurHash3_32()</h4>
+<h4 id="murmurhash3_64">murmurHash3_64()</h4>
+<h4 id="negate">negate()</h4>
+<h4 id="ngramdistancekwargs">ngramDistance(**kwargs)</h4>
+<h4
+id="ngramdistancecaseinsensitivekwargs">ngramDistanceCaseInsensitive(**kwargs)</h4>
+<h4
+id="ngramdistancecaseinsensitiveutf8needle">ngramDistanceCaseInsensitiveUTF8(needle)</h4>
+<h4 id="ngramdistanceutf8needle">ngramDistanceUTF8(needle)</h4>
+<h4 id="ngramsearchkwargs">ngramSearch(**kwargs)</h4>
+<h4
+id="ngramsearchcaseinsensitivekwargs">ngramSearchCaseInsensitive(**kwargs)</h4>
+<h4
+id="ngramsearchcaseinsensitiveutf8needle">ngramSearchCaseInsensitiveUTF8(needle)</h4>
+<h4 id="ngramsearchutf8needle">ngramSearchUTF8(needle)</h4>
+<h4 id="notempty">notEmpty()</h4>
+<h4 id="notequalskwargs">notEquals(**kwargs)</h4>
+<h4 id="notlikepattern">notLike(pattern)</h4>
+<h4 id="now">now()</h4>
+<h4 id="nullify">nullIf(y)</h4>
+<h4
+id="parsedatetimebesteffortkwargs">parseDateTimeBestEffort(**kwargs)</h4>
+<h4
+id="parsedatetimebesteffortornulltimezoneno_value">parseDateTimeBestEffortOrNull(timezone=NO_VALUE)</h4>
+<h4
+id="parsedatetimebesteffortorzerotimezoneno_value">parseDateTimeBestEffortOrZero(timezone=NO_VALUE)</h4>
+<h4 id="pi">pi()</h4>
+<h4 id="pluskwargs">plus(**kwargs)</h4>
+<h4 id="positionkwargs">position(**kwargs)</h4>
+<h4
+id="positioncaseinsensitivekwargs">positionCaseInsensitive(**kwargs)</h4>
+<h4
+id="positioncaseinsensitiveutf8needle">positionCaseInsensitiveUTF8(needle)</h4>
+<h4 id="positionutf8needle">positionUTF8(needle)</h4>
+<h4 id="powery">power(y)</h4>
+<h4 id="powery-1">power(y)</h4>
+<h4 id="quantilekwargs">quantile(**kwargs)</h4>
+<h4
+id="quantiledeterministickwargs">quantileDeterministic(**kwargs)</h4>
+<h4 id="quantiledeterministicif">quantileDeterministicIf()</h4>
+<h4
+id="quantiledeterministicordefault">quantileDeterministicOrDefault()</h4>
+<h4
+id="quantiledeterministicordefaultif">quantileDeterministicOrDefaultIf()</h4>
+<h4 id="quantiledeterministicornull">quantileDeterministicOrNull()</h4>
+<h4
+id="quantiledeterministicornullif">quantileDeterministicOrNullIf()</h4>
+<h4 id="quantileexactkwargs">quantileExact(**kwargs)</h4>
+<h4 id="quantileexactif">quantileExactIf()</h4>
+<h4 id="quantileexactordefault">quantileExactOrDefault()</h4>
+<h4 id="quantileexactordefaultif">quantileExactOrDefaultIf()</h4>
+<h4 id="quantileexactornull">quantileExactOrNull()</h4>
+<h4 id="quantileexactornullif">quantileExactOrNullIf()</h4>
+<h4
+id="quantileexactweightedkwargs">quantileExactWeighted(**kwargs)</h4>
+<h4 id="quantileexactweightedif">quantileExactWeightedIf()</h4>
+<h4
+id="quantileexactweightedordefault">quantileExactWeightedOrDefault()</h4>
+<h4
+id="quantileexactweightedordefaultif">quantileExactWeightedOrDefaultIf()</h4>
+<h4 id="quantileexactweightedornull">quantileExactWeightedOrNull()</h4>
+<h4
+id="quantileexactweightedornullif">quantileExactWeightedOrNullIf()</h4>
+<h4 id="quantileif">quantileIf()</h4>
+<h4 id="quantileordefault">quantileOrDefault()</h4>
+<h4 id="quantileordefaultif">quantileOrDefaultIf()</h4>
+<h4 id="quantileornull">quantileOrNull()</h4>
+<h4 id="quantileornullif">quantileOrNullIf()</h4>
+<h4 id="quantiletdigestkwargs">quantileTDigest(**kwargs)</h4>
+<h4 id="quantiletdigestif">quantileTDigestIf()</h4>
+<h4 id="quantiletdigestordefault">quantileTDigestOrDefault()</h4>
+<h4 id="quantiletdigestordefaultif">quantileTDigestOrDefaultIf()</h4>
+<h4 id="quantiletdigestornull">quantileTDigestOrNull()</h4>
+<h4 id="quantiletdigestornullif">quantileTDigestOrNullIf()</h4>
+<h4
+id="quantiletdigestweightedkwargs">quantileTDigestWeighted(**kwargs)</h4>
+<h4 id="quantiletdigestweightedif">quantileTDigestWeightedIf()</h4>
+<h4
+id="quantiletdigestweightedordefault">quantileTDigestWeightedOrDefault()</h4>
+<h4
+id="quantiletdigestweightedordefaultif">quantileTDigestWeightedOrDefaultIf()</h4>
+<h4
+id="quantiletdigestweightedornull">quantileTDigestWeightedOrNull()</h4>
+<h4
+id="quantiletdigestweightedornullif">quantileTDigestWeightedOrNullIf()</h4>
+<h4 id="quantiletimingkwargs">quantileTiming(**kwargs)</h4>
+<h4 id="quantiletimingif">quantileTimingIf()</h4>
+<h4 id="quantiletimingordefault">quantileTimingOrDefault()</h4>
+<h4 id="quantiletimingordefaultif">quantileTimingOrDefaultIf()</h4>
+<h4 id="quantiletimingornull">quantileTimingOrNull()</h4>
+<h4 id="quantiletimingornullif">quantileTimingOrNullIf()</h4>
+<h4
+id="quantiletimingweightedkwargs">quantileTimingWeighted(**kwargs)</h4>
+<h4 id="quantiletimingweightedif">quantileTimingWeightedIf()</h4>
+<h4
+id="quantiletimingweightedordefault">quantileTimingWeightedOrDefault()</h4>
+<h4
+id="quantiletimingweightedordefaultif">quantileTimingWeightedOrDefaultIf()</h4>
+<h4
+id="quantiletimingweightedornull">quantileTimingWeightedOrNull()</h4>
+<h4
+id="quantiletimingweightedornullif">quantileTimingWeightedOrNullIf()</h4>
+<h4 id="quantileskwargs">quantiles(**kwargs)</h4>
+<h4
+id="quantilesdeterministickwargs">quantilesDeterministic(**kwargs)</h4>
+<h4 id="quantilesdeterministicif">quantilesDeterministicIf()</h4>
+<h4
+id="quantilesdeterministicordefault">quantilesDeterministicOrDefault()</h4>
+<h4
+id="quantilesdeterministicordefaultif">quantilesDeterministicOrDefaultIf()</h4>
+<h4
+id="quantilesdeterministicornull">quantilesDeterministicOrNull()</h4>
+<h4
+id="quantilesdeterministicornullif">quantilesDeterministicOrNullIf()</h4>
+<h4 id="quantilesexactkwargs">quantilesExact(**kwargs)</h4>
+<h4 id="quantilesexactif">quantilesExactIf()</h4>
+<h4 id="quantilesexactordefault">quantilesExactOrDefault()</h4>
+<h4 id="quantilesexactordefaultif">quantilesExactOrDefaultIf()</h4>
+<h4 id="quantilesexactornull">quantilesExactOrNull()</h4>
+<h4 id="quantilesexactornullif">quantilesExactOrNullIf()</h4>
+<h4
+id="quantilesexactweightedkwargs">quantilesExactWeighted(**kwargs)</h4>
+<h4 id="quantilesexactweightedif">quantilesExactWeightedIf()</h4>
+<h4
+id="quantilesexactweightedordefault">quantilesExactWeightedOrDefault()</h4>
+<h4
+id="quantilesexactweightedordefaultif">quantilesExactWeightedOrDefaultIf()</h4>
+<h4
+id="quantilesexactweightedornull">quantilesExactWeightedOrNull()</h4>
+<h4
+id="quantilesexactweightedornullif">quantilesExactWeightedOrNullIf()</h4>
+<h4 id="quantilesif">quantilesIf()</h4>
+<h4 id="quantilesordefault">quantilesOrDefault()</h4>
+<h4 id="quantilesordefaultif">quantilesOrDefaultIf()</h4>
+<h4 id="quantilesornull">quantilesOrNull()</h4>
+<h4 id="quantilesornullif">quantilesOrNullIf()</h4>
+<h4 id="quantilestdigestkwargs">quantilesTDigest(**kwargs)</h4>
+<h4 id="quantilestdigestif">quantilesTDigestIf()</h4>
+<h4 id="quantilestdigestordefault">quantilesTDigestOrDefault()</h4>
+<h4 id="quantilestdigestordefaultif">quantilesTDigestOrDefaultIf()</h4>
+<h4 id="quantilestdigestornull">quantilesTDigestOrNull()</h4>
+<h4 id="quantilestdigestornullif">quantilesTDigestOrNullIf()</h4>
+<h4
+id="quantilestdigestweightedkwargs">quantilesTDigestWeighted(**kwargs)</h4>
+<h4 id="quantilestdigestweightedif">quantilesTDigestWeightedIf()</h4>
+<h4
+id="quantilestdigestweightedordefault">quantilesTDigestWeightedOrDefault()</h4>
+<h4
+id="quantilestdigestweightedordefaultif">quantilesTDigestWeightedOrDefaultIf()</h4>
+<h4
+id="quantilestdigestweightedornull">quantilesTDigestWeightedOrNull()</h4>
+<h4
+id="quantilestdigestweightedornullif">quantilesTDigestWeightedOrNullIf()</h4>
+<h4 id="quantilestimingkwargs">quantilesTiming(**kwargs)</h4>
+<h4 id="quantilestimingif">quantilesTimingIf()</h4>
+<h4 id="quantilestimingordefault">quantilesTimingOrDefault()</h4>
+<h4 id="quantilestimingordefaultif">quantilesTimingOrDefaultIf()</h4>
+<h4 id="quantilestimingornull">quantilesTimingOrNull()</h4>
+<h4 id="quantilestimingornullif">quantilesTimingOrNullIf()</h4>
+<h4
+id="quantilestimingweightedkwargs">quantilesTimingWeighted(**kwargs)</h4>
+<h4 id="quantilestimingweightedif">quantilesTimingWeightedIf()</h4>
+<h4
+id="quantilestimingweightedordefault">quantilesTimingWeightedOrDefault()</h4>
+<h4
+id="quantilestimingweightedordefaultif">quantilesTimingWeightedOrDefaultIf()</h4>
+<h4
+id="quantilestimingweightedornull">quantilesTimingWeightedOrNull()</h4>
+<h4
+id="quantilestimingweightedornullif">quantilesTimingWeightedOrNullIf()</h4>
+<h4 id="rand">rand()</h4>
+<h4 id="rand64">rand64()</h4>
+<h4 id="randconstant">randConstant()</h4>
+<h4 id="range">range()</h4>
+<h4 id="regexpquotemeta">regexpQuoteMeta()</h4>
+<h4 id="replacepattern-replacement">replace(pattern, replacement)</h4>
+<h4 id="replaceallpattern-replacement">replaceAll(pattern,
+replacement)</h4>
+<h4 id="replaceonepattern-replacement">replaceOne(pattern,
+replacement)</h4>
+<h4 id="replaceregexpallpattern-replacement">replaceRegexpAll(pattern,
+replacement)</h4>
+<h4 id="replaceregexponepattern-replacement">replaceRegexpOne(pattern,
+replacement)</h4>
+<h4 id="reversekwargs">reverse(**kwargs)</h4>
+<h4 id="reverseutf8">reverseUTF8()</h4>
+<h4 id="roundnnone">round(n=None)</h4>
+<h4 id="roundage">roundAge()</h4>
+<h4 id="rounddowny">roundDown(y)</h4>
+<h4 id="roundduration">roundDuration()</h4>
+<h4 id="roundtoexp2">roundToExp2()</h4>
+<h4 id="sin">sin()</h4>
+<h4 id="siphash128">sipHash128()</h4>
+<h4 id="siphash64">sipHash64()</h4>
+<h4 id="skewpopkwargs">skewPop(**kwargs)</h4>
+<h4 id="skewpopifcond">skewPopIf(cond)</h4>
+<h4 id="skewpopordefault">skewPopOrDefault()</h4>
+<h4 id="skewpopordefaultifcond">skewPopOrDefaultIf(cond)</h4>
+<h4 id="skewpopornull">skewPopOrNull()</h4>
+<h4 id="skewpopornullifcond">skewPopOrNullIf(cond)</h4>
+<h4 id="skewsampkwargs">skewSamp(**kwargs)</h4>
+<h4 id="skewsampifcond">skewSampIf(cond)</h4>
+<h4 id="skewsampordefault">skewSampOrDefault()</h4>
+<h4 id="skewsampordefaultifcond">skewSampOrDefaultIf(cond)</h4>
+<h4 id="skewsampornull">skewSampOrNull()</h4>
+<h4 id="skewsampornullifcond">skewSampOrNullIf(cond)</h4>
+<h4 id="splitbychars">splitByChar(s)</h4>
+<h4 id="splitbystrings">splitByString(s)</h4>
+<h4 id="sqrt">sqrt()</h4>
+<h4 id="startswithprefix">startsWith(prefix)</h4>
+<h4 id="substringkwargs">substring(**kwargs)</h4>
+<h4 id="substringutf8offset-length">substringUTF8(offset, length)</h4>
+<h4 id="subtractdaysn-timezoneno_value">subtractDays(n,
+timezone=NO_VALUE)</h4>
+<h4 id="subtracthoursn-timezoneno_value">subtractHours(n,
+timezone=NO_VALUE)</h4>
+<h4 id="subtractminutesn-timezoneno_value">subtractMinutes(n,
+timezone=NO_VALUE)</h4>
+<h4 id="subtractmonthsn-timezoneno_value">subtractMonths(n,
+timezone=NO_VALUE)</h4>
+<h4 id="subtractquartersn-timezoneno_value">subtractQuarters(n,
+timezone=NO_VALUE)</h4>
+<h4 id="subtractsecondsn-timezoneno_value">subtractSeconds(n,
+timezone=NO_VALUE)</h4>
+<h4 id="subtractweeksn-timezoneno_value">subtractWeeks(n,
+timezone=NO_VALUE)</h4>
+<h4 id="subtractyearsn-timezoneno_value">subtractYears(n,
+timezone=NO_VALUE)</h4>
+<h4 id="sumkwargs">sum(**kwargs)</h4>
+<h4 id="sumifcond">sumIf(cond)</h4>
+<h4 id="sumordefault">sumOrDefault()</h4>
+<h4 id="sumordefaultifcond">sumOrDefaultIf(cond)</h4>
+<h4 id="sumornull">sumOrNull()</h4>
+<h4 id="sumornullifcond">sumOrNullIf(cond)</h4>
+<h4 id="tan">tan()</h4>
+<h4 id="tgamma">tgamma()</h4>
+<h4 id="timeslot">timeSlot()</h4>
+<h4 id="timeslotsduration">timeSlots(duration)</h4>
+<h4 id="todatekwargs">toDate(**kwargs)</h4>
+<h4 id="todateornull">toDateOrNull()</h4>
+<h4 id="todateorzero">toDateOrZero()</h4>
+<h4 id="todatetimekwargs">toDateTime(**kwargs)</h4>
+<h4 id="todatetime64kwargs">toDateTime64(**kwargs)</h4>
+<h4
+id="todatetime64ornullprecision-timezoneno_value">toDateTime64OrNull(precision,
+timezone=NO_VALUE)</h4>
+<h4
+id="todatetime64orzeroprecision-timezoneno_value">toDateTime64OrZero(precision,
+timezone=NO_VALUE)</h4>
+<h4 id="todatetimeornull">toDateTimeOrNull()</h4>
+<h4 id="todatetimeorzero">toDateTimeOrZero()</h4>
+<h4 id="todayofmonth">toDayOfMonth()</h4>
+<h4 id="todayofweek">toDayOfWeek()</h4>
+<h4 id="todayofyear">toDayOfYear()</h4>
+<h4 id="todecimal128kwargs">toDecimal128(**kwargs)</h4>
+<h4 id="todecimal128ornullscale">toDecimal128OrNull(scale)</h4>
+<h4 id="todecimal128orzeroscale">toDecimal128OrZero(scale)</h4>
+<h4 id="todecimal32kwargs">toDecimal32(**kwargs)</h4>
+<h4 id="todecimal32ornullscale">toDecimal32OrNull(scale)</h4>
+<h4 id="todecimal32orzeroscale">toDecimal32OrZero(scale)</h4>
+<h4 id="todecimal64kwargs">toDecimal64(**kwargs)</h4>
+<h4 id="todecimal64ornullscale">toDecimal64OrNull(scale)</h4>
+<h4 id="todecimal64orzeroscale">toDecimal64OrZero(scale)</h4>
+<h4 id="tofixedstringlength">toFixedString(length)</h4>
+<h4 id="tofloat32kwargs">toFloat32(**kwargs)</h4>
+<h4 id="tofloat32ornull">toFloat32OrNull()</h4>
+<h4 id="tofloat32orzero">toFloat32OrZero()</h4>
+<h4 id="tofloat64kwargs">toFloat64(**kwargs)</h4>
+<h4 id="tofloat64ornull">toFloat64OrNull()</h4>
+<h4 id="tofloat64orzero">toFloat64OrZero()</h4>
+<h4 id="tohour">toHour()</h4>
+<h4 id="toipv4">toIPv4()</h4>
+<h4 id="toipv6">toIPv6()</h4>
+<h4 id="toisoweektimezone">toISOWeek(timezone=““)</h4>
+<h4 id="toisoyeartimezone">toISOYear(timezone=““)</h4>
+<h4 id="toint16kwargs">toInt16(**kwargs)</h4>
+<h4 id="toint16ornull">toInt16OrNull()</h4>
+<h4 id="toint16orzero">toInt16OrZero()</h4>
+<h4 id="toint32kwargs">toInt32(**kwargs)</h4>
+<h4 id="toint32ornull">toInt32OrNull()</h4>
+<h4 id="toint32orzero">toInt32OrZero()</h4>
+<h4 id="toint64kwargs">toInt64(**kwargs)</h4>
+<h4 id="toint64ornull">toInt64OrNull()</h4>
+<h4 id="toint64orzero">toInt64OrZero()</h4>
+<h4 id="toint8kwargs">toInt8(**kwargs)</h4>
+<h4 id="toint8ornull">toInt8OrNull()</h4>
+<h4 id="toint8orzero">toInt8OrZero()</h4>
+<h4 id="tointervalday">toIntervalDay()</h4>
+<h4 id="tointervalhour">toIntervalHour()</h4>
+<h4 id="tointervalminute">toIntervalMinute()</h4>
+<h4 id="tointervalmonth">toIntervalMonth()</h4>
+<h4 id="tointervalquarter">toIntervalQuarter()</h4>
+<h4 id="tointervalsecond">toIntervalSecond()</h4>
+<h4 id="tointervalweek">toIntervalWeek()</h4>
+<h4 id="tointervalyear">toIntervalYear()</h4>
+<h4 id="tominute">toMinute()</h4>
+<h4 id="tomonday">toMonday()</h4>
+<h4 id="tomonth">toMonth()</h4>
+<h4 id="toquartertimezone">toQuarter(timezone=““)</h4>
+<h4 id="torelativedaynumtimezone">toRelativeDayNum(timezone=““)</h4>
+<h4 id="torelativehournumtimezone">toRelativeHourNum(timezone=““)</h4>
+<h4
+id="torelativeminutenumtimezone">toRelativeMinuteNum(timezone=““)</h4>
+<h4 id="torelativemonthnumtimezone">toRelativeMonthNum(timezone=““)</h4>
+<h4
+id="torelativesecondnumtimezone">toRelativeSecondNum(timezone=““)</h4>
+<h4 id="torelativeweeknumtimezone">toRelativeWeekNum(timezone=““)</h4>
+<h4 id="torelativeyearnumtimezone">toRelativeYearNum(timezone=““)</h4>
+<h4 id="tosecond">toSecond()</h4>
+<h4 id="tostartofday">toStartOfDay()</h4>
+<h4 id="tostartoffifteenminutes">toStartOfFifteenMinutes()</h4>
+<h4 id="tostartoffiveminute">toStartOfFiveMinute()</h4>
+<h4 id="tostartofhour">toStartOfHour()</h4>
+<h4 id="tostartofisoyear">toStartOfISOYear()</h4>
+<h4 id="tostartofminute">toStartOfMinute()</h4>
+<h4 id="tostartofmonth">toStartOfMonth()</h4>
+<h4 id="tostartofquarter">toStartOfQuarter()</h4>
+<h4 id="tostartoftenminutes">toStartOfTenMinutes()</h4>
+<h4 id="tostartofweekmode0">toStartOfWeek(mode=0)</h4>
+<h4 id="tostartofyear">toStartOfYear()</h4>
+<h4 id="tostring">toString()</h4>
+<h4 id="tostringcuttozero">toStringCutToZero()</h4>
+<h4 id="totimetimezone">toTime(timezone=““)</h4>
+<h4 id="totimezonetimezone">toTimeZone(timezone)</h4>
+<h4 id="touint16kwargs">toUInt16(**kwargs)</h4>
+<h4 id="touint16ornull">toUInt16OrNull()</h4>
+<h4 id="touint16orzero">toUInt16OrZero()</h4>
+<h4 id="touint32kwargs">toUInt32(**kwargs)</h4>
+<h4 id="touint32ornull">toUInt32OrNull()</h4>
+<h4 id="touint32orzero">toUInt32OrZero()</h4>
+<h4 id="touint64kwargs">toUInt64(**kwargs)</h4>
+<h4 id="touint64ornull">toUInt64OrNull()</h4>
+<h4 id="touint64orzero">toUInt64OrZero()</h4>
+<h4 id="touint8kwargs">toUInt8(**kwargs)</h4>
+<h4 id="touint8ornull">toUInt8OrNull()</h4>
+<h4 id="touint8orzero">toUInt8OrZero()</h4>
+<h4 id="touuid">toUUID()</h4>
+<h4 id="tounixtimestamptimezone">toUnixTimestamp(timezone=““)</h4>
+<h4 id="toweekmode0-timezone">toWeek(mode=0, timezone=““)</h4>
+<h4 id="toyyyymmtimezone">toYYYYMM(timezone=““)</h4>
+<h4 id="toyyyymmddtimezone">toYYYYMMDD(timezone=““)</h4>
+<h4 id="toyyyymmddhhmmsstimezone">toYYYYMMDDhhmmss(timezone=““)</h4>
+<h4 id="toyear">toYear()</h4>
+<h4 id="to_sqlargs">to_sql(*args)</h4>
+<p>Generates an SQL string for this function and its arguments. For
+example if the function name is a symbol of a binary operator: (2.54 *
+<code>height</code>) For other functions: gcd(12, 300)</p>
+<h4 id="today">today()</h4>
+<h4 id="topkkwargs">topK(**kwargs)</h4>
+<h4 id="topkif">topKIf()</h4>
+<h4 id="topkordefault">topKOrDefault()</h4>
+<h4 id="topkordefaultif">topKOrDefaultIf()</h4>
+<h4 id="topkornull">topKOrNull()</h4>
+<h4 id="topkornullif">topKOrNullIf()</h4>
+<h4 id="topkweightedkwargs">topKWeighted(**kwargs)</h4>
+<h4 id="topkweightedif">topKWeightedIf()</h4>
+<h4 id="topkweightedordefault">topKWeightedOrDefault()</h4>
+<h4 id="topkweightedordefaultif">topKWeightedOrDefaultIf()</h4>
+<h4 id="topkweightedornull">topKWeightedOrNull()</h4>
+<h4 id="topkweightedornullif">topKWeightedOrNullIf()</h4>
+<h4 id="trimboth">trimBoth()</h4>
+<h4 id="trimleft">trimLeft()</h4>
+<h4 id="trimright">trimRight()</h4>
+<h4 id="trybase64decode">tryBase64Decode()</h4>
+<h4 id="unhex">unhex()</h4>
+<h4 id="uniqkwargs">uniq(**kwargs)</h4>
+<h4 id="uniqexactkwargs">uniqExact(**kwargs)</h4>
+</body>
+</html>
