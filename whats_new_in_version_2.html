@@ -249,14 +249,14 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a hr
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>expr <span class="op">=</span> (Temperature.timestamp <span class="op">&gt;</span> start) <span class="op">&amp;</span> (Temperature.station_id <span class="op">==</span> <span class="dv">123</span>) <span class="op">&amp;</span> (Temperature.degrees_celsius <span class="op">&gt;</span> <span class="dv">30</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> Temperature.objects_in(db).<span class="bu">filter</span>(expr):</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(t.timestamp, t.degrees_celsius)</span></code></pre></div>
-<p>See <a href="expressions.md">Expressions</a>.</p>
+<p>See <a href="expressions.html">Expressions</a>.</p>
 <h2 id="support-for-ipv4-and-ipv6-fields">Support for IPv4 and IPv6
 fields</h2>
 <p>Two new fields classes were added: <code>IPv4Field</code> and
 <code>IPv6Field</code>. Their values are represented by Python’s
 <code>ipaddress.IPv4Address</code> and
 <code>ipaddress.IPv6Address</code>.</p>
-<p>See <a href="field_types.md">Field Types</a>.</p>
+<p>See <a href="field_types.html">Field Types</a>.</p>
 <h2
 id="automatic-generation-of-models-by-inspecting-existing-tables">Automatic
 generation of models by inspecting existing tables</h2>
@@ -274,6 +274,6 @@ ORM classes</h2>
 example:</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clickhouse_orm <span class="im">import</span> Database, Model, StringField, DateTimeField, MergeTree</span></code></pre></div>
-<p>See <a href="importing_orm_classes.md">Importing ORM Classes</a>.</p>
+<p>See <a href="importing_orm_classes.html">Importing ORM Classes</a>.</p>
 </body>
 </html>

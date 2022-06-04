@@ -244,17 +244,17 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a hr
 <p>The columns in the database table are represented by model fields.
 Each field has a type, which matches the type of the corresponding
 database column. All the supported fields types are listed <a
-href="field_types.md">here</a>.</p>
+href="field_types.html">here</a>.</p>
 <p>A model must have an <code>engine</code>, which determines how its
 table is stored on disk (if at all), and what capabilities it has. For
 more details about table engines see <a
-href="table_engines.md">here</a>.</p>
+href="table_engines.html">here</a>.</p>
 <h3 id="default-values">Default values</h3>
 <p>Each field has a “natural” default value - empty string for string
 fields, zero for numeric fields etc. To specify a different value use
 the <code>default</code> parameter:</p>
 <pre><code>    first_name = StringField(default=&quot;anonymous&quot;)</code></pre>
-<p>For additional details see <a href="field_options.md">here</a>.</p>
+<p>For additional details see <a href="field_options.html">here</a>.</p>
 <h3 id="null-values">Null values</h3>
 <p>To allow null values in a field, wrap it inside a
 <code>NullableField</code>:</p>
@@ -262,14 +262,14 @@ the <code>default</code> parameter:</p>
 <p>In this case, the default value for that field becomes
 <code>null</code> unless otherwise specified.</p>
 <p>For more information about <code>NullableField</code> see <a
-href="field_types.md">Field Types</a>.</p>
+href="field_types.html">Field Types</a>.</p>
 <h3 id="materialized-fields">Materialized fields</h3>
 <p>The value of a materialized field is calculated from other fields in
 the model. For example:</p>
 <pre><code>    year_born = Int16Field(materialized=F.toYear(birthday))</code></pre>
 <p>Materialized fields are read-only, meaning that their values are not
 sent to the database when inserting records.</p>
-<p>For additional details see <a href="field_options.md">here</a>.</p>
+<p>For additional details see <a href="field_options.html">here</a>.</p>
 <h3 id="alias-fields">Alias fields</h3>
 <p>An alias field is a field whose value is calculated by ClickHouse on
 the fly, as a function of other fields. It is not physically stored by
@@ -277,7 +277,7 @@ the database. For example:</p>
 <pre><code>    weekday_born = field.UInt8Field(alias=F.toDayOfWeek(birthday))</code></pre>
 <p>Alias fields are read-only, meaning that their values are not sent to
 the database when inserting records.</p>
-<p>For additional details see <a href="field_options.md">here</a>.</p>
+<p>For additional details see <a href="field_options.html">here</a>.</p>
 <h3 id="table-names">Table Names</h3>
 <p>The table name used for the model is its class name, converted to
 lowercase. To override the default name, implement the
@@ -386,7 +386,7 @@ will receive their default values:</p>
 hand. The previous snippet can be written like this:</p>
 <pre><code>for person in Person.objects_in(db).filter(Person.last_name == &#39;Smith&#39;).only(&#39;first_name&#39;):
     print(person.first_name)</code></pre>
-<p>See <a href="querysets.md">Querysets</a> for more information.</p>
+<p>See <a href="querysets.html">Querysets</a> for more information.</p>
 <h2 id="reading-without-a-model">Reading without a Model</h2>
 <p>When running a query, specifying a model class is not required. In
 case you do not provide a model class, an ad-hoc class will be defined
@@ -449,8 +449,8 @@ value -1 may be used to retrieve the last page</li>
 is unique, otherwise there might be inconsistencies in the pagination
 (such as an instance that appears on two different pages).</p>
 <hr />
-<p><a href="index.md">&lt;&lt; Overview</a> | <a href="toc.md">Table of
-Contents</a> | <a href="async_databases.md">Async DataBase
+<p><a href="index.html">&lt;&lt; Overview</a> | <a href="toc.html">Table of
+Contents</a> | <a href="async_databases.html">Async DataBase
 &gt;&gt;</a></p>
 </body>
 </html>
