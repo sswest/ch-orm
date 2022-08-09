@@ -103,7 +103,7 @@ class Database:
     def __init__(
         self,
         db_name,
-        db_url="http://localhost:18123/",
+        db_url="http://localhost:8123/",
         username=None,
         password=None,
         readonly=False,
