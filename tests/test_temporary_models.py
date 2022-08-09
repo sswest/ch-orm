@@ -1,12 +1,9 @@
 import unittest
-from datetime import date
 
-import os
-
-from clickhouse_orm.database import Database, DatabaseException, ServerError
-from clickhouse_orm.engines import Memory, MergeTree
+from clickhouse_orm.database import Database, ServerError
+from clickhouse_orm.engines import MergeTree
 from clickhouse_orm.fields import UUIDField, DateField
-from clickhouse_orm.models import TemporaryModel, Model
+from clickhouse_orm.models import TemporaryTable
 from clickhouse_orm.session import in_session
 
 
@@ -20,26 +17,24 @@ class TemporaryTest(unittest.TestCase):
 
     def test_create_table(self):
         with self.assertRaises(ServerError):
-            self.database.create_table(TemporaryTable)
+            self.database.create_table(Temporary1)
         with self.assertRaises(AssertionError):
-            self.database.create_table(TemporaryTable2)
+            self.database.create_table(Temporary2)
         with in_session():
-            self.database.create_table(TemporaryTable)
-            count = TemporaryTable.objects_in(self.database).count()
+            self.database.create_table(Temporary1)
+            count = Temporary1.objects_in(self.database).count()
             self.assertEqual(count, 0)
         # Check if temporary table is cleaned up
         with self.assertRaises(ServerError):
-            TemporaryTable.objects_in(self.database).count()
+            Temporary1.objects_in(self.database).count()
 
 
-class TemporaryTable(TemporaryModel):
+class Temporary1(TemporaryTable):
     date_field = DateField()
     uuid = UUIDField()
 
-    engine = Memory()
 
-
-class TemporaryTable2(TemporaryModel):
+class Temporary2(TemporaryTable):
     date_field = DateField()
     uuid = UUIDField()
 

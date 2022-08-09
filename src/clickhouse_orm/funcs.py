@@ -1165,6 +1165,114 @@ class F(Cond, FunctionOperatorsMixin, metaclass=FMeta):  # pylint: disable=R0904
         return F("arrayElement", arr, n)
 
     @staticmethod
+    def arrayMap(func: str | Lambda, arr):
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayMap", func, arr)
+
+    @staticmethod
+    def arrayFilter(func: str | Lambda, arr):
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayFilter", func, arr)
+
+    @staticmethod
+    def arrayFill(func: str | Lambda, arr):
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayFill", func, arr)
+
+    @staticmethod
+    def arrayReverseFill(func: str | Lambda, arr):
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayReverseFill", func, arr)
+
+    @staticmethod
+    def arraySplit(func: str | Lambda, arr):
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arraySplit", func, arr)
+
+    @staticmethod
+    def arrayReverseSplit(func: str | Lambda, arr):
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayReverseSplit", func, arr)
+
+    @staticmethod
+    def arrayExists(arr, func: str | Lambda = None):
+        if func is None:
+            return F("arrayExists", arr)
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayExists", func, arr)
+
+    @staticmethod
+    def arrayAll(arr, func: str | Lambda = None):
+        if func is None:
+            return F("arrayAll", arr)
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayAll", func, arr)
+
+    @staticmethod
+    def arrayFirst(func: str | Lambda, arr):
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayFirst", func, arr)
+
+    @staticmethod
+    def arrayLast(func: str | Lambda, arr):
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayLast", func, arr)
+
+    @staticmethod
+    def arrayFirstIndex(func: str | Lambda, arr):
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayFirstIndex", func, arr)
+
+    @staticmethod
+    def arrayLastIndex(func: str | Lambda, arr):
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayLastIndex", func, arr)
+
+    @staticmethod
+    def arraySort(arr, func: str | Lambda = None):
+        if func is None:
+            return F("arraySort", arr)
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arraySort", func, arr)
+
+    @staticmethod
+    def arrayReverseSort(arr, func: str | Lambda = None):
+        if func is None:
+            return F("arrayReverseSort", arr)
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayReverseSort", func, arr)
+
+    @staticmethod
+    def arrayCount(arr, func: str | Lambda = None):
+        if func is None:
+            return F("arrayCount", arr)
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayCount", func, arr)
+
+    @staticmethod
+    def arrayCumSum(arr, func: str | Lambda = None):
+        if func is None:
+            return F("arrayCumSum", arr)
+        if isinstance(func, str):
+            func = Lambda(func)
+        return F("arrayCumSum", func, arr)
+
+    @staticmethod
     def tupleElement(arr, n):
         return F("tupleElement", arr, n)
 
@@ -2032,5 +2140,19 @@ class F(Cond, FunctionOperatorsMixin, metaclass=FMeta):  # pylint: disable=R0904
         return F("dictIsIn", dict_name, child_id_expr, ancestor_id_expr)
 
 
+class Lambda:
+    """
+    Functions can’t change the values of their arguments – any changes are returned as the result.
+    Thus, the result of calculating separate functions does not depend on the order in which
+    the functions are written in the query.
+    """
+    def __init__(self, symbol: str):
+        """Higher-order functions, -> operator and lambda(params, expr) function"""
+        self.symbol = symbol
+
+    def __str__(self):
+        return self.symbol
+
+
 # Expose only relevant classes in import *
-__all__ = ["F"]
+__all__ = ["F", "Lambda"]

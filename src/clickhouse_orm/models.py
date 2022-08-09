@@ -668,7 +668,7 @@ class DistributedModel(Model):
         return "\n".join(parts)
 
 
-class TemporaryModel(Model):
+class TemporaryTable(Model):
     """Temporary Tables
 
     Temporary tables disappear when the session ends, including if the connection is lost.
@@ -682,6 +682,8 @@ class TemporaryModel(Model):
 
     https://clickhouse.com/docs/en/sql-reference/statements/create/table/#temporary-tables
     """
+
+    engine = Memory()
 
     _temporary = True
 
