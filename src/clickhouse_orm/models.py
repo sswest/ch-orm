@@ -709,6 +709,8 @@ class TemporaryTable(Model):
         return "\n".join(parts)
 
 
+# forward compatible
+TemporaryModel = TemporaryTable
 # Expose only relevant classes in import *
 MODEL = TypeVar("MODEL", bound=Model)
 __all__ = get_subclass_names(locals(), (Model, Constraint, Index))
