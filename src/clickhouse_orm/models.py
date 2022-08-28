@@ -8,7 +8,7 @@ from typing import TypeVar, Optional, TYPE_CHECKING, Any
 import pytz
 
 from .fields import Field, StringField
-from .utils import parse_tsv, NO_VALUE, get_subclass_names, arg_to_sql, parse_array_field
+from .utils import parse_tsv, NO_VALUE, get_subclass_names, arg_to_sql
 from .query import QuerySet
 from .funcs import F
 from .engines import Merge, Distributed, Memory
@@ -241,7 +241,7 @@ class ModelBase(type):
             )
         # Arrays
         if db_type.startswith("Array"):
-            inner_field = cls.create_ad_hoc_field(parse_array_field(db_type))
+            inner_field = cls.create_ad_hoc_field(db_type[6:-1])
             return orm_fields.ArrayField(inner_field)
         # Tuples
         if db_type.startswith("Tuple"):

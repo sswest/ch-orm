@@ -249,7 +249,7 @@ class DatabaseTestCase(TestCaseWithData):
         from clickhouse_orm.models import ModelBase
         query = "SELECT DISTINCT type FROM system.columns"
         for row in self.database.select(query):
-            if row.type.startswith('Map'):
+            if row.type.startswith('Map') or row.type.startswith("Object"):
                 continue  # Not supported yet
             ModelBase.create_ad_hoc_field(row.type)
 
