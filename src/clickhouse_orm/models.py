@@ -251,7 +251,7 @@ class ModelBase(type):
                 if len(tp) == 2:
                     name_fields.append((tp[0], cls.create_ad_hoc_field(tp[1])))
                 else:
-                    name_fields.append((str(i), cls.create_ad_hoc_field(tp[0])))
+                    name_fields.append((chr(65 + i), cls.create_ad_hoc_field(tp[0])))
             return orm_fields.TupleField(name_fields=name_fields)
         # Map
         if db_type.startswith("Map"):
