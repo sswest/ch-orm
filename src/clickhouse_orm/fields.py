@@ -2,12 +2,13 @@ from __future__ import unicode_literals, annotations
 
 import json
 import re
+import datetime
 from enum import Enum
 from uuid import UUID
 from calendar import timegm
-import datetime
-from decimal import Decimal, localcontext
 from logging import getLogger
+from collections import namedtuple
+from decimal import Decimal, localcontext
 from ipaddress import IPv4Address, IPv6Address
 from typing import TYPE_CHECKING, Any, Optional, Union, Iterable
 
@@ -684,6 +685,10 @@ class TupleField(Field):
             self.inner_fields.append(field)
         self.class_default = tuple(field.class_default for field in self.inner_fields)
         super().__init__(default, alias, materialized, readonly, codec, db_column)
+        if self.names:
+            self.tuple_field = namedtuple("TupleField", list(self.names.keys()))
+        else:
+            self.tuple_field = tuple
 
     def to_python(self, value, timezone_in_use) -> tuple:
         if isinstance(value, str):
@@ -698,8 +703,8 @@ class TupleField(Field):
             )
         elif not isinstance(value, (list, tuple)):
             raise ValueError("TupleField expects list or tuple, not %s" % type(value))
-        return tuple(
-            self.inner_fields[i].to_python(v, timezone_in_use) for i, v in enumerate(value)
+        return self.tuple_field(
+            *[self.inner_fields[i].to_python(v, timezone_in_use) for i, v in enumerate(value)]
         )
 
     def validate(self, value):
@@ -719,6 +724,12 @@ class TupleField(Field):
         if with_default_expression and self.codec and db and db.has_codec_support:
             sql += " CODEC(%s)" % self.codec
         return sql
+
+    def __getattr__(self, item):
+        super(TupleField, self).__getattr__()
+
+    def __setattr__(self, key, value):
+        super(TupleField, self).__setattr__(key, value)
 
 
 class UUIDField(Field):
@@ -940,6 +951,13 @@ class MapField(Field):
         if with_default_expression and self.codec and db and db.has_codec_support:
             sql += " CODEC(%s)" % self.codec
         return sql
+
+
+class JSONField(Field):
+    """Experimental Field"""
+    class_default = {}
+    db_type = "JSON"
+
 
 # Expose only relevant classes in import *
 __all__ = get_subclass_names(locals(), Field)

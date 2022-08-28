@@ -308,7 +308,7 @@ class Q:
 
     def __invert__(self) -> "Q":
         q = copy(self)
-        q._negate = True
+        q._negate = not q._negate
         return q
 
     def __bool__(self):
