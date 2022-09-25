@@ -13,7 +13,7 @@ Using Expressions
 
 Expressions usually include ClickHouse database functions, which are made available by the `F` class. Here's a simple function:
 ```python
-from infi.clickhouse_orm import F
+from clickhouse_orm import F
 expr = F.today()
 ```
 
@@ -23,7 +23,7 @@ expr = F.toDayOfWeek(F.today())
 ```
 
 You can see the SQL expression that is represented by an ORM expression by calling its `to_sql` method or converting it to a string:
-```python
+```shell
 >>> print(expr)
 toDayOfWeek(today())
 ```
@@ -93,7 +93,3 @@ expr = F("someFunctionName", arg1, arg2, ...)
 ```
 
 Note that higher-order database functions (those that use lambda expressions) are not supported.
-
----
-
-[<< Async Databases](async_databases.md) | [Importing ORM Classes >>](importing_orm_classes.md)

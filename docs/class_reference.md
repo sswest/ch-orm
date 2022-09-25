@@ -10,7 +10,7 @@ clickhouse_orm.database
 Database instances connect to a specific ClickHouse database for running queries,
 inserting data and other operations.
 
-#### Database(db_name, db_url="http://localhost:8123/", username=None, password=None, readonly=False, auto_create=True, timeout=60, verify_ssl_cert=True, log_statements=False, engine=Atomic())
+#### Database(db_name, db_url="http://localhost:8123/", username=None, password=None, readonly=False, auto_create=True, timeout=60, verify_ssl_cert=True, log_statements=False, engine=<clickhouse_orm.engines.Atomic object at 0x7fca8025cc40>)
 
 
 Initializes a database instance. Unless it's readonly, the database will be
@@ -165,7 +165,7 @@ clickhouse_orm.aio.database
 
 Extends Database
 
-#### AioDatabase(db_name, db_url="http://localhost:8123/", username=None, password=None, readonly=False, auto_create=True, timeout=60, verify_ssl_cert=True, log_statements=False)
+#### AioDatabase(db_name, db_url="http://localhost:8123/", username=None, password=None, readonly=False, auto_create=True, timeout=60, verify_ssl_cert=True, log_statements=False, engine=<clickhouse_orm.engines.Atomic object at 0x7fca8025cc40>)
 
 
 Initializes a database instance. Unless it's readonly, the database will be
@@ -1177,11 +1177,29 @@ Extends BaseIntField
 #### Int8Field(default=None, alias=None, materialized=None, readonly=None, codec=None, db_column=None)
 
 
+### JSONField
+
+Extends Field
+
+Experimental Field
+
+#### JSONField(default=None, alias=None, materialized=None, readonly=None, codec=None, db_column=None)
+
+
 ### LowCardinalityField
 
 Extends Field
 
 #### LowCardinalityField(inner_field, default=None, alias=None, materialized=None, readonly=None, codec=None, db_column=None)
+
+
+### MapField
+
+Extends Field
+
+MapField is only experimental and is expected to be available in the next few releases
+
+#### MapField(key, value, default=None, alias=None, materialized=None, readonly=None, codec=None, db_column=None)
 
 
 ### NullableField
@@ -1264,6 +1282,9 @@ Can be used only with *Log tables.
 It’s optimized for storing many small *Log tables,
 for which there is a long time interval between accesses.
 
+#### Lazy(expiration_time_in_seconds)
+
+
 ### MySQL
 
 Extends DatabaseEngine
@@ -1274,6 +1295,16 @@ SELECT queries to exchange data between ClickHouse and MySQL.
 
 The MySQL database engine translate queries to the MySQL server so you can perform operations
 such as SHOW TABLES or SHOW CREATE TABLE.
+
+#### MySQL(host, port, database, user, password)
+
+
+- `host`: MySQL server address.
+- `port`: MySQL server port.
+- `database`: Remote database name.
+- `user`: MySQL user.
+- `password`: User password.
+
 
 ### PostgreSQL
 
@@ -1290,6 +1321,18 @@ Supports table structure modifications (ALTER TABLE ... ADD|DROP COLUMN).
 If use_table_cache parameter (see the Engine Parameters below) it set to 1,
 the table structure is cached and not checked for being modified,
 but can be updated with DETACH and ATTACH queries.
+
+#### PostgreSQL(host, port, database, user, password, schema=None, use_table_cache=None)
+
+
+- `host`: PostgreSQL server address.
+- `port`: PostgreSQL server port.
+- `database`: Remote database name.
+- `user`: PostgreSQL user.
+- `password`: User password.
+- `schema`: PostgreSQL schema.
+- `use_table_cache`: Defines if the database table structure is cached or not.
+
 
 ### SQLite
 
@@ -1326,7 +1369,7 @@ Extends TableEngine
 
 Extends TableEngine
 
-#### MergeTree(date_col=None, order_by=(), sampling_expr=None, index_granularity=8192, replica_table_path=None, replica_name=None, partition_key=None, primary_key=None)
+#### MergeTree(date_col=None, order_by=(), sampling_expr=None, index_granularity=8192, replica_table_path=None, replica_name=None, partition_key=None, primary_key=None, settings=None)
 
 
 ### Buffer
@@ -1382,21 +1425,21 @@ straightly into Distributed table, optional
 
 Extends MergeTree
 
-#### CollapsingMergeTree(date_col=None, order_by=(), sign_col="sign", sampling_expr=None, index_granularity=8192, replica_table_path=None, replica_name=None, partition_key=None, primary_key=None)
+#### CollapsingMergeTree(date_col=None, order_by=(), sign_col="sign", sampling_expr=None, index_granularity=8192, replica_table_path=None, replica_name=None, partition_key=None, primary_key=None, settings=None)
 
 
 ### SummingMergeTree
 
 Extends MergeTree
 
-#### SummingMergeTree(date_col=None, order_by=(), summing_cols=None, sampling_expr=None, index_granularity=8192, replica_table_path=None, replica_name=None, partition_key=None, primary_key=None)
+#### SummingMergeTree(date_col=None, order_by=(), summing_cols=None, sampling_expr=None, index_granularity=8192, replica_table_path=None, replica_name=None, partition_key=None, primary_key=None, settings=None)
 
 
 ### ReplacingMergeTree
 
 Extends MergeTree
 
-#### ReplacingMergeTree(date_col=None, order_by=(), ver_col=None, sampling_expr=None, index_granularity=8192, replica_table_path=None, replica_name=None, partition_key=None, primary_key=None)
+#### ReplacingMergeTree(date_col=None, order_by=(), ver_col=None, sampling_expr=None, index_granularity=8192, replica_table_path=None, replica_name=None, partition_key=None, primary_key=None, settings=None)
 
 
 clickhouse_orm.query
@@ -1903,7 +1946,16 @@ Initializer.
 #### array()
 
 
+#### arrayAll(func=None)
+
+
 #### arrayConcat()
+
+
+#### arrayCount(func=None)
+
+
+#### arrayCumSum(func=None)
 
 
 #### arrayDifference()
@@ -1930,10 +1982,34 @@ Initializer.
 #### arrayEnumerateUniqRanked()
 
 
+#### arrayExists(func=None)
+
+
+#### arrayFill(arr)
+
+
+#### arrayFilter(arr)
+
+
+#### arrayFirst(arr)
+
+
+#### arrayFirstIndex(arr)
+
+
 #### arrayIntersect()
 
 
 #### arrayJoin()
+
+
+#### arrayLast(arr)
+
+
+#### arrayLastIndex(arr)
+
+
+#### arrayMap(arr)
 
 
 #### arrayPopBack()
@@ -1957,7 +2033,22 @@ Initializer.
 #### arrayReverse()
 
 
+#### arrayReverseFill(arr)
+
+
+#### arrayReverseSort(func=None)
+
+
+#### arrayReverseSplit(arr)
+
+
 #### arraySlice(offset, length=None)
+
+
+#### arraySort(func=None)
+
+
+#### arraySplit(arr)
 
 
 #### arrayStringConcat(sep=None)
@@ -2284,7 +2375,53 @@ Initializer.
 #### generateUUIDv4()
 
 
+#### geoDistance(lat1, lon2, lat2)
+
+
+Similar to greatCircleDistance but calculates the distance on WGS-84 ellipsoid
+instead of sphere.
+This is more precise approximation of the Earth Geoid.
+The performance is the same as for greatCircleDistance (no performance drawback).
+It is recommended to use geoDistance to calculate the distances on Earth.
+
+
+#### geoToH3(lat, resolution)
+
+
+Returns H3 point index (lon, lat) with specified resolution.
+
+
+#### geohashDecode()
+
+
+Decodes any geohash-encoded string into longitude and latitude.
+
+
 #### geohashEncode(y, precision=12)
+
+
+Encodes latitude and longitude as a geohash-string.
+
+
+#### geohashesInBox(latitude_min, longitude_max, latitude_max, precision)
+
+
+Returns an array of geohash-encoded strings of given precision that fall inside
+and intersect boundaries of given box, basically a 2D grid flattened into array.
+
+
+#### greatCircleAngle(lat1, lon2, lat2)
+
+
+Calculates the central angle between two points on the Earth’s surface
+using the great-circle formula.
+
+
+#### greatCircleDistance(lat1, lon2, lat2)
+
+
+Calculates the distance between two points on the Earth’s surface
+using the great-circle formula.
 
 
 #### greater(**kwargs)
@@ -2294,6 +2431,79 @@ Initializer.
 
 
 #### greatest(y)
+
+
+#### h3EdgeAngle()
+
+
+Calculates the average length of the H3 hexagon edge in grades.
+
+
+#### h3EdgeLengthKm()
+
+
+Calculates the average length of the H3 hexagon edge in kilometers.
+
+
+#### h3EdgeLengthM()
+
+
+Calculates the average length of the H3 hexagon edge in meters.
+
+
+#### h3GetBaseCell()
+
+
+Returns the base cell number of the H3 index.
+
+
+#### h3GetResolution()
+
+
+Defines the resolution of the given H3 index.
+
+
+#### h3HexAreaKm2()
+
+
+Returns average hexagon area in square kilometers at the given resolution.
+
+
+#### h3HexAreaM2()
+
+
+Returns average hexagon area in square meters at the given resolution.
+
+
+#### h3IndexesAreNeighbors(index2)
+
+
+Returns whether or not the provided H3 indexes are neighbors.
+
+
+#### h3IsValid()
+
+
+Verifies whether the number is a valid H3 index.
+
+
+#### h3ToChildren(resolution)
+
+
+Returns an array of child indexes for the given H3 index.
+
+
+#### h3ToGeo()
+
+
+Returns the centroid longitude and latitude corresponding to the provided H3 index.
+
+
+#### h3ToGeoBoundary()
+
+
+Returns array of pairs (lon, lat), which corresponds to the boundary
+of the provided H3 index.
 
 
 #### halfMD5()
@@ -2344,6 +2554,9 @@ Initializer.
 #### isFinite()
 
 
+#### isGlobalIn(others)
+
+
 #### isIn(others)
 
 
@@ -2351,6 +2564,9 @@ Initializer.
 
 
 #### isNaN()
+
+
+#### isNotGlobalIn(others)
 
 
 #### isNotIn(others)
@@ -2567,6 +2783,12 @@ Initializer.
 
 
 #### plus(**kwargs)
+
+
+#### pointInPolygon(y, polygon)
+
+
+Checks whether the point belongs to the polygon on the plane.
 
 
 #### position(**kwargs)

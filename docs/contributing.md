@@ -11,25 +11,29 @@ Building
 
 After cloning the project, run the following commands:
 
-    pip install build
-    python -m build
+```shell
+pip install build
+python -m build
+```
 
 A `dist` directory will be generated, which you can use to install the development version of the package:
 
-    pip install dist/*
+```shell
+pip install dist/*
+```
 
 Tests
 -----
 
 To run the tests, ensure that the ClickHouse server is running on <http://localhost:8123/> (this is the default), and run:
 
-    python -m unittest
+```shell
+python -m unittest
+```
 
 To see test coverage information run:
 
-    coverage run --source=clickhouse_orm -m unittest
-    coverage report -m
-
----
-
-[<< System Models](system_models.md) | [Class Reference >>](class_reference.md)
+```shell
+coverage run --source=clickhouse_orm -m unittest
+coverage report -m
+```

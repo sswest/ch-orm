@@ -27,7 +27,7 @@ class Event(Model):
     ...
 ```
 When creating a model instance, any fields you do not specify get their default value. Fields that use a default expression are assigned a sentinel value of `clickhouse_orm.utils.NO_VALUE` instead. For example:
-```python
+```shell
 >>> event = Event()
 >>> print(event.to_dict())
 {'name': 'EVENT', 'repeated': 1, 'created': <NO_VALUE>}
@@ -121,7 +121,3 @@ Note: This feature is supported on ClickHouse version 19.1.16 and above. Codec a
 ## readonly
 
 This attribute is set automatically for fields with `alias` or `materialized` attributes, you do not need to pass it yourself.
-
----
-
-[<< Querysets](querysets.md) | [Field Types >>](field_types.md)

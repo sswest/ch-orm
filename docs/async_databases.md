@@ -55,6 +55,3 @@ async def main():
     # correct
     person = [_ async for _ in Person.objects_in(db).filter[5:5]][0]
 ```
-
-
-[<< Models and Databases](models_and_databases.md) | [Expressions >>](expressions.md)

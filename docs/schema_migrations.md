@@ -22,13 +22,15 @@ To write migrations, create a Python package. Then create a python file for the 
 
 Each migration file is expected to contain a list of `operations`, for example:
 
-    from infi.clickhouse_orm import migrations
-    from analytics import models
+```python
+from clickhouse_orm import migrations
+from analytics import models
 
-    operations = [
-        migrations.CreateTable(models.Visits),
-        migrations.CreateTable(models.Visitors)
-    ]
+operations = [
+    migrations.CreateTable(models.Visits),
+    migrations.CreateTable(models.Visitors)
+]
+```
 
 The following operations are supported:
 
@@ -72,14 +74,16 @@ A migration operation that adds new constraints from the model to the database t
 
 A migration operation that runs a Python function. The function receives the `Database` instance to operate on.
 
-    def forward(database):
-        database.insert([
-             TestModel(field=1)
-        ])
+```python
+def forward(database):
+    database.insert([
+         TestModel(field=1)
+    ])
 
-    operations = [
-        migrations.RunPython(forward),
-    ]
+operations = [
+    migrations.RunPython(forward),
+]
+```
 
 
 ### RunSQL
@@ -88,13 +92,15 @@ A migration operation that runs raw SQL statements. It expects a string containi
 
 Example:
 
-    operations = [
-        RunSQL('INSERT INTO `test_table` (field) VALUES (1)'),
-        RunSQL([
-          'INSERT INTO `test_table` (field) VALUES (2)',
-          'INSERT INTO `test_table` (field) VALUES (3)'
-         ])
-    ]
+```python
+operations = [
+    RunSQL('INSERT INTO `test_table` (field) VALUES (1)'),
+    RunSQL([
+      'INSERT INTO `test_table` (field) VALUES (2)',
+      'INSERT INTO `test_table` (field) VALUES (3)'
+     ])
+]
+```
 
 
 Running Migrations
@@ -102,11 +108,8 @@ Running Migrations
 
 To migrate a database, create a `Database` instance and call its `migrate` method with the package name containing your migrations:
 
-    Database('analytics_db').migrate('analytics.analytics_migrations')
+```python
+Database('analytics_db').migrate('analytics.analytics_migrations')
+```
 
 Note that you may have more than one migrations package.
-
-
----
-
-[<< Table Engines](table_engines.md) | [System Models >>](system_models.md)

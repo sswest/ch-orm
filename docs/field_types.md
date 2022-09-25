@@ -111,15 +111,21 @@ from clickhouse_orm.models import Model
 from clickhouse_orm.engines import MergeTree
 from clickhouse_orm.fields import DateField, Float32Field, UInt8Field, TupleField
 
-class SensorData(Model):
 
+class SensorData(Model):
     date = DateField()
     info = TupleField([('t', Float32Field()), ('h', UInt8Field())])
-
     engine = MergeTree('date', ('date',))
 
+
 data = SensorData(date=date.today(), info=(25.5, 41))
+
+print(data.info)  # TupleField(t=25.5, h=41) <class 'clickhouse_orm.fields.TupleField'>
+print(data.info.t)  # 25.5
+print(data.info.h)  # 41
 ```
+
+TupleField uses namedtuple to store data, so you can access values as properties.
 
 Working with nullable fields
 ----------------------------
@@ -179,6 +185,42 @@ class LowCardinalityModel(Model):
 
 Note: `LowCardinality` field with an inner array field is not supported. Use an `ArrayField` with a `LowCardinality` inner field as seen in the example.
 
+Working with geo fields
+-------------------------
+
+PointField and RingField are an experimental feature and their API may change significantly in the future.
+
+```python
+import uuid
+
+from clickhouse_orm import F
+from clickhouse_orm.contrib.geo import PointField, Point
+from clickhouse_orm.models import Model
+from clickhouse_orm.engines import MergeTree
+from clickhouse_orm.fields import UUIDField
+
+
+class Residence(Model):
+    uuid = UUIDField()
+    geo_wgs84 = PointField()
+    engine = MergeTree('uuid')
+
+
+r = Residence(uuid=uuid.uuid4(), geo_wgs84=Point(120, 30))
+print(r.geo_wgs84)  
+# <Point x=120.0 y=30.0>
+print(r.geo_wgs84.x)  
+# 120.0
+print(r.geo_wgs84.y)  
+# 30.0
+f = F.geohashEncode(
+    F.tupleElement(r.geo_wgs84, 1), F.tupleElement(r.geo_wgs84, 2), 7
+)
+print(f.to_sql())  
+# geohashEncode(tupleElement(<Point x=120.0 y=30.0>, 1), tupleElement(<Point x=120.0 y=30.0>, 2), 7)
+```
+
+
 Creating custom field types
 ---------------------------
 Sometimes it is convenient to use data types that are supported in Python, but have no corresponding column type in ClickHouse. In these cases it is possible to define a custom field class that knows how to convert the Pythonic object to a suitable representation in the database, and vice versa.
@@ -191,7 +233,7 @@ For example, we can create a BooleanField which will hold `True` and `False` val
 Here's the full implementation:
 
 ```python
-from infi.clickhouse_orm import Field
+from clickhouse_orm import Field
 
 class BooleanField(Field):
 
@@ -214,7 +256,3 @@ class BooleanField(Field):
         # The value was already converted by to_python, so it's a bool
         return '1' if value else '0'
 ```
-
----
-
-[<< Field Options](field_options.md) | [Table Engines >>](table_engines.md)
