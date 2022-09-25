@@ -215,7 +215,6 @@ class ModelBase(type):
         # Create an ad hoc model class
         attrs = {}
         for name, db_type in fields:
-            name = name.replace(".", "_")
             attrs[name] = cls.create_ad_hoc_field(db_type)
         model_class = cls.__new__(cls, model_name, (Model,), attrs)
         # Add the model class to the cache
@@ -436,7 +435,6 @@ class Model(metaclass=ModelBase):
         values = iter(parse_tsv(line))
         kwargs = {}
         for name in field_names:
-            name = name.replace(".", "_")
             field = getattr(cls, name)
             field_timezone = getattr(field, "timezone", None) or timezone_in_use
             kwargs[name] = field.to_python(next(values), field_timezone)
