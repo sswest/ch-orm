@@ -18,6 +18,7 @@ SPECIAL_CHARS_REGEX = re.compile("[" + "".join(SPECIAL_CHARS.values()) + "]")
 POINT_REGEX = re.compile(r"\((?P<x>\d+(\.\d+)?),(?P<y>\d+(\.\d+)?)\)")
 RING_VALID_REGEX = re.compile(r"\[((\(\d+(\.\d+)?,\d+(\.\d+)?\)),)*\(\d+(\.\d+)?,\d+(\.\d+)?\)\]")
 MAP_REGEX = re.compile(r"(.+?)=(.+?),?")
+ARRAY_TYPE_REGEX = re.compile(r"Array\((.+?)\)")
 
 
 def escape(value, quote=True):
@@ -120,6 +121,11 @@ def parse_array(array_string):
             match = re.search(r",|\]|\)", array_string)
             values.append(array_string[0 : match.start()])
             array_string = array_string[match.end() - 1 :]
+
+
+def parse_array_field(array_field_string: str) -> str:
+    field_type = ARRAY_TYPE_REGEX.match(array_field_string)
+    return field_type.group(1) if field_type else None
 
 
 def parse_map(map_string: str) -> dict:

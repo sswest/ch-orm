@@ -50,6 +50,7 @@ parts/*.msi
 src/infi/projector/__version__.py
 .codeintel
 *sublime*
+.DS_Store
 
 tmp*
 !tmp*py
@@ -59,6 +60,7 @@ src/infi/clickhouse_orm/__version__.py
 bootstrap.py
 
 htmldocs/
+docs/_build/
 cover/
 
 # tox

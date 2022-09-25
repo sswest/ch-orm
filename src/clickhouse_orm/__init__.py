@@ -9,4 +9,6 @@ from clickhouse_orm.models import *
 from clickhouse_orm.query import *
 from clickhouse_orm.system_models import *
 
+__version__ = "0.2.3"
+
 __all__ = [c.__name__ for c in locals().values() if isclass(c)]

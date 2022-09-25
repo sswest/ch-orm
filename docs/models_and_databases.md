@@ -262,4 +262,4 @@ Note that `order_by` must be chosen so that the ordering is unique, otherwise th
 
 ---
 
-[<< Overview](index.md) | [Table of Contents](toc.md) | [Async DataBase >>](async_databases.md)
+[<< Overview](index.md) | [Async DataBase >>](async_databases.md)

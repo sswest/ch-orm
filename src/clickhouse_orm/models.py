@@ -251,7 +251,7 @@ class ModelBase(type):
                 if len(tp) == 2:
                     name_fields.append((tp[0], cls.create_ad_hoc_field(tp[1])))
                 else:
-                    name_fields.append((str(i), cls.create_ad_hoc_field(tp[0])))
+                    name_fields.append((chr(65 + i), cls.create_ad_hoc_field(tp[0])))
             return orm_fields.TupleField(name_fields=name_fields)
         # Map
         if db_type.startswith("Map"):
@@ -668,7 +668,7 @@ class DistributedModel(Model):
         return "\n".join(parts)
 
 
-class TemporaryModel(Model):
+class TemporaryTable(Model):
     """Temporary Tables
 
     Temporary tables disappear when the session ends, including if the connection is lost.
@@ -682,6 +682,8 @@ class TemporaryModel(Model):
 
     https://clickhouse.com/docs/en/sql-reference/statements/create/table/#temporary-tables
     """
+
+    engine = Memory()
 
     _temporary = True
 
@@ -707,6 +709,8 @@ class TemporaryModel(Model):
         return "\n".join(parts)
 
 
+# forward compatible
+TemporaryModel = TemporaryTable
 # Expose only relevant classes in import *
 MODEL = TypeVar("MODEL", bound=Model)
 __all__ = get_subclass_names(locals(), (Model, Constraint, Index))

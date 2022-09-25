@@ -1,13 +1,28 @@
 
-mkdir -p ../htmldocs
+#mkdir -p ../htmldocs
 
-find ./ -iname "*.md" -type f -exec sh -c 'echo "Converting ${0}"; pandoc "${0}" -s -o "../htmldocs/${0%.md}.html"' {} \;
+#find ./ -iname "*.md" -type f -exec sh -c 'echo "Converting ${0}"; pandoc "${0}" -s -o "../htmldocs/${0%.md}.html"' {} \;
+if [ -d "../htmldocs" ]; then
+    rm -rf ../htmldocs
+fi
 
-echo "Converting README.md"
-pandoc ../README.md -s -o "../htmldocs/README.html"
+cd ../docs
 
-echo "Converting CHANGELOG.md"
-pandoc ../CHANGELOG.md -s -o "../htmldocs/CHANGELOG.html"
+echo "clean html"
 
-echo "Fixing links"
-sed -i 's/\.md/\.html/g' ../htmldocs/*.html
+make clean
+
+echo "make html"
+
+make html
+
+cp -r _build/html ../htmldocs
+
+#echo "Converting README.md"
+#pandoc ../README.md -s -o "../htmldocs/README.html"
+
+#echo "Converting CHANGELOG.md"
+#pandoc ../CHANGELOG.md -s -o "../htmldocs/CHANGELOG.html"
+
+#echo "Fixing links"
+#sed -i 's/\.md/\.html/g' ../htmldocs/*.html

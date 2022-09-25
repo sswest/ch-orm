@@ -171,7 +171,13 @@ class MergeTree(TableEngine):
         replica_name: Optional[str] = None,
         partition_key: Optional[Union[list, tuple]] = None,
         primary_key: Optional[Union[list, tuple]] = None,
+        settings: Optional[dict] = None,
     ):
+        if settings is None:
+            settings = {"index_granularity": index_granularity}
+        else:
+            assert isinstance(settings, dict), 'settings must be dict'
+            settings["index_granularity"] = index_granularity
         assert type(order_by) in (list, tuple), "order_by must be a list or tuple"
         assert date_col is None or isinstance(date_col, str), "date_col must be string if present"
         assert primary_key is None or type(primary_key) in (
@@ -195,6 +201,8 @@ class MergeTree(TableEngine):
 
         self.order_by = order_by
         self.sampling_expr = sampling_expr
+        self.settings = settings
+        # Just for backward compatibility
         self.index_granularity = index_granularity
         self.replica_table_path = replica_table_path
         self.replica_name = replica_name
@@ -236,7 +244,8 @@ class MergeTree(TableEngine):
             if self.sampling_expr:
                 partition_sql += " SAMPLE BY %s" % self.sampling_expr
 
-            partition_sql += " SETTINGS index_granularity=%d" % self.index_granularity
+            settings = ', '.join(f"{k}={v}" for k, v in self.settings.items())
+            partition_sql += " SETTINGS %s" % settings
 
         elif not self.date_col:
             # Can't import it globally due to circular import
@@ -284,6 +293,7 @@ class CollapsingMergeTree(MergeTree):
         replica_name=None,
         partition_key=None,
         primary_key=None,
+        settings: Optional[dict] = None,
     ):
         super(CollapsingMergeTree, self).__init__(
             date_col,
@@ -294,6 +304,7 @@ class CollapsingMergeTree(MergeTree):
             replica_name,
             partition_key,
             primary_key,
+            settings,
         )
         self.sign_col = sign_col
 
@@ -315,6 +326,7 @@ class SummingMergeTree(MergeTree):
         replica_name=None,
         partition_key=None,
         primary_key=None,
+        settings: Optional[dict] = None,
     ):
         super(SummingMergeTree, self).__init__(
             date_col,
@@ -325,6 +337,7 @@ class SummingMergeTree(MergeTree):
             replica_name,
             partition_key,
             primary_key,
+            settings,
         )
         assert type is None or type(summing_cols) in (
             list,
@@ -351,6 +364,7 @@ class ReplacingMergeTree(MergeTree):
         replica_name=None,
         partition_key=None,
         primary_key=None,
+        settings: Optional[dict] = None,
     ):
         super(ReplacingMergeTree, self).__init__(
             date_col,
@@ -361,6 +375,7 @@ class ReplacingMergeTree(MergeTree):
             replica_name,
             partition_key,
             primary_key,
+            settings,
         )
         self.ver_col = ver_col
 

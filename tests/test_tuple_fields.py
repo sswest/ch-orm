@@ -19,7 +19,7 @@ class TupleFieldsTest(unittest.TestCase):
     def test_insert_and_select(self):
         instance = ModelWithTuple(
             date_field='2016-08-30',
-            tuple_str=['goodbye,', 'cruel'],
+            tuple_str=['goodbye', 'cruel'],
             tuple_date=['2010-01-01', '2020-01-01'],
         )
         self.database.insert([instance])
@@ -28,7 +28,11 @@ class TupleFieldsTest(unittest.TestCase):
             results = list(self.database.select(query, model_cls))
             self.assertEqual(len(results), 1)
             self.assertEqual(results[0].tuple_str, instance.tuple_str)
+            self.assertEqual(results[0].tuple_str.a, "goodbye")
+            self.assertEqual(results[0].tuple_str.b, "cruel")
             self.assertEqual(results[0].tuple_int, instance.tuple_int)
+            self.assertEqual(results[0].tuple_int.a, 0)
+            self.assertEqual(results[0].tuple_int.b, 0)
             self.assertEqual(results[0].tuple_date, instance.tuple_date)
 
     def test_conversion(self):
