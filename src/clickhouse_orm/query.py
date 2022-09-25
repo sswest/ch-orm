@@ -375,7 +375,13 @@ class QuerySet(Generic[MODEL]):
         """
         Iterates over the model instances matching this queryset
         """
-        for val in self._database.select(self.as_sql(), self._model_cls):
+        from .funcs import Lambda
+
+        if any(isinstance(field, Lambda) for field in self._fields):
+            model_cls = None
+        else:
+            model_cls = self._model_cls
+        for val in self._database.select(self.as_sql(), model_cls):
             yield val
 
     async def __aiter__(self) -> AsyncIterator[MODEL]:

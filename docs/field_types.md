@@ -217,4 +217,4 @@ class BooleanField(Field):
 
 ---
 
-[<< Field Options](field_options.md) | [Table of Contents](toc.md) | [Table Engines >>](table_engines.md)
+[<< Field Options](field_options.md) | [Table Engines >>](table_engines.md)

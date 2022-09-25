@@ -17,7 +17,7 @@ import pytz
 from pytz import BaseTzInfo
 
 from .utils import escape, parse_array, comma_join, string_or_func, get_subclass_names, parse_map
-from .funcs import F, FunctionOperatorsMixin
+from .funcs import F, FunctionOperatorsMixin, Lambda
 
 if TYPE_CHECKING:
     from clickhouse_orm.models import Model
@@ -726,6 +726,8 @@ class TupleField(Field):
         return sql
 
     def __getattr__(self, item):
+        if item in self.names:
+            return Lambda(f"{self.name}.{item}")
         super(TupleField, self).__getattr__()
 
     def __setattr__(self, key, value):

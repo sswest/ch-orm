@@ -43,4 +43,4 @@ Usage example:
 
 ---
 
-[<< Schema Migrations](schema_migrations.md) | [Table of Contents](toc.md) | [Contributing >>](contributing.md)
+[<< Schema Migrations](schema_migrations.md) | [Contributing >>](contributing.md)

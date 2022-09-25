@@ -135,4 +135,4 @@ Engine parameter specifies re2 (similar to PCRE) regular expression, from which 
 
 ---
 
-[<< Field Types](field_types.md) | [Table of Contents](toc.md) | [Schema Migrations >>](schema_migrations.md)
+[<< Field Types](field_types.md) | [Schema Migrations >>](schema_migrations.md)

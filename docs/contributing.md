@@ -32,4 +32,4 @@ To see test coverage information run:
 
 ---
 
-[<< System Models](system_models.md) | [Table of Contents](toc.md) | [Class Reference >>](class_reference.md)
+[<< System Models](system_models.md) | [Class Reference >>](class_reference.md)

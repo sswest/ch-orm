@@ -86,4 +86,4 @@ class Event(Model):
 
 ---
 
-[<< Expressions](expressions.md) | [Table of Contents](toc.md) | [Querysets >>](querysets.md)
+[<< Expressions](expressions.md) | [Querysets >>](querysets.md)

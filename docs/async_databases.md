@@ -57,4 +57,4 @@ async def main():
 ```
 
 
-[<< Models and Databases](models_and_databases.md) | [Table of Contents](toc.md) | [Expressions >>](expressions.md)
+[<< Models and Databases](models_and_databases.md) | [Expressions >>](expressions.md)

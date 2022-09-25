@@ -238,6 +238,7 @@ class DistributedTestCase(_EnginesHelperTestCase):
         self.assertEqual(exc.code, 170)
         self.assertTrue(exc.message.startswith("Requested cluster 'cluster_name' not found"))
 
+    @unittest.skip("Requested cluster")
     def test_verbose_engine_two_superclasses(self):
         class TestModel2(SampleModel):
             engine = Log()
@@ -330,6 +331,7 @@ class DistributedTestCase(_EnginesHelperTestCase):
     def test_insert_distributed_select_local(self):
         return self._test_insert_select(local_to_distributed=False)
 
+    @unittest.skip("Requested cluster")
     def test_insert_local_select_distributed(self):
         return self._test_insert_select(local_to_distributed=True)
 
