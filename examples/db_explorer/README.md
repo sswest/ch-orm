@@ -16,7 +16,7 @@ ORM concepts that are demonstrated by this example:
 
 Create a virtualenv and install the required libraries:
 ```
-virtualenv -p python3.6 env
+virtualenv -p python3.7 env
 source env/bin/activate
 pip install -r requirements.txt
 ```

@@ -15,7 +15,7 @@ def download_ebook(id):
     for line in text.splitlines():
         if line.startswith('Title:'):
             title = line[6:].strip()
-    print(title)
+            print(title)
     # Save the ebook
     with open('ebooks/{}.txt'.format(title), 'wb') as f:
         f.write(r.content)

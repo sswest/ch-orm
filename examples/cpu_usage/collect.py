@@ -1,5 +1,9 @@
-import psutil, time, datetime
-from infi.clickhouse_orm import Database
+import time
+import datetime
+
+import psutil
+from clickhouse_orm import Database
+
 from models import CPUStats
 
 
@@ -7,7 +11,7 @@ db = Database('demo')
 db.create_table(CPUStats)
 
 
-psutil.cpu_percent(percpu=True) # first sample should be discarded
+psutil.cpu_percent(percpu=True)  # first sample should be discarded
 
 while True:
     time.sleep(1)

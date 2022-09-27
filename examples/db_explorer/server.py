@@ -1,8 +1,10 @@
-from infi.clickhouse_orm import Database, F
-from charts import tables_piechart, columns_piechart, number_formatter, bytes_formatter
+import sys
+
+from clickhouse_orm import Database, F
 from flask import Flask
 from flask import render_template
-import sys
+
+from charts import tables_piechart, columns_piechart, number_formatter, bytes_formatter
 
 
 app = Flask(__name__)
@@ -10,9 +12,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def homepage_view():
-    '''
+    """
     Root view that lists all databases.
-    '''
+    """
     db = _get_db('system')
     # Get all databases in the system.databases table
     DatabasesTable = db.get_model_for_table('databases', system_table=True)
@@ -24,9 +26,9 @@ def homepage_view():
 
 @app.route('/<db_name>/')
 def database_view(db_name):
-    '''
+    """
     A view that displays information about a single database.
-    '''
+    """
     db = _get_db(db_name)
     # Get all the tables in the database, by aggregating information from system.columns
     ColumnsTable = db.get_model_for_table('columns', system_table=True)
@@ -48,9 +50,9 @@ def database_view(db_name):
 
 @app.route('/<db_name>/<tbl_name>/')
 def table_view(db_name, tbl_name):
-    '''
+    """
     A view that displays information about a single table.
-    '''
+    """
     db = _get_db(db_name)
     # Get table information from system.tables
     TablesTable = db.get_model_for_table('tables', system_table=True)
@@ -72,10 +74,10 @@ def table_view(db_name, tbl_name):
 
 
 def _get_db(db_name):
-    '''
+    """
     Returns a Database instance using connection information
     from the command line arguments (optional).
-    '''
+    """
     db_url = sys.argv[1] if len(sys.argv) > 1 else 'http://localhost:8123/'
     username = sys.argv[2] if len(sys.argv) > 2 else None
     password = sys.argv[3] if len(sys.argv) > 3 else None
@@ -83,5 +85,5 @@ def _get_db(db_name):
 
 
 if __name__ == '__main__':
-    _get_db('system') # fail early on db connection problems
+    _get_db('system')  # fail early on db connection problems
     app.run(debug=True)

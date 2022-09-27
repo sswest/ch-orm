@@ -1,7 +1,9 @@
 import sys
-from colorama import init, Fore, Back, Style
+
+from colorama import init, Fore, Style
 from nltk.stem.porter import PorterStemmer
-from infi.clickhouse_orm import Database, F
+from clickhouse_orm import Database, F
+
 from models import Fragment
 from load import trim_punctuation
 
@@ -11,9 +13,9 @@ WILDCARD = '*'
 
 
 def prepare_search_terms(text):
-    '''
+    """
     Convert the text to search into a list of stemmed words.
-    '''
+    """
     stemmer = PorterStemmer()
     stems = []
     for word in text.split():
@@ -25,10 +27,10 @@ def prepare_search_terms(text):
 
 
 def build_query(db, stems):
-    '''
+    """
     Returns a queryset instance for finding sequences of Fragment instances
     that matche the list of stemmed words.
-    '''
+    """
     # Start by searching for the first stemmed word
     all_fragments = Fragment.objects_in(db)
     query = all_fragments.filter(stem=stems[0]).only(Fragment.document, Fragment.idx)
@@ -47,11 +49,11 @@ def build_query(db, stems):
 
 
 def get_matching_text(db, document, from_idx, to_idx, extra=5):
-    '''
+    """
     Reconstructs the document text between the given indexes (inclusive),
     plus `extra` words before and after the match. The words that are
     included in the given range are highlighted in green.
-    '''
+    """
     text = []
     conds = (Fragment.document == document) & (Fragment.idx >= from_idx - extra) & (Fragment.idx <= to_idx + extra)
     for fragment in Fragment.objects_in(db).filter(conds).order_by('document', 'idx'):
@@ -65,9 +67,9 @@ def get_matching_text(db, document, from_idx, to_idx, extra=5):
 
 
 def find(db, text):
-    '''
+    """
     Performs the search for the given text, and prints out the matches.
-    '''
+    """
     stems = prepare_search_terms(text)
     query = build_query(db, stems)
     print('\n' + Fore.MAGENTA + str(query) + Style.RESET_ALL + '\n')

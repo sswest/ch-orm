@@ -1,4 +1,4 @@
-infi.clickhouse_orm
+ch-orm
 nltk
 requests
 colorama

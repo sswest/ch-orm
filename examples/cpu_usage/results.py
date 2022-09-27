@@ -1,4 +1,5 @@
-from infi.clickhouse_orm import Database, F
+from clickhouse_orm import Database, F
+
 from models import CPUStats
 
 

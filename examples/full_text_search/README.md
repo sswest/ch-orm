@@ -6,7 +6,7 @@ This example shows how ClickHouse might be used for searching for word sequences
 
 Create a virtualenv and install the required libraries:
 ```
-virtualenv -p python3.6 env
+virtualenv -p python3.7 env
 source env/bin/activate
 pip install -r requirements.txt
 ```
