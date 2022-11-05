@@ -214,10 +214,10 @@ print(r.geo_wgs84.x)
 print(r.geo_wgs84.y)  
 # 30.0
 f = F.geohashEncode(
-    F.tupleElement(r.geo_wgs84, 1), F.tupleElement(r.geo_wgs84, 2), 7
+    F.tupleElement(Residence.geo_wgs84, 1), F.tupleElement(Residence.geo_wgs84, 2), 7
 )
 print(f.to_sql())  
-# geohashEncode(tupleElement(<Point x=120.0 y=30.0>, 1), tupleElement(<Point x=120.0 y=30.0>, 2), 7)
+# geohashEncode(tupleElement(`geo_wgs84`, 1), tupleElement(`geo_wgs84`, 2), 7)
 ```
 
 
